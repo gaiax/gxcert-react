@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import * as image from "./image"
-import * as ipfs from "./ipfs"
+import * as ipfs from "./ipfs";
+import "./certificate.css";
 
 class CertificateComponent extends React.Component {
   componentWillMount() {
@@ -29,7 +30,8 @@ class CertificateComponent extends React.Component {
     return (
       <div class="certificate">
         <img src={ this.state.imageUrl } width="200" />
-        <p>{ this.state.issueser } -- { this.state.receiver }</p>
+        <p>issueser: { this.state.issueser }</p>
+        <p>receiver: { this.state.receiver }</p>
       </div>
     )
   }
