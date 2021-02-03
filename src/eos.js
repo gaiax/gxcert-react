@@ -69,6 +69,7 @@ async function _createCertificate() {
   const receiver = getValue("receiver");
   await createCertificate(fileElement, issueser, receiver);
 }
+
 function getValue(id) {
   return document.getElementById(id).value;
 }

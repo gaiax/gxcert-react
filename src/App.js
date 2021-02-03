@@ -17,6 +17,7 @@ function resetTabSelected() {
   document.getElementById("issue").classList.remove("hidden");
   document.getElementById("show").classList.remove("hidden");
 }
+
 function changeTabToIssue() {
   resetTabSelected();
   document.getElementById("issue-tab").classList.add("selected");
@@ -56,7 +57,8 @@ function App() {
           <label for="receiver">receiver</label> 
           <input type="text" id="receiver" class="form-control" placeholder="bob" />
           <label>Certificate Image</label>
-          <input type="file" id="cert-image" onChange={ eos._createCertificate } class="form-control" /><br />
+          <input type="file" id="cert-image" class="form-control" /><br />
+          <input type="button" id="issue-button" class="form-control" value="Issue" onClick={ eos._createCertificate } />
         </div>
       </div>
     </div>
