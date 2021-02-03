@@ -7,8 +7,13 @@ class CertificateComponent extends React.Component {
   componentWillMount() {
     const that = this;
     (async () => {
-      const imageUrl = await ipfs.getCertificateImage(that.state.ipfs_hash);
-      that.setState({ imageUrl });
+      try {
+        const imageUrl = await ipfs.getCertificateImage(that.state.ipfs_hash);
+        that.setState({ imageUrl });
+      } catch(err) {
+        console.error(err);
+        return;
+      }
     })();
   }
   constructor(props) {
@@ -39,7 +44,7 @@ class CertificateComponents extends React.Component {
   render() {
     return (
       <div class="certificates">
-        { this.certificates.map((certificate) => {
+        { this.state.certificates.map((certificate) => {
           return (
             <CertificateComponent ipfs_hash={certificate.ipfs_hash} issueser={certificate.issueser} receiver={certificate.receiver} />
           );

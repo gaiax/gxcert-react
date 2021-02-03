@@ -4,11 +4,12 @@ import ReactDOM from "react-dom";
 import * as components from "./components";
 import * as image from "./image";
 import * as ipfs from "./ipfs";
-const EOS = window.EOS;
+import { Api, JsonRpc, RpcError } from 'eosjs';
+import { JsSignatureProvider } from 'eosjs/dist/eosjs-jssig';
 const defaultPrivateKey = "5KJaizMxUXizqzEi4YyHFtM1P3ppNJxFcez3kTg6uADGitM5vXf";
-const signatureProvider = new EOS.JsSignatureProvider([defaultPrivateKey]);
-const rpc = new EOS.JsonRpc("http://localhost:8888");
-const api = new EOS.Api({ rpc, signatureProvider, textDecoder: new TextDecoder(), textEncoder: new TextEncoder() });
+const signatureProvider = new JsSignatureProvider([defaultPrivateKey]);
+const rpc = new JsonRpc("http://localhost:8888");
+const api = new Api({ rpc, signatureProvider, textDecoder: new TextDecoder(), textEncoder: new TextEncoder() });
 
 async function getMyCertificates(holder) {
   const response = await rpc.get_table_rows({
