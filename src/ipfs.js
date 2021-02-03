@@ -34,5 +34,8 @@ async function getCertificateImage(ipfsHash) {
   return null;
 }
 
-export getCertificateImage
-export postCertificate
+export {
+  getCertificateImage,
+  postCertificate,
+}
+

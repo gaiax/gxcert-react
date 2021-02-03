@@ -42,4 +42,7 @@ function openFile(element) {
   });
 }
 
-export fileInputToDataURL
+export {
+  fileInputToDataURL,
+  createBlobFromImageDataURI,
+}

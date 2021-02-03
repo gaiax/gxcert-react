@@ -1,5 +1,7 @@
-import * from "./image"
-import * from "./ipfs"
+import React from "react";
+import ReactDOM from "react-dom";
+import * as image from "./image"
+import * as ipfs from "./ipfs"
 
 class CertificateComponent extends React.Component {
   componentWillMount() {
@@ -47,4 +49,8 @@ class CertificateComponents extends React.Component {
   }
 }
 
+export {
+  CertificateComponents,
+  CertificateComponent
+}
 
