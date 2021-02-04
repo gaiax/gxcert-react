@@ -11,6 +11,9 @@ const rpcHost = "http://localhost:8888";
 let client = null;
 
 function showErrorMessage(message) {
+  document.getElementById("error-message").innerText = message;
+}
+function showMessage(message) {
   document.getElementById("message").innerText = message;
 }
 async function createCertificate() {
@@ -21,7 +24,9 @@ async function createCertificate() {
     await client._createCertificate();
   } catch (err) {
     showErrorMessage("Failed to issue a certificate.");
+    return;
   }
+  showMessage("Successfully completed issuesing a certificate.");
 }
 
 async function showCertificates() {
@@ -72,6 +77,7 @@ function App() {
   return (
     <div className="App">
       <div className="main">
+        <p id="error-message"></p>
         <p id="message"></p>
         <div className="tabs">
           <div
