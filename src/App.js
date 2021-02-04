@@ -1,14 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
 import "./form.css";
+import React from "react";
 import ReactDOM from "react-dom";
 import * as components from "./components";
 import * as eos from "./eos";
 
+const resultRef = React.createRef();
+
 async function showCertificates() {
   const receiver = document.getElementById("holder").value;
   const certificates = await eos.getMyCertificates(receiver);
-  ReactDOM.render(<components.CertificateComponents certificates={certificates} />, document.getElementById("result"));
+  resultRef.current.setState({ certificates: certificates });
 }
 
 function resetTabSelected() {
@@ -47,8 +50,7 @@ function App() {
           <label>Certificate Holder</label>
           <input type="text" id="holder" class="form-control" placeholder="alice" />
           <input type="button" value="Show certificates" onClick={ showCertificates } id="show-cert" class="form-control" /><br/>
-          <div id="result">
-          </div>
+          <components.CertificateComponents ref={ resultRef } certificates={[]} />
         </div>
         <div className="issue" class="form-group" id="issue">
           <h2>Issue Certificate</h2>
