@@ -17,7 +17,6 @@ if (privateKey !== null) {
   }
 }
 
-
 function showErrorMessage(message) {
   document.getElementById("error-message").innerText = message;
 }
