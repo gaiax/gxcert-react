@@ -4,13 +4,24 @@ import "./form.css";
 import React from "react";
 import ReactDOM from "react-dom";
 import * as components from "./components";
-import * as eos from "./eos";
+import { getMyCertificates, CertClient } from "./eos";
 
 const resultRef = React.createRef();
 
+const rpcHost = "http://localhost:8888";
+
+let client = null;
+
+function createCertificate() {
+  if (client === null) {
+    return;
+  }
+  client._createCertificate();
+}
+
 async function showCertificates() {
   const receiver = document.getElementById("holder").value;
-  const certificates = await eos.getMyCertificates(receiver);
+  const certificates = await getMyCertificates(receiver);
   resultRef.current.setState({ certificates: certificates });
 }
 
@@ -25,6 +36,20 @@ function changeTabToIssue() {
   resetTabSelected();
   document.getElementById("issue-tab").classList.add("selected");
   document.getElementById("show").classList.add("hidden");
+  if (client === null) {
+    const privateKey = window.prompt("enter private key of your account", "");
+    console.log(privateKey)
+    if (privateKey === null) {
+      changeTabToShow();
+      return;
+    }
+    try {
+      client = new CertClient(privateKey, rpcHost);
+    } catch (err) {
+      console.error(err);
+      changeTabToShow();
+    }
+  }
 }
 
 function changeTabToShow() {
@@ -38,21 +63,21 @@ function App() {
     <div className="App">
       <div className="main">
         <div className="tabs">
-          <div className="issue-tab tab selected" id="issue-tab" onClick={ changeTabToIssue }>
+          <div className="issue-tab tab" id="issue-tab" onClick={ changeTabToIssue }>
             Issue
           </div>
-          <div className="show-tab tab" id="show-tab" onClick= { changeTabToShow }>
+          <div className="show-tab tab selected" id="show-tab" onClick= { changeTabToShow }>
             Show
           </div>
         </div><br/>
-        <div id="show" className="show" class="form-group hidden">
+        <div id="show" className="show" class="form-group">
           <h2>Show Certificates</h2>
           <label>Certificate Holder</label>
           <input type="text" id="holder" class="form-control" placeholder="alice" />
           <input type="button" value="Show certificates" onClick={ showCertificates } id="show-cert" class="form-control" /><br/>
           <components.CertificateComponents ref={ resultRef } certificates={[]} />
         </div>
-        <div className="issue" class="form-group" id="issue">
+        <div className="issue" class="form-group hidden" id="issue">
           <h2>Issue Certificate</h2>
           <label for="issueser">issueser</label>
           <input type="text" id="issueser" class="form-control" placeholder="alice" />
@@ -60,7 +85,7 @@ function App() {
           <input type="text" id="receiver" class="form-control" placeholder="bob" />
           <label>Certificate Image</label>
           <input type="file" id="cert-image" class="form-control" /><br />
-          <input type="button" id="issue-button" class="form-control" value="Issue" onClick={ eos._createCertificate } />
+          <input type="button" id="issue-button" class="form-control" value="Issue" onClick={ createCertificate } />
         </div>
       </div>
     </div>
