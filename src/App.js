@@ -1,8 +1,6 @@
-import logo from './logo.svg';
 import './App.css';
 import "./form.css";
 import React from "react";
-import ReactDOM from "react-dom";
 import * as components from "./components";
 import { getMyCertificates, CertClient } from "./eos";
 
@@ -12,17 +10,28 @@ const rpcHost = "http://localhost:8888";
 
 let client = null;
 
-function createCertificate() {
+function showErrorMessage(message) {
+  document.getElementById("message").innerText = message;
+}
+async function createCertificate() {
   if (client === null) {
     return;
   }
-  client._createCertificate();
+  try {
+    await client._createCertificate();
+  } catch(err) {
+    showErrorMessage("Failed to issue a certificate.");
+  }
 }
 
 async function showCertificates() {
   const receiver = document.getElementById("holder").value;
-  const certificates = await getMyCertificates(receiver);
-  resultRef.current.setState({ certificates: certificates });
+  try {
+    const certificates = await getMyCertificates(receiver);
+    resultRef.current.setState({ certificates: certificates });
+  } catch(err) {
+    showErrorMessage("Failed to fetch certificates.");
+  }
 }
 
 function resetTabSelected() {
@@ -62,6 +71,7 @@ function App() {
   return (
     <div className="App">
       <div className="main">
+        <p id="message"></p>
         <div className="tabs">
           <div className="issue-tab tab" id="issue-tab" onClick={ changeTabToIssue }>
             Issue

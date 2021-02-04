@@ -2,6 +2,11 @@
   padding-top: 50px;
 }
 
+#message {
+  color: red;
+  font-size: 14px;
+}
+
 .issue label {
   font-weight: bold;
   font-size: 18px;

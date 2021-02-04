@@ -1,10 +1,7 @@
 
-import React from "react";
-import ReactDOM from "react-dom";
-import * as components from "./components";
 import * as image from "./image";
 import * as ipfs from "./ipfs";
-import { Api, JsonRpc, RpcError } from 'eosjs';
+import { Api, JsonRpc } from 'eosjs';
 import { JsSignatureProvider } from 'eosjs/dist/eosjs-jssig';
 
 const rpcHost = "http://localhost:8888";
@@ -24,30 +21,26 @@ class CertClient {
     const imageData = await image.fileInputToDataURL(fileElement);
     const blob = image.createBlobFromImageDataURI(imageData);
     const hash = await ipfs.postCertificate(blob);
-    try {
-      const result = await this.api.transact({
-        actions: [{
-          account: "cert",
-          name: "create",
-          authorization: [{
-            actor: issueser,
-            permission: "active",
-          }],
-          data: {
-            issueser,
-            receiver,
-            ipfs_hash: hash,
-            expired: false,
-          }
-        }]
-      }, {
-        blocksBehind: 3,
-        expireSeconds: 30,
-      });
-      console.log(result);
-    } catch(err) {
-      throw err;
-    }
+    const result = await this.api.transact({
+      actions: [{
+        account: "cert",
+        name: "create",
+        authorization: [{
+          actor: issueser,
+          permission: "active",
+        }],
+        data: {
+          issueser,
+          receiver,
+          ipfs_hash: hash,
+          expired: false,
+        }
+      }]
+    }, {
+      blocksBehind: 3,
+      expireSeconds: 30,
+    });
+    console.log(result);
   }
   async _createCertificate() {
     const fileElement = document.getElementById("cert-image");

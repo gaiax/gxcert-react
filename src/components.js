@@ -1,6 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import * as image from "./image"
 import * as ipfs from "./ipfs";
 import "./certificate.css";
 
@@ -29,7 +27,7 @@ class CertificateComponent extends React.Component {
   render() {
     return (
       <div class="certificate">
-        <img src={ this.state.imageUrl } width="200" />
+        <img src={ this.state.imageUrl } width="200" alt="certificate" />
         <p>issueser: { this.state.issueser }</p>
         <p>receiver: { this.state.receiver }</p>
       </div>
