@@ -28,6 +28,7 @@ async function showCertificates() {
   const receiver = document.getElementById("holder").value;
   try {
     const certificates = await getMyCertificates(receiver);
+    resultRef.current.setState({ certificates: [] });
     resultRef.current.setState({ certificates: certificates });
   } catch (err) {
     showErrorMessage("Failed to fetch certificates.");
