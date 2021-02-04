@@ -7,8 +7,16 @@ import { getMyCertificates, CertClient } from "./eos";
 const resultRef = React.createRef();
 
 const rpcHost = "http://localhost:8888";
-
+const privateKey = window.prompt("enter private key of your account", "");
 let client = null;
+if (privateKey !== null) {
+  try {
+    client = new CertClient(privateKey, rpcHost);
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 
 function showErrorMessage(message) {
   document.getElementById("error-message").innerText = message;
@@ -64,20 +72,6 @@ function changeTabToIssue() {
   resetTabSelected();
   document.getElementById("issue-tab").classList.add("selected");
   document.getElementById("show").classList.add("hidden");
-  if (client === null) {
-    const privateKey = window.prompt("enter private key of your account", "");
-    console.log(privateKey);
-    if (privateKey === null) {
-      changeTabToShow();
-      return;
-    }
-    try {
-      client = new CertClient(privateKey, rpcHost);
-    } catch (err) {
-      console.error(err);
-      changeTabToShow();
-    }
-  }
 }
 
 function changeTabToShow() {
