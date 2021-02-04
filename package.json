@@ -10,6 +10,9 @@
     "cutestrap": "^2.0.0-4",
     "eosjs": "^21.0.3",
     "ipfs-http-client": "^49.0.1",
+    "prettier": "^2.2.1",
+    "prettier-eslint": "^12.0.0",
+    "prettier-eslint-cli": "^5.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.1",
@@ -19,7 +22,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "prettier-eslint --write $PWD/'src/*.js'"
   },
   "eslintConfig": {
     "extends": [

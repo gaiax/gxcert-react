@@ -9,7 +9,7 @@ class CertificateComponent extends React.Component {
       try {
         const imageUrl = await ipfs.getCertificateImage(that.state.ipfs_hash);
         that.setState({ imageUrl });
-      } catch(err) {
+      } catch (err) {
         console.error(err);
         return;
       }
@@ -22,16 +22,16 @@ class CertificateComponent extends React.Component {
       imageUrl: null,
       issueser: props.issueser,
       receiver: props.receiver,
-    }
+    };
   }
   render() {
     return (
       <div class="certificate">
-        <img src={ this.state.imageUrl } width="200" alt="certificate" />
-        <p>issueser: { this.state.issueser }</p>
-        <p>receiver: { this.state.receiver }</p>
+        <img src={this.state.imageUrl} width="200" alt="certificate" />
+        <p>issueser: {this.state.issueser}</p>
+        <p>receiver: {this.state.receiver}</p>
       </div>
-    )
+    );
   }
 }
 class CertificateComponents extends React.Component {
@@ -39,23 +39,23 @@ class CertificateComponents extends React.Component {
     super(props);
     this.state = {
       certificates: props.certificates,
-    }
+    };
   }
   render() {
     return (
       <div class="certificates">
-        { this.state.certificates.map((certificate) => {
+        {this.state.certificates.map((certificate) => {
           return (
-            <CertificateComponent ipfs_hash={certificate.ipfs_hash} issueser={certificate.issueser} receiver={certificate.receiver} />
+            <CertificateComponent
+              ipfs_hash={certificate.ipfs_hash}
+              issueser={certificate.issueser}
+              receiver={certificate.receiver}
+            />
           );
-        }) }
+        })}
       </div>
     );
   }
 }
 
-export {
-  CertificateComponents,
-  CertificateComponent
-}
-
+export { CertificateComponents, CertificateComponent };

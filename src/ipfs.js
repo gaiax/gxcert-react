@@ -1,5 +1,9 @@
 import * as IpfsHttpClient from "ipfs-http-client";
-const ipfs = IpfsHttpClient({ host: "ipfs.infura.io", port: 5001, protocol: "https" });
+const ipfs = IpfsHttpClient({
+  host: "ipfs.infura.io",
+  port: 5001,
+  protocol: "https",
+});
 async function postCertificate(blob) {
   const response = await ipfs.add(blob);
   if (response) {
@@ -14,7 +18,7 @@ function createImageUrlFromUint8Array(arr) {
   const imageUrl = urlCreator.createObjectURL(blob);
   return imageUrl;
 }
-var concatBuffer = function(buffer1, buffer2) {
+var concatBuffer = function (buffer1, buffer2) {
   var tmp = new Uint8Array(buffer1.byteLength + buffer2.byteLength);
   tmp.set(new Uint8Array(buffer1), 0);
   tmp.set(new Uint8Array(buffer2), buffer1.byteLength);
@@ -26,7 +30,7 @@ async function getCertificateImage(ipfsHash) {
   for await (const data of response) {
     console.log(data);
     let content = new ArrayBuffer(0);
-    for await(const chunk of data.content) {
+    for await (const chunk of data.content) {
       content = concatBuffer(content, chunk);
     }
     const url = createImageUrlFromUint8Array(content);
@@ -35,8 +39,4 @@ async function getCertificateImage(ipfsHash) {
   return null;
 }
 
-export {
-  getCertificateImage,
-  postCertificate,
-}
-
+export { getCertificateImage, postCertificate };
