@@ -33,16 +33,17 @@ async function showCertificates() {
   const receiver = document.getElementById("holder").value;
   try {
     let certificates = await getMyCertificates(receiver);
-
-    const withVerified = async (certificates) => {
-      let promises = certificates.map((certificate) => {
-        return client.verifyCertificate(receiver, certificate.key);
-      });
-      return await Promise.all(promises);
-    };
-    const verifieds = await withVerified(certificates);
-    for (let i = 0; i < certificates.length; i++) {
-      certificates[i].verified = verifieds[i];
+    if (client !== null) {
+      const withVerified = async (certificates) => {
+        let promises = certificates.map((certificate) => {
+          return client.verifyCertificate(receiver, certificate.key);
+        });
+        return await Promise.all(promises);
+      };
+      const verifieds = await withVerified(certificates);
+      for (let i = 0; i < certificates.length; i++) {
+        certificates[i].verified = verifieds[i];
+      }
     }
     resultRef.current.setState({ certificates: [] });
     resultRef.current.setState({ certificates: certificates });
