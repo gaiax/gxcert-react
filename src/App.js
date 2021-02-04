@@ -32,10 +32,22 @@ async function createCertificate() {
 async function showCertificates() {
   const receiver = document.getElementById("holder").value;
   try {
-    const certificates = await getMyCertificates(receiver);
+    let certificates = await getMyCertificates(receiver);
+
+    const withVerified = async (certificates) => {
+      let promises = certificates.map((certificate) => {
+        return client.verifyCertificate(receiver, certificate.key);
+      });
+      return await Promise.all(promises);
+    };
+    const verifieds = await withVerified(certificates);
+    for (let i = 0; i < certificates.length; i++) {
+      certificates[i].verified = verifieds[i];
+    }
     resultRef.current.setState({ certificates: [] });
     resultRef.current.setState({ certificates: certificates });
   } catch (err) {
+    console.error(err);
     showErrorMessage("Failed to fetch certificates.");
   }
 }

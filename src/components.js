@@ -22,12 +22,14 @@ class CertificateComponent extends React.Component {
       imageUrl: null,
       issueser: props.issueser,
       receiver: props.receiver,
+      verified: props.verified,
     };
   }
   render() {
     return (
       <div class="certificate">
         <img src={this.state.imageUrl} width="200" alt="certificate" />
+        <p>{this.state.verified ? "✅" : ""}</p>
         <p>issueser: {this.state.issueser}</p>
         <p>receiver: {this.state.receiver}</p>
       </div>
@@ -50,6 +52,7 @@ class CertificateComponents extends React.Component {
               ipfs_hash={certificate.ipfs_hash}
               issueser={certificate.issueser}
               receiver={certificate.receiver}
+              verified={certificate.verified}
             />
           );
         })}

@@ -20,6 +20,39 @@ class CertClient {
     });
   }
 
+  async verifyCertificate(name, key) {
+    try {
+      await this.api.transact(
+        {
+          actions: [
+            {
+              account: "cert",
+              name: "verify",
+              authorization: [
+                {
+                  actor: name,
+                  permission: "active",
+                },
+              ],
+              data: {
+                me: name,
+                key: key,
+              },
+            },
+          ],
+        },
+        {
+          blocksBehind: 3,
+          expireSeconds: 30,
+        }
+      );
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
+    return true;
+  }
+
   async createCertificate(fileElement, issueser, receiver) {
     const imageData = await image.fileInputToDataURL(fileElement);
     const blob = image.createBlobFromImageDataURI(imageData);
