@@ -1,7 +1,7 @@
 import "./App.css";
 import "./form.css";
 import React from "react";
-import * as components from "./components";
+import { CertificateComponents } from "./Certificate";
 import { getCertificate, getCertificates, CertClient } from "./eos";
 
 const resultRef = React.createRef();
@@ -175,7 +175,7 @@ class App extends React.Component {
               className="form-control"
             />
             <br />
-            <components.CertificateComponents
+            <CertificateComponents
               ref={resultRef}
               certificates={[]}
             />
