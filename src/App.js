@@ -1,5 +1,4 @@
 import "./App.css";
-import "./form.css";
 import React from "react";
 import { CertificateComponents } from "./Certificate";
 import { getCertificate, getCertificates, CertClient } from "./eos";
