@@ -17,12 +17,16 @@ if (privateKey !== null) {
   }
 }
 
+function byId(id) {
+  return document.getElementById(id);
+}
+
 function showErrorMessage(message) {
-  document.getElementById("error-message").innerText = message;
+  byId("error-message").innerText = message;
 }
 
 function showMessage(message) {
-  document.getElementById("message").innerText = message;
+  byId("message").innerText = message;
 }
 
 async function createCertificate() {
@@ -85,7 +89,7 @@ async function showCertificate(queries) {
   refreshCertificates(certificates);
 }
 async function showCertificates() {
-  const receiver = document.getElementById("holder").value;
+  const receiver = byId("holder").value;
   try {
     let certificates = await getCertificates(receiver);
     await verifyCertificates(certificates);
@@ -97,22 +101,22 @@ async function showCertificates() {
 }
 
 function resetTabSelected() {
-  document.getElementById("issue-tab").classList.remove("selected");
-  document.getElementById("show-tab").classList.remove("selected");
-  document.getElementById("issue").classList.remove("hidden");
-  document.getElementById("show").classList.remove("hidden");
+  byId("issue-tab").classList.remove("selected");
+  byId("show-tab").classList.remove("selected");
+  byId("issue").classList.remove("hidden");
+  byId("show").classList.remove("hidden");
 }
 
 function changeTabToIssue() {
   resetTabSelected();
-  document.getElementById("issue-tab").classList.add("selected");
-  document.getElementById("show").classList.add("hidden");
+  byId("issue-tab").classList.add("selected");
+  byId("show").classList.add("hidden");
 }
 
 function changeTabToShow() {
   resetTabSelected();
-  document.getElementById("show-tab").classList.add("selected");
-  document.getElementById("issue").classList.add("hidden");
+  byId("show-tab").classList.add("selected");
+  byId("issue").classList.add("hidden");
 }
 
 class App extends React.Component {
