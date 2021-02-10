@@ -8,6 +8,7 @@ const resultRef = React.createRef();
 
 const rpcHost = "http://localhost:8888";
 const privateKey = window.prompt("enter private key of your account", "");
+
 let client = null;
 if (privateKey !== null) {
   try {
@@ -88,6 +89,7 @@ async function showCertificate(queries) {
   await verifyCertificates(holder, certificates);
   refreshCertificates(certificates);
 }
+
 async function showCertificates() {
   const receiver = byId("holder").value;
   try {
@@ -119,10 +121,17 @@ function changeTabToShow() {
   byId("issue").classList.add("hidden");
 }
 
+function isShowPage(queries) {
+  if ("key" in queries && "user" in queries) {
+    return true;
+  }
+  return false;
+}
+
 class App extends React.Component {
   componentDidMount() {
     const queries = getUrlQueries();
-    if ("key" in queries && "user" in queries) {
+    if (isShowPage(queries)) {
       showCertificate(queries);
     }
   }
