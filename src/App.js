@@ -91,10 +91,10 @@ async function showCertificate(queries) {
 }
 
 async function showCertificates() {
-  const receiver = byId("holder").value;
+  const holder = byId("holder").value;
   try {
-    let certificates = await getCertificates(receiver);
-    await verifyCertificates(receiver, certificates);
+    let certificates = await getCertificates(holder);
+    await verifyCertificates(holder, certificates);
     refreshCertificates(certificates);
   } catch (err) {
     console.error(err);
@@ -182,14 +182,14 @@ class App extends React.Component {
           </div>
           <div className="issue" class="form-group hidden" id="issue">
             <h2>Issue Certificate</h2>
-            <label for="issueser">issueser</label>
+            <label>issueser</label>
             <input
               type="text"
               id="issueser"
               class="form-control"
               placeholder="alice"
             />
-            <label for="receiver">receiver</label>
+            <label>receiver</label>
             <input
               type="text"
               id="receiver"
