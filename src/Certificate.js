@@ -1,6 +1,6 @@
 import React from "react";
 import * as ipfs from "./ipfs";
-import "./certificate.css";
+import "./Certificate.css";
 
 class CertificateComponent extends React.Component {
   componentWillMount() {
