@@ -174,10 +174,7 @@ class App extends React.Component {
               className="form-control"
             />
             <br />
-            <CertificateComponents
-              ref={resultRef}
-              certificates={[]}
-            />
+            <CertificateComponents ref={resultRef} certificates={[]} />
           </div>
           <div className="issue form-group hidden" id="issue">
             <h2>Issue Certificate</h2>

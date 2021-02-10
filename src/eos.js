@@ -121,6 +121,7 @@ async function getCertificate(holder, key) {
   }
   return filtered[0];
 }
+
 function getValue(id) {
   return document.getElementById(id).value;
 }
