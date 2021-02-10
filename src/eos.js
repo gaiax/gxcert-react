@@ -93,7 +93,7 @@ class CertClient {
   }
 }
 
-async function getMyCertificates(holder) {
+async function getCertificates(holder) {
   const response = await rpc.get_table_rows({
     json: true,
     code: "cert",
@@ -110,8 +110,19 @@ async function getMyCertificates(holder) {
   return rows;
 }
 
+async function getCertificate(holder, key) {
+  const certificates = await getCertificates(holder);
+  console.log(certificates);
+  const filtered = certificates.filter((certificate) => {
+    return certificate.key === key;
+  });
+  if (filtered.length === 0) {
+    throw new Error("certificate not found.");
+  }
+  return filtered[0];
+}
 function getValue(id) {
   return document.getElementById(id).value;
 }
 
-export { CertClient, getMyCertificates };
+export { CertClient, getCertificates, getCertificate };
