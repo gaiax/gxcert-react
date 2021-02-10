@@ -27,7 +27,7 @@ class CertificateComponent extends React.Component {
   }
   render() {
     return (
-      <div class="certificate">
+      <div className="certificate">
         <img src={this.state.imageUrl} width="200" alt="certificate" />
         <p>{this.state.verified ? "✅" : ""}</p>
         <p>issueser: {this.state.issueser}</p>
@@ -45,7 +45,7 @@ class CertificateComponents extends React.Component {
   }
   render() {
     return (
-      <div class="certificates">
+      <div className="certificates">
         {this.state.certificates.map((certificate) => {
           return (
             <CertificateComponent

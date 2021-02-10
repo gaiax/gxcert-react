@@ -158,13 +158,13 @@ class App extends React.Component {
             </div>
           </div>
           <br />
-          <div id="show" className="show" class="form-group">
+          <div id="show" className="show form-group">
             <h2>Show Certificates</h2>
             <label>Certificate Holder</label>
             <input
               type="text"
               id="holder"
-              class="form-control"
+              className="form-control"
               placeholder="alice"
             />
             <input
@@ -172,7 +172,7 @@ class App extends React.Component {
               value="Show certificates"
               onClick={showCertificates}
               id="show-cert"
-              class="form-control"
+              className="form-control"
             />
             <br />
             <components.CertificateComponents
@@ -180,29 +180,29 @@ class App extends React.Component {
               certificates={[]}
             />
           </div>
-          <div className="issue" class="form-group hidden" id="issue">
+          <div className="issue form-group hidden" id="issue">
             <h2>Issue Certificate</h2>
             <label>issueser</label>
             <input
               type="text"
               id="issueser"
-              class="form-control"
+              className="form-control"
               placeholder="alice"
             />
             <label>receiver</label>
             <input
               type="text"
               id="receiver"
-              class="form-control"
+              className="form-control"
               placeholder="bob"
             />
             <label>Certificate Image</label>
-            <input type="file" id="cert-image" class="form-control" />
+            <input type="file" id="cert-image" className="form-control" />
             <br />
             <input
               type="button"
               id="issue-button"
-              class="form-control"
+              className="form-control"
               value="Issue"
               onClick={createCertificate}
             />
