@@ -59,7 +59,7 @@ function refreshCertificates(certificates) {
   resultRef.current.setState({ certificates: certificates });
 }
 
-async function verifyCertificates(certificates) {
+async function verifyCertificates(holder, certificates) {
   if (client !== null) {
     const withVerified = async (certificates) => {
       let promises = certificates.map((certificate) => {
@@ -85,14 +85,14 @@ async function showCertificate(queries) {
     return;
   }
   let certificates = [certificate];
-  await verifyCertificates(certificates);
+  await verifyCertificates(holder, certificates);
   refreshCertificates(certificates);
 }
 async function showCertificates() {
   const receiver = byId("holder").value;
   try {
     let certificates = await getCertificates(receiver);
-    await verifyCertificates(certificates);
+    await verifyCertificates(receiver, certificates);
     refreshCertificates(certificates);
   } catch (err) {
     console.error(err);
