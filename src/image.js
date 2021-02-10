@@ -11,20 +11,21 @@ function getPixelsFromContext(context, width, height) {
   }
   return result;
 }
+
 function getPixelsFromImage(fileElement) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     const img = new Image();
-    reader.onload = function() {
+    reader.onload = function () {
       img.src = reader.result;
-      img.onload = function() {
+      img.onload = function () {
         const canvas = document.createElement("canvas");
         const context = canvas.getContext("2d");
         context.drawImage(img, 0, 0);
         const pixels = getPixelsFromContext(context, img.width, img.height);
         resolve(pixels);
-      }
-    }
+      };
+    };
     reader.readAsDataURL(fileElement.files[0]);
   });
 }
@@ -35,12 +36,16 @@ async function getHashFromImage(fileElement) {
 }
 
 function makeHashFromPixels(pixels) {
-  const text = pixels.map(row => {
-    console.log(row);
-    return row.map(pixel => {
-      return "" + pixel[0] + pixel[1] + pixel[2];
-    }).join("");
-  }).join("");
+  const text = pixels
+    .map((row) => {
+      console.log(row);
+      return row
+        .map((pixel) => {
+          return "" + pixel[0] + pixel[1] + pixel[2];
+        })
+        .join("");
+    })
+    .join("");
   console.log(text);
   const md5 = crypto.createHash("md5");
   return md5.update(text, "binary").digest("hex");

@@ -20,9 +20,11 @@ if (privateKey !== null) {
 function showErrorMessage(message) {
   document.getElementById("error-message").innerText = message;
 }
+
 function showMessage(message) {
   document.getElementById("message").innerText = message;
 }
+
 async function createCertificate() {
   if (client === null) {
     return;
@@ -48,17 +50,12 @@ function getUrlQueries() {
   });
   return queries;
 }
-async function showCertificate(queries) {
-  const key = parseInt(queries["key"]);
-  const holder = queries["user"];
-  let certificate;
-  try {
-    certificate = await getCertificate(holder, key);
-  } catch (err) {
-    console.error(err);
-    return;
-  }
-  let certificates = [certificate];
+function refreshCertificates(certificates) {
+  resultRef.current.setState({ certificates: [] });
+  resultRef.current.setState({ certificates: certificates });
+}
+
+async function verifyCertificates(certificates) {
   if (client !== null) {
     const withVerified = async (certificates) => {
       let promises = certificates.map((certificate) => {
@@ -71,27 +68,28 @@ async function showCertificate(queries) {
       certificates[i].verified = verifieds[i];
     }
   }
-  resultRef.current.setState({ certificates: [] });
-  resultRef.current.setState({ certificates: certificates });
+}
+
+async function showCertificate(queries) {
+  const key = parseInt(queries["key"]);
+  const holder = queries["user"];
+  let certificate;
+  try {
+    certificate = await getCertificate(holder, key);
+  } catch (err) {
+    console.error(err);
+    return;
+  }
+  let certificates = [certificate];
+  await verifyCertificates(certificates);
+  refreshCertificates(certificates);
 }
 async function showCertificates() {
   const receiver = document.getElementById("holder").value;
   try {
     let certificates = await getCertificates(receiver);
-    if (client !== null) {
-      const withVerified = async (certificates) => {
-        let promises = certificates.map((certificate) => {
-          return client.verifyCertificate(receiver, certificate.key);
-        });
-        return await Promise.all(promises);
-      };
-      const verifieds = await withVerified(certificates);
-      for (let i = 0; i < certificates.length; i++) {
-        certificates[i].verified = verifieds[i];
-      }
-    }
-    resultRef.current.setState({ certificates: [] });
-    resultRef.current.setState({ certificates: certificates });
+    await verifyCertificates(certificates);
+    refreshCertificates(certificates);
   } catch (err) {
     console.error(err);
     showErrorMessage("Failed to fetch certificates.");
