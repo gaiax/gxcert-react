@@ -5,7 +5,7 @@ function getPixelsFromContext(context, width, height) {
   for (let i = 0; i < height; i++) {
     result.push([]);
     for (let j = 0; j < width; j++) {
-      const pixel = context.getImageData(j, i, 1, 1);
+      const pixel = context.getImageData(j, i, 1, 1).data;
       result[i].push([pixel[0], pixel[1], pixel[2]]);
     }
   }
@@ -17,20 +17,28 @@ function getPixelsFromImage(fileElement) {
     const img = new Image();
     reader.onload = function() {
       img.src = reader.result;
-      const canvas = document.createElement("canvas");
-      const context = canvas.getContext("2d");
-      context.drawImage(img, 0, 0);
-      const pixels = getPixelsFromContext(context, img.width, img.height);
-      resolve(pixels);
+      img.onload = function() {
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+        context.drawImage(img, 0, 0);
+        const pixels = getPixelsFromContext(context, img.width, img.height);
+        resolve(pixels);
+      }
     }
     reader.readAsDataURL(fileElement.files[0]);
   });
 }
 
-function makeHash(pixels) {
+async function getHashFromImage(fileElement) {
+  const pixels = await getPixelsFromImage(fileElement);
+  return makeHashFromPixels(pixels);
+}
+
+function makeHashFromPixels(pixels) {
   const text = pixels.map(row => {
+    console.log(row);
     return row.map(pixel => {
-      return pixel.toString();
+      return "" + pixel[0] + pixel[1] + pixel[2];
     }).join("");
   }).join("");
   console.log(text);
@@ -74,4 +82,4 @@ function createBlobFromImageDataURI(uri) {
   return blob;
 }
 
-export { fileInputToDataURL, createBlobFromImageDataURI };
+export { fileInputToDataURL, createBlobFromImageDataURI, getHashFromImage };
