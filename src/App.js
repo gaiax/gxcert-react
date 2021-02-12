@@ -134,7 +134,7 @@ async function getPrivateKeyFromGoogle() {
   let uid;
   try {
     uid = await getGoogleUid();
-  } catch(err) {
+  } catch (err) {
     console.error(err);
     return;
   }
@@ -142,7 +142,7 @@ async function getPrivateKeyFromGoogle() {
   return wif;
 }
 async function getGoogleUid() {
-  const result = await firebase.auth().signInWithPopup(provider)
+  const result = await firebase.auth().signInWithPopup(provider);
   return result.user.uid;
 }
 class App extends React.Component {
