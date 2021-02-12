@@ -29,6 +29,11 @@ function showMessage(message) {
   byId("message").innerText = message;
 }
 
+async function createAccount() {
+  const name = byId("account-name").value;
+  await client.createAccount(name);
+}
+
 async function createCertificate() {
   if (client === null) {
     return;
@@ -102,22 +107,33 @@ async function showCertificates() {
 }
 
 function resetTabSelected() {
+  byId("new-tab").classList.remove("selected");
   byId("issue-tab").classList.remove("selected");
   byId("show-tab").classList.remove("selected");
   byId("issue").classList.remove("hidden");
   byId("show").classList.remove("hidden");
+  byId("new").classList.remove("hidden");
+}
+
+function changeTabToNew() {
+  resetTabSelected();
+  byId("new-tab").classList.add("selected");
+  byId("show").classList.add("hidden");
+  byId("issue").classList.add("hidden");
 }
 
 function changeTabToIssue() {
   resetTabSelected();
   byId("issue-tab").classList.add("selected");
   byId("show").classList.add("hidden");
+  byId("new").classList.add("hidden");
 }
 
 function changeTabToShow() {
   resetTabSelected();
   byId("show-tab").classList.add("selected");
   byId("issue").classList.add("hidden");
+  byId("new").classList.add("hidden");
 }
 
 function isShowPage(queries) {
@@ -141,6 +157,9 @@ class App extends React.Component {
           <p id="error-message"></p>
           <p id="message"></p>
           <div className="tabs">
+            <div className="new-tab tab" id="new-tab" onClick={changeTabToNew}>
+              New
+            </div>
             <div
               className="issue-tab tab"
               id="issue-tab"
@@ -157,6 +176,16 @@ class App extends React.Component {
             </div>
           </div>
           <br />
+          <div id="new" className="new form-group hidden">
+            <h2>New Account</h2>
+            <label>Account Name</label>
+            <input type="text" id="account-name" className="form-control" />
+            <input
+              type="button"
+              className="form-control"
+              onClick={createAccount}
+            />
+          </div>
           <div id="show" className="show form-group">
             <h2>Show Certificates</h2>
             <label>Certificate Holder</label>

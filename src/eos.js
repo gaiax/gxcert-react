@@ -38,7 +38,7 @@ class CertClient {
             ],
             data: {
               creator: "eosio",
-              name: "name",
+              name: name,
               owner: {
                 threshold: 1,
                 keys: [
