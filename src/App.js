@@ -2,6 +2,9 @@ import "./App.css";
 import React from "react";
 import { CertificateComponents } from "./Certificate";
 import { getCertificate, getCertificates, CertClient } from "./eos";
+import firebase from "./Firebase";
+const provider = new firebase.auth.GoogleAuthProvider();
+const ecc = require("eosjs-ecc");
 
 const resultRef = React.createRef();
 
@@ -127,6 +130,21 @@ function isShowPage(queries) {
   return false;
 }
 
+async function getPrivateKeyFromGoogle() {
+  let uid;
+  try {
+    uid = await getGoogleUid();
+  } catch(err) {
+    console.error(err);
+    return;
+  }
+  const wif = ecc.seedPrivate(uid + ": You are super lucky!!!");
+  return wif;
+}
+async function getGoogleUid() {
+  const result = await firebase.auth().signInWithPopup(provider)
+  return result.user.uid;
+}
 class App extends React.Component {
   componentDidMount() {
     const queries = getUrlQueries();
