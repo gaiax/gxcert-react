@@ -126,7 +126,7 @@ class CertClient {
               issueser,
               receiver,
               ipfs_hash: hash,
-              created_at: parseInt((new Date()).getTime() / 1000),
+              created_at: parseInt(new Date().getTime() / 1000),
             },
           },
         ],
@@ -156,8 +156,16 @@ async function getCertificates(holder) {
     reverse: false,
     show_payer: false,
   });
-  const rows = response.rows.filter(function (row) {
+  let rows = response.rows.filter(function (row) {
     return row.receiver === holder;
+  });
+  rows = rows.map(function (row) {
+    return {
+      issueser: row.issueser,
+      receiver: row.receiver,
+      ipfs_hash: row.ipfs_hash,
+      created_at: new Date(row.created_at * 1000),
+    };
   });
   console.log(rows);
   return rows;
