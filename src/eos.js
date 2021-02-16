@@ -126,7 +126,7 @@ class CertClient {
               issueser,
               receiver,
               ipfs_hash: hash,
-              expired: false,
+              created_at: parseInt((new Date()).getTime() / 1000),
             },
           },
         ],
