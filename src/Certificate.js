@@ -33,7 +33,7 @@ class CertificateComponent extends React.Component {
         <p>{this.state.verified ? "✅" : ""}</p>
         <p>issueser: {this.state.issueser}</p>
         <p>receiver: {this.state.receiver}</p>
-        <p>issuesed at: {(new Date(this.state.created_at * 1000)).toString()}</p>
+        <p>issuesed at: {(new Date(this.state.created_at)).toString()}</p>
       </div>
     );
   }
