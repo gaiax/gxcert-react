@@ -23,6 +23,7 @@ class CertificateComponent extends React.Component {
       issueser: props.issueser,
       receiver: props.receiver,
       verified: props.verified,
+      created_at: props.created_at,
     };
   }
   render() {
@@ -32,6 +33,7 @@ class CertificateComponent extends React.Component {
         <p>{this.state.verified ? "✅" : ""}</p>
         <p>issueser: {this.state.issueser}</p>
         <p>receiver: {this.state.receiver}</p>
+        <p>issuesed at: {(new Date(this.state.created_at * 1000)).toString()}</p>
       </div>
     );
   }
@@ -52,6 +54,7 @@ class CertificateComponents extends React.Component {
               ipfs_hash={certificate.ipfs_hash}
               issueser={certificate.issueser}
               receiver={certificate.receiver}
+              created_at={certificate.created_at}
               verified={certificate.verified}
             />
           );
