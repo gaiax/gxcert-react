@@ -35,8 +35,8 @@ class CertificateComponent extends React.Component {
     return (
       <div className="certificate">
         <img src={this.state.imageUrl} width="200" alt="certificate" />
-        <p>{this.state.verified ? "✅" : ""}</p>
         <p>
+          {this.state.verified ? " ✅ " : ""}
           {this.state.issueser} issuesed to {this.state.receiver} at{" "}
           {dateString(new Date(this.state.created_at))}
         </p>
