@@ -4,7 +4,8 @@ import { Api, JsonRpc } from "eosjs";
 import { JsSignatureProvider } from "eosjs/dist/eosjs-jssig";
 import ecc from "eosjs-ecc";
 
-const rpcHost = "https://api.eosargentina.io";
+//const rpcHost = "https://api.eosargentina.io";
+const rpcHost = "http://localhost:8888";
 const rpc = new JsonRpc(rpcHost);
 
 class CertClient {
