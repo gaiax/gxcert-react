@@ -2,6 +2,11 @@ import React from "react";
 import * as ipfs from "./ipfs";
 import "./Certificate.css";
 
+function dateString(date) {
+  return (
+    date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate()
+  );
+}
 class CertificateComponent extends React.Component {
   componentWillMount() {
     const that = this;
@@ -31,9 +36,10 @@ class CertificateComponent extends React.Component {
       <div className="certificate">
         <img src={this.state.imageUrl} width="200" alt="certificate" />
         <p>{this.state.verified ? "✅" : ""}</p>
-        <p>issueser: {this.state.issueser}</p>
-        <p>receiver: {this.state.receiver}</p>
-        <p>issuesed at: {(new Date(this.state.created_at)).toString()}</p>
+        <p>
+          {this.state.issueser} issuesed to {this.state.receiver} at{" "}
+          {dateString(new Date(this.state.created_at))}
+        </p>
       </div>
     );
   }
