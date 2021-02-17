@@ -162,6 +162,7 @@ async function getCertificates(holder) {
   });
   rows = rows.map(function (row) {
     return {
+      key: row.key,
       issueser: row.issueser,
       receiver: row.receiver,
       ipfs_hash: row.ipfs_hash,
