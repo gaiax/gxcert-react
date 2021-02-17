@@ -11,8 +11,11 @@
 
 .certificate img {
   margin-bottom: 30px;
+  width: 100%;
 }
 
 .certificate p {
   margin: 5px;
+  color: #300;
+  font-weight: bold;
 }
