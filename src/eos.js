@@ -4,12 +4,12 @@ import { Api, JsonRpc } from "eosjs";
 import { JsSignatureProvider } from "eosjs/dist/eosjs-jssig";
 import ecc from "eosjs-ecc";
 
-//const rpcHost = "https://api.eosargentina.io";
-const rpcHost = "http://localhost:8888";
+const rpcHost = "https://api.testnet.eos.io";
 const rpc = new JsonRpc(rpcHost);
+const CERT_ACCOUNT = "czpdhrwjtxwq";
 
 class CertClient {
-  constructor(privateKey, rpcHost) {
+  constructor(privateKey) {
     this.defaultPrivateKey = privateKey;
     const signatureProvider = new JsSignatureProvider([this.defaultPrivateKey]);
     this.signatureProvider = signatureProvider;
@@ -80,7 +80,7 @@ class CertClient {
         {
           actions: [
             {
-              account: "cert",
+              account: CERT_ACCOUNT,
               name: "verify",
               authorization: [
                 {
@@ -115,7 +115,7 @@ class CertClient {
       {
         actions: [
           {
-            account: "cert",
+            account: CERT_ACCOUNT,
             name: "create",
             authorization: [
               {
@@ -150,7 +150,7 @@ class CertClient {
 async function getCertificates(holder) {
   const response = await rpc.get_table_rows({
     json: true,
-    code: "cert",
+    code: CERT_ACCOUNT,
     scope: holder,
     table: "certificates",
     limit: 100,
@@ -171,6 +171,60 @@ async function getCertificates(holder) {
   });
   console.log(rows);
   return rows;
+}
+async function createAccount(name, privateKey) {
+  /*
+  const client = new CertClient(privateKeyForAccountCreation);
+  const publicKey = ecc.privateToPublic(privateKey);
+  console.log(publicKey);
+  const result = await client.api.transact(
+    {
+      actions: [
+        {
+          account: "eosio",
+          name: "newaccount",
+          authorization: [
+            {
+              actor: accountForAccountCreation,
+              permission: "active",
+            },
+          ],
+          data: {
+            creator: accountForAccountCreation,
+            name: name,
+            owner: {
+              threshold: 1,
+              keys: [
+                {
+                  key: publicKey,
+                  weight: 1,
+                },
+              ],
+              accounts: [],
+              waits: [],
+            },
+            active: {
+              threshold: 1,
+              keys: [
+                {
+                  key: publicKey,
+                  weight: 1,
+                },
+              ],
+              accounts: [],
+              waits: [],
+            },
+          },
+        },
+      ],
+    },
+    {
+      blocksBehind: 3,
+      expireSeconds: 30,
+    }
+  );
+  console.log(result);
+  */
 }
 
 async function getCertificate(holder, key) {
