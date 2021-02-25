@@ -55,7 +55,7 @@ class CertificateComponents extends React.Component {
             <CertificateComponent
               ipfs_hash={certificate.ipfs}
               issueser={certificate.by}
-              created_at={certificate.time}
+              created_at={certificate.time * 1000}
             />
           );
         })}
