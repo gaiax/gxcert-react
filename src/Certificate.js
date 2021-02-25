@@ -26,8 +26,6 @@ class CertificateComponent extends React.Component {
       ipfs_hash: props.ipfs_hash,
       imageUrl: null,
       issueser: props.issueser,
-      receiver: props.receiver,
-      verified: props.verified,
       created_at: props.created_at,
     };
   }
@@ -36,9 +34,7 @@ class CertificateComponent extends React.Component {
       <div className="certificate">
         <img src={this.state.imageUrl} width="200" alt="certificate" />
         <p>
-          {this.state.verified ? " ✅ " : ""}
-          {this.state.issueser} issuesed to {this.state.receiver} at{" "}
-          {dateString(new Date(this.state.created_at))}
+          {this.state.issueser} issuesed at {dateString(new Date(this.state.created_at))}
         </p>
       </div>
     );
@@ -57,11 +53,9 @@ class CertificateComponents extends React.Component {
         {this.state.certificates.map((certificate) => {
           return (
             <CertificateComponent
-              ipfs_hash={certificate.ipfs_hash}
-              issueser={certificate.issueser}
-              receiver={certificate.receiver}
-              created_at={certificate.created_at}
-              verified={certificate.verified}
+              ipfs_hash={certificate.ipfs}
+              issueser={certificate.by}
+              created_at={certificate.time}
             />
           );
         })}

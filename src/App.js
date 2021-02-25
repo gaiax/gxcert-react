@@ -1,21 +1,21 @@
 import "./App.css";
 import React from "react";
 import { CertificateComponents } from "./Certificate";
-import { getCertificate, getCertificates, CertClient } from "./eos";
+import { getGoogleUid } from "./Google";
+import * as CertClient from "gxcert-iota";
+import * as ipfs from "./ipfs";
+import * as image from "./image";
 
 const resultRef = React.createRef();
 
-const rpcHost = "http://localhost:8888";
-const privateKey = window.prompt("enter private key of your account", "");
 
 let client = null;
-if (privateKey !== null) {
-  try {
-    client = new CertClient(privateKey, rpcHost);
-  } catch (err) {
-    console.error(err);
-  }
-}
+(async () => {
+  const uid = await getGoogleUid();
+  client = new CertClient("https://nodes.devnet.iota.org", uid);
+  await client.init();
+  console.log(client.address);
+})();
 
 function byId(id) {
   return document.getElementById(id);
@@ -29,20 +29,26 @@ function showMessage(message) {
   byId("message").innerText = message;
 }
 
-async function createAccount() {
-  const name = byId("account-name").value;
-  await client.createAccount(name);
-}
 
 async function createCertificate() {
   if (client === null) {
     return;
   }
+  let ipfsHash = null;
+  const address = byId("receiver").value;
+  const imageData = await image.fileInputToDataURL(byId("cert-image"));
   try {
-    await client._createCertificate();
+    const blob = image.createBlobFromImageDataURI(imageData);
+    ipfsHash = await ipfs.postCertificate(blob);
   } catch (err) {
     showErrorMessage("Failed to issue a certificate.");
     return;
+  }
+  const certificate = client.createCertificateObject(ipfsHash);
+  try {
+    await client.issueCertificate(certificate, address);
+  } catch (err) {
+    showErrorMessage("Failed to issue a certificate.");
   }
   showMessage("Successfully completed issuesing a certificate.");
 }
@@ -64,60 +70,31 @@ function refreshCertificates(certificates) {
   resultRef.current.setState({ certificates: certificates });
 }
 
-async function verifyCertificates(holder, certificates) {
-  if (client !== null) {
-    const withVerified = async (certificates) => {
-      let promises = certificates.map((certificate) => {
-        return client.verifyCertificate(holder, certificate.key);
-      });
-      return await Promise.all(promises);
-    };
-    const verifieds = await withVerified(certificates);
-    for (let i = 0; i < certificates.length; i++) {
-      certificates[i].verified = verifieds[i];
-    }
-  }
-}
 
-async function showCertificate(queries) {
-  const key = parseInt(queries["key"]);
-  const holder = queries["user"];
-  let certificate;
-  try {
-    certificate = await getCertificate(holder, key);
-  } catch (err) {
-    console.error(err);
-    return;
-  }
-  let certificates = [certificate];
-  await verifyCertificates(holder, certificates);
-  refreshCertificates(certificates);
-}
 
 async function showCertificates() {
   const holder = byId("holder").value;
+  console.log(holder);
+  let certificates;
   try {
-    let certificates = await getCertificates(holder);
-    await verifyCertificates(holder, certificates);
-    refreshCertificates(certificates);
+    certificates = await client.getCertificates(holder);
   } catch (err) {
     console.error(err);
     showErrorMessage("Failed to fetch certificates.");
   }
+  console.log(certificates);
+  refreshCertificates(certificates);
 }
 
 function resetTabSelected() {
-  byId("new-tab").classList.remove("selected");
   byId("issue-tab").classList.remove("selected");
   byId("show-tab").classList.remove("selected");
   byId("issue").classList.remove("hidden");
   byId("show").classList.remove("hidden");
-  byId("new").classList.remove("hidden");
 }
 
 function changeTabToNew() {
   resetTabSelected();
-  byId("new-tab").classList.add("selected");
   byId("show").classList.add("hidden");
   byId("issue").classList.add("hidden");
 }
@@ -126,14 +103,12 @@ function changeTabToIssue() {
   resetTabSelected();
   byId("issue-tab").classList.add("selected");
   byId("show").classList.add("hidden");
-  byId("new").classList.add("hidden");
 }
 
 function changeTabToShow() {
   resetTabSelected();
   byId("show-tab").classList.add("selected");
   byId("issue").classList.add("hidden");
-  byId("new").classList.add("hidden");
 }
 
 function isShowPage(queries) {
@@ -145,10 +120,6 @@ function isShowPage(queries) {
 
 class App extends React.Component {
   componentDidMount() {
-    const queries = getUrlQueries();
-    if (isShowPage(queries)) {
-      showCertificate(queries);
-    }
   }
   render() {
     return (
@@ -157,9 +128,6 @@ class App extends React.Component {
           <p id="error-message"></p>
           <p id="message"></p>
           <div className="tabs">
-            <div className="new-tab tab" id="new-tab" onClick={changeTabToNew}>
-              New
-            </div>
             <div
               className="issue-tab tab"
               id="issue-tab"
@@ -176,16 +144,6 @@ class App extends React.Component {
             </div>
           </div>
           <br />
-          <div id="new" className="new form-group hidden">
-            <h2>New Account</h2>
-            <label>Account Name</label>
-            <input type="text" id="account-name" className="form-control" />
-            <input
-              type="button"
-              className="form-control"
-              onClick={createAccount}
-            />
-          </div>
           <div id="show" className="show form-group">
             <h2>Show Certificates</h2>
             <label>Certificate Holder</label>
