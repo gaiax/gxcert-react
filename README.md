@@ -51,3 +51,7 @@ http://localhost:3000
 
 **5. Issueボタンをクリックする**
 
+### 証明書の一覧の表示
+**Certificate Holderに証明書を確認したい人のアドレスを入力**
+
+**Show Certificatesをクリック**
