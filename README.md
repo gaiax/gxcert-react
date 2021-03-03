@@ -34,6 +34,7 @@ npm start
 http://localhost:3000
 
 **Google login**
+
 自分のgmailアカウントでログインしてください。
 
 **要素の検証からコンソールを開き、アドレスをコピーする**
