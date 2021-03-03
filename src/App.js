@@ -46,10 +46,8 @@ const UI = {
 
 
 
-/*
- *
 function isShowPage(queries) {
-  if ("key" in queries && "user" in queries) {
+  if ("index" in queries && "address" in queries) {
     return true;
   }
   return false;
@@ -66,11 +64,6 @@ function getUrlQueries() {
   });
   return queries;
 }
-*/
-
-
-
-
 
 class App extends React.Component {
   async init() {
@@ -90,6 +83,20 @@ class App extends React.Component {
 }
 
 class CertApp extends React.Component {
+  async showCertificate(holder, index) {
+    let certificate;
+    try {
+      certificate = await client.getCertificate(holder, index);
+    } catch(err) {
+      console.error(err);
+      UI.showErrorMessage("Failed to fetch certificate.");
+    }
+    if (certificate === undefined) {
+      UI.showErrorMessage("Certificate not found.");
+      return;
+    }
+    UI.refreshCertificates([certificate]);
+  }
   async showCertificates() {
     const holder = UI.byId("holder").value;
     console.log(holder);
@@ -126,6 +133,10 @@ class CertApp extends React.Component {
     UI.showMessage("Successfully completed issuesing a certificate.");
   }
   componentDidMount() {
+    const queries = getUrlQueries();
+    if (isShowPage(queries)) {
+      this.showCertificate(queries.address, parseInt(queries.index));
+    }
   }
   render() {
     return (
@@ -137,14 +148,14 @@ class CertApp extends React.Component {
             <div
               className="issue-tab tab"
               id="issue-tab"
-              onClick={UI.changeTabToIssue}
+              onClick={UI.changeTabToIssue.bind(UI)}
             >
               Issue
             </div>
             <div
               className="show-tab tab selected"
               id="show-tab"
-              onClick={UI.changeTabToShow}
+              onClick={UI.changeTabToShow.bind(UI)}
             >
               Show
             </div>
