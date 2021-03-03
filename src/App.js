@@ -5,17 +5,15 @@ import { getGoogleUid } from "./Google";
 import * as CertClient from "gxcert-iota";
 import * as ipfs from "./ipfs";
 import * as image from "./image";
+import Login from "./Login";
 
 const resultRef = React.createRef();
 
 
 let client = null;
-(async () => {
-  const uid = await getGoogleUid();
-  client = new CertClient("https://nodes.devnet.iota.org", uid);
-  await client.init();
-  console.log(client.address);
-})();
+
+async function init(){
+};
 
 function byId(id) {
   return document.getElementById(id);
@@ -53,6 +51,14 @@ async function createCertificate() {
   showMessage("Successfully completed issuesing a certificate.");
 }
 
+/*
+ *
+function isShowPage(queries) {
+  if ("key" in queries && "user" in queries) {
+    return true;
+  }
+  return false;
+}
 function getUrlQueries() {
   let queryStr = window.location.search.slice(1);
   let queries = {};
@@ -65,6 +71,7 @@ function getUrlQueries() {
   });
   return queries;
 }
+*/
 function refreshCertificates(certificates) {
   resultRef.current.setState({ certificates: [] });
   resultRef.current.setState({ certificates: certificates });
@@ -93,11 +100,6 @@ function resetTabSelected() {
   byId("show").classList.remove("hidden");
 }
 
-function changeTabToNew() {
-  resetTabSelected();
-  byId("show").classList.add("hidden");
-  byId("issue").classList.add("hidden");
-}
 
 function changeTabToIssue() {
   resetTabSelected();
@@ -111,14 +113,25 @@ function changeTabToShow() {
   byId("issue").classList.add("hidden");
 }
 
-function isShowPage(queries) {
-  if ("key" in queries && "user" in queries) {
-    return true;
-  }
-  return false;
-}
 
 class App extends React.Component {
+  async init() {
+    const uid = await getGoogleUid();
+    client = new CertClient("https://nodes.devnet.iota.org", uid);
+    await client.init();
+    console.log(client.address); 
+    this.forceUpdate();
+  }
+  render() {
+    return (
+      <div className="App">
+        { client === null?  <Login onClick={this.init()} /> : <CertApp /> }
+      </div>
+    );
+  }
+}
+
+class CertApp extends React.Component {
   componentDidMount() {
   }
   render() {
