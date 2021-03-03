@@ -12,44 +12,39 @@ const resultRef = React.createRef();
 
 let client = null;
 
-async function init(){
-};
-
-function byId(id) {
-  return document.getElementById(id);
-}
-
-function showErrorMessage(message) {
-  byId("error-message").innerText = message;
-}
-
-function showMessage(message) {
-  byId("message").innerText = message;
-}
-
-
-async function createCertificate() {
-  if (client === null) {
-    return;
+const UI = {
+  byId: function(id) {
+    return document.getElementById(id);
+  },
+  showErrorMessage: function(message) {
+    this.byId("error-message").innerText = message;
+  },
+  showMessage: function(message) {
+    this.byId("message").innerText = message;
+  },
+  refreshCertificates: function(certificates) {
+    resultRef.current.setState({ certificates: [] });
+    resultRef.current.setState({ certificates: certificates });
+  },
+  resetTabSelected: function () {
+    this.byId("issue-tab").classList.remove("selected");
+    this.byId("show-tab").classList.remove("selected");
+    this.byId("issue").classList.remove("hidden");
+    this.byId("show").classList.remove("hidden");
+  },
+  changeTabToIssue: function() {
+    this.resetTabSelected();
+    this.byId("issue-tab").classList.add("selected");
+    this.byId("show").classList.add("hidden");
+  },
+  changeTabToShow: function() {
+    this.resetTabSelected();
+    this.byId("show-tab").classList.add("selected");
+    this.byId("issue").classList.add("hidden");
   }
-  let ipfsHash = null;
-  const address = byId("receiver").value;
-  const imageData = await image.fileInputToDataURL(byId("cert-image"));
-  try {
-    const blob = image.createBlobFromImageDataURI(imageData);
-    ipfsHash = await ipfs.postCertificate(blob);
-  } catch (err) {
-    showErrorMessage("Failed to issue a certificate.");
-    return;
-  }
-  const certificate = client.createCertificateObject(ipfsHash);
-  try {
-    await client.issueCertificate(certificate, address);
-  } catch (err) {
-    showErrorMessage("Failed to issue a certificate.");
-  }
-  showMessage("Successfully completed issuesing a certificate.");
 }
+
+
 
 /*
  *
@@ -72,46 +67,9 @@ function getUrlQueries() {
   return queries;
 }
 */
-function refreshCertificates(certificates) {
-  resultRef.current.setState({ certificates: [] });
-  resultRef.current.setState({ certificates: certificates });
-}
 
 
 
-async function showCertificates() {
-  const holder = byId("holder").value;
-  console.log(holder);
-  let certificates;
-  try {
-    certificates = await client.getCertificates(holder);
-  } catch (err) {
-    console.error(err);
-    showErrorMessage("Failed to fetch certificates.");
-  }
-  console.log(certificates);
-  refreshCertificates(certificates);
-}
-
-function resetTabSelected() {
-  byId("issue-tab").classList.remove("selected");
-  byId("show-tab").classList.remove("selected");
-  byId("issue").classList.remove("hidden");
-  byId("show").classList.remove("hidden");
-}
-
-
-function changeTabToIssue() {
-  resetTabSelected();
-  byId("issue-tab").classList.add("selected");
-  byId("show").classList.add("hidden");
-}
-
-function changeTabToShow() {
-  resetTabSelected();
-  byId("show-tab").classList.add("selected");
-  byId("issue").classList.add("hidden");
-}
 
 
 class App extends React.Component {
@@ -132,6 +90,41 @@ class App extends React.Component {
 }
 
 class CertApp extends React.Component {
+  async showCertificates() {
+    const holder = UI.byId("holder").value;
+    console.log(holder);
+    let certificates;
+    try {
+      certificates = await client.getCertificates(holder);
+    } catch (err) {
+      console.error(err);
+      UI.showErrorMessage("Failed to fetch certificates.");
+    }
+    console.log(certificates);
+    UI.refreshCertificates(certificates);
+  }
+  async createCertificate() {
+    if (client === null) {
+      return;
+    }
+    let ipfsHash = null;
+    const address = UI.byId("receiver").value;
+    const imageData = await image.fileInputToDataURL(UI.byId("cert-image"));
+    try {
+      const blob = image.createBlobFromImageDataURI(imageData);
+      ipfsHash = await ipfs.postCertificate(blob);
+    } catch (err) {
+      UI.showErrorMessage("Failed to issue a certificate.");
+      return;
+    }
+    const certificate = client.createCertificateObject(ipfsHash);
+    try {
+      await client.issueCertificate(certificate, address);
+    } catch (err) {
+      UI.showErrorMessage("Failed to issue a certificate.");
+    }
+    UI.showMessage("Successfully completed issuesing a certificate.");
+  }
   componentDidMount() {
   }
   render() {
@@ -144,14 +137,14 @@ class CertApp extends React.Component {
             <div
               className="issue-tab tab"
               id="issue-tab"
-              onClick={changeTabToIssue}
+              onClick={UI.changeTabToIssue}
             >
               Issue
             </div>
             <div
               className="show-tab tab selected"
               id="show-tab"
-              onClick={changeTabToShow}
+              onClick={UI.changeTabToShow}
             >
               Show
             </div>
@@ -169,7 +162,7 @@ class CertApp extends React.Component {
             <input
               type="button"
               value="Show certificates"
-              onClick={showCertificates}
+              onClick={this.showCertificates}
               id="show-cert"
               className="form-control"
             />
@@ -200,7 +193,7 @@ class CertApp extends React.Component {
               id="issue-button"
               className="form-control"
               value="Issue"
-              onClick={createCertificate}
+              onClick={this.createCertificate}
             />
           </div>
         </div>
