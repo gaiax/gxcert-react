@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+# gxcert
+gxcertのフロントWebアプリケーションです。
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+以下の技術を使用しています。
+* IOTA
+* React.js
 
-## Available Scripts
+以下のバージョンが必要です。
+* Node.js v14.6.0
+* npm 6.14.6
 
-In the project directory, you can run:
 
-### `yarn start`
+### 実行方法
+**1. git clone**
+```bash
+git clone git@github.com:gaiax/gxcert-react.git
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**2. npm install**
+```bash
+cd /path/to/gxcert-react
+npm install
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+**3. start dev server**
+```bash
+npm start
+```
 
-### `yarn test`
+**4. access local server**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+ブラウザで以下のurlを開いてください。
 
-### `yarn build`
+http://localhost:3000
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**5. Google login**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+自分のgmailアカウントでログインしてください。
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**6. Copy your address from developer console**
 
-### `yarn eject`
+コピーしたアドレスが、そのアカウントに証明書を発行するためのアドレスです。
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 証明書の発行
+1. Issueタブをクリック
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. issueserは入力しなくて良い
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+3. receiverに、証明書を発行する相手のアドレスを入力する
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+4. 証明書の画像を選択する
 
-## Learn More
+5. Issueボタンをクリックする
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 証明書の一覧の表示
+1. Certificate Holderに証明書を確認したい人のアドレスを入力
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+2. Show Certificatesをクリック
