@@ -182,13 +182,6 @@ class CertApp extends React.Component {
           </div>
           <div className="issue form-group hidden" id="issue">
             <h2>Issue Certificate</h2>
-            <label>issueser</label>
-            <input
-              type="text"
-              id="issueser"
-              className="form-control"
-              placeholder="alice"
-            />
             <label>receiver</label>
             <input
               type="text"
