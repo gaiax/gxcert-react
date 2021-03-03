@@ -1,0 +1,11 @@
+.login-page {
+  background-color: white;
+  text-align: center;
+}
+
+.login-google {
+  background-color: blue;
+  color: white;
+  width: 300px;
+  height: 80px;
+}
