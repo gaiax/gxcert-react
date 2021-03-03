@@ -38,6 +38,7 @@ http://localhost:3000
 自分のgmailアカウントでログインしてください。
 
 **6. Copy your address from developer console**
+
 コピーしたアドレスが、そのアカウントに証明書を発行するためのアドレスです。
 
 ### 証明書の発行
