@@ -125,7 +125,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        { client === null?  <Login onClick={this.init()} /> : <CertApp /> }
+        { client === null?  <Login onClick={this.init.bind(this)} /> : <CertApp /> }
       </div>
     );
   }
