@@ -9,8 +9,13 @@ import Login from "./Login";
 
 const resultRef = React.createRef();
 
-
+let uid = sessionStorage.getItem("uid");
 let client = null;
+if (uid !== null) {
+  client = new CertClient("https://nodes.devnet.iota.org", uid);
+  client.address = sessionStorage.getItem("address");
+}
+
 
 const UI = {
   byId: function(id) {
@@ -66,13 +71,19 @@ function getUrlQueries() {
 }
 
 class App extends React.Component {
+  saveToSessionStorage(uid, address) {
+    sessionStorage.setItem("uid", uid);
+    sessionStorage.setItem("address", address);
+  }
   async init() {
     const uid = await getGoogleUid();
     client = new CertClient("https://nodes.devnet.iota.org", uid);
     await client.init();
+    if (uid) {
+      this.saveToSessionStorage(uid, client.address);
+    }
     console.log(client.address); 
     this.forceUpdate();
-    UI.byId("my-pubkey").innerText = "Your public key is " + client.address.substr(0, 8) + "...   ";
   }
   render() {
     return (
@@ -93,6 +104,9 @@ class CertApp extends React.Component {
     var retVal = document.execCommand('copy');
     bodyElm.removeChild(copyFrom);
     UI.showMessage("Copied pubkey!");
+  }
+  showPubkey() {
+    UI.byId("my-pubkey").innerText = "Your public key is " + client.address.substr(0, 8) + "...   ";
   }
   async showCertificate(holder, index) {
     let certificate;
@@ -144,6 +158,7 @@ class CertApp extends React.Component {
     UI.showMessage("Successfully completed issuesing a certificate.");
   }
   componentDidMount() {
+    this.showPubkey();
     const queries = getUrlQueries();
     if (isShowPage(queries)) {
       this.showCertificate(queries.address, parseInt(queries.index));
