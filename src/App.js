@@ -98,10 +98,10 @@ class CertApp extends React.Component {
   copyPubkey() {
     const copyFrom = document.createElement("textarea");
     copyFrom.textContent = client.address;
-    var bodyElm = document.getElementsByTagName("body")[0];
+    const bodyElm = document.getElementsByTagName("body")[0];
     bodyElm.appendChild(copyFrom);
     copyFrom.select();
-    var retVal = document.execCommand('copy');
+    document.execCommand('copy');
     bodyElm.removeChild(copyFrom);
     UI.showMessage("Copied pubkey!");
   }
