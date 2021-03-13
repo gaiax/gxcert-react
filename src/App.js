@@ -72,6 +72,7 @@ class App extends React.Component {
     await client.init();
     console.log(client.address); 
     this.forceUpdate();
+    UI.byId("my-pubkey").innerText = "Your public key is " + client.address.substr(0, 8) + "...   ";
   }
   render() {
     return (
@@ -83,6 +84,16 @@ class App extends React.Component {
 }
 
 class CertApp extends React.Component {
+  copyPubkey() {
+    const copyFrom = document.createElement("textarea");
+    copyFrom.textContent = client.address;
+    var bodyElm = document.getElementsByTagName("body")[0];
+    bodyElm.appendChild(copyFrom);
+    copyFrom.select();
+    var retVal = document.execCommand('copy');
+    bodyElm.removeChild(copyFrom);
+    UI.showMessage("Copied pubkey!");
+  }
   async showCertificate(holder, index) {
     let certificate;
     try {
@@ -161,6 +172,8 @@ class CertApp extends React.Component {
             </div>
           </div>
           <br />
+          <span id="my-pubkey"></span>
+          <a onClick={this.copyPubkey} className="copy-pubkey">Copy pubkey</a>
           <div id="show" className="show form-group">
             <h2>Show Certificates</h2>
             <label>Certificate Holder</label>
