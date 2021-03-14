@@ -103,10 +103,10 @@ class CertApp extends React.Component {
     copyFrom.select();
     document.execCommand('copy');
     bodyElm.removeChild(copyFrom);
-    UI.showMessage("Copied pubkey!");
+    UI.showMessage("Copied your ID!");
   }
   showPubkey() {
-    UI.byId("my-pubkey").innerText = "Your public key is " + client.address.substr(0, 8) + "...   ";
+    UI.byId("my-pubkey").innerText = "Your ID is " + client.address.substr(0, 8) + "...   ";
   }
   async showCertificate(holder, index) {
     let certificate;
@@ -188,15 +188,15 @@ class CertApp extends React.Component {
           </div>
           <br />
           <span id="my-pubkey"></span>
-          <a onClick={this.copyPubkey} className="copy-pubkey">Copy pubkey</a>
+          <a onClick={this.copyPubkey} className="copy-pubkey">Copy ID</a>
           <div id="show" className="show form-group">
             <h2>Show Certificates</h2>
-            <label>Certificate Holder</label>
+            <label>Certificate Holder ID</label>
             <input
               type="text"
               id="holder"
               className="form-control"
-              placeholder="alice"
+              placeholder=""
             />
             <input
               type="button"
@@ -210,12 +210,12 @@ class CertApp extends React.Component {
           </div>
           <div className="issue form-group hidden" id="issue">
             <h2>Issue Certificate</h2>
-            <label>receiver</label>
+            <label>Receiver ID</label>
             <input
               type="text"
               id="receiver"
               className="form-control"
-              placeholder="bob"
+              placeholder=""
             />
             <label>Certificate Image</label>
             <input type="file" id="cert-image" className="form-control" />
