@@ -55,7 +55,7 @@
   font-size: 18px;
   color: #666;
 }
-#issueser, #receiver, #cert-image, #show-cert, #holder{
+#issueser, #receiver, #cert-image, #show-cert, #holder, #issue-button{
   width: 300px;
   margin-left: auto;
   margin-right: auto;
