@@ -6,6 +6,7 @@ import * as CertClient from "gxcert-iota";
 import * as ipfs from "./ipfs";
 import * as image from "./image";
 import Login from "./Login";
+import CommunicationLoading from "./loading";
 
 const resultRef = React.createRef();
 
@@ -95,6 +96,13 @@ class App extends React.Component {
 }
 
 class CertApp extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      showPageIsLoading: false,
+      issuePageIsLoading: false
+    }
+  }
   copyPubkey() {
     const copyFrom = document.createElement("textarea");
     copyFrom.textContent = client.address;
@@ -126,12 +134,18 @@ class CertApp extends React.Component {
     const holder = UI.byId("holder").value;
     console.log(holder);
     let certificates;
+    this.setState({
+      showPageIsLoading: true,
+    });
     try {
       certificates = await client.getCertificates(holder);
     } catch (err) {
       console.error(err);
       UI.showErrorMessage("Failed to fetch certificates.");
     }
+    this.setState({
+      showPageIsLoading: false,
+    });
     console.log(certificates);
     UI.refreshCertificates(certificates);
   }
@@ -141,6 +155,9 @@ class CertApp extends React.Component {
     }
     let ipfsHash = null;
     const address = UI.byId("receiver").value;
+    this.setState({
+      issuePageIsLoading: true,
+    });
     const imageData = await image.fileInputToDataURL(UI.byId("cert-image"));
     try {
       const blob = image.createBlobFromImageDataURI(imageData);
@@ -155,6 +172,9 @@ class CertApp extends React.Component {
     } catch (err) {
       UI.showErrorMessage("Failed to issue a certificate.");
     }
+    this.setState({
+      issuePageIsLoading: false,
+    });
     UI.showMessage("Successfully completed issuesing a certificate.");
   }
   componentDidMount() {
@@ -203,12 +223,12 @@ class CertApp extends React.Component {
             <input
               type="button"
               value="Show certificates"
-              onClick={this.showCertificates}
+              onClick={this.showCertificates.bind(this)}
               id="show-cert"
               className="form-control"
             />
             <br />
-            <CertificateComponents ref={resultRef} certificates={[]} />
+            { this.state.showPageIsLoading ? <CommunicationLoading /> : <CertificateComponents ref={resultRef} certificates={[]} /> }
           </div>
           <div className="issue form-group hidden" id="issue">
             <h2>Issue Certificate</h2>
@@ -227,8 +247,9 @@ class CertApp extends React.Component {
               id="issue-button"
               className="form-control"
               value="Issue"
-              onClick={this.createCertificate}
+              onClick={this.createCertificate.bind(this)}
             />
+            { this.state.issuePageIsLoading ? <CommunicationLoading /> : "" }
           </div>
         </div>
       </div>
