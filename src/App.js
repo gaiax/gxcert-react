@@ -187,8 +187,10 @@ class CertApp extends React.Component {
             </div>
           </div>
           <br />
-          <span id="my-pubkey"></span>
-          <a onClick={this.copyPubkey} className="copy-pubkey">Copy ID</a>
+          <div className="pubkey">
+            <span id="my-pubkey"></span>
+            <a onClick={this.copyPubkey} className="copy-pubkey">Copy ID</a>
+          </div>
           <div id="show" className="show form-group">
             <h2>Show Certificates</h2>
             <label>Certificate Holder ID</label>
