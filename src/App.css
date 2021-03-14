@@ -96,6 +96,7 @@
 .copy-pubkey {
   text-decoration: underline;
   cursor: pointer;
+  color: blue;
 }
 .pubkey {
   margin-bottom: 20px;
