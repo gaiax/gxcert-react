@@ -34,7 +34,7 @@ class CertificateComponent extends React.Component {
       <div className="certificate">
         <img src={this.state.imageUrl} width="200" alt="certificate" />
         <p>
-          {this.state.issueser} issuesed at {dateString(new Date(this.state.created_at))}
+          {this.state.issueser.substr(0, 8) + "..."} issuesed at {dateString(new Date(this.state.created_at))}
         </p>
       </div>
     );
