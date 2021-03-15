@@ -131,7 +131,7 @@ class CertApp extends React.Component {
     UI.refreshCertificates([certificate]);
   }
   async showCertificates() {
-    const holder = UI.byId("holder").value;
+    const holder = parseInt(UI.byId("holder").value);
     console.log(holder);
     let certificates;
     this.setState({
