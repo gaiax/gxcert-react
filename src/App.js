@@ -1,4 +1,5 @@
 import "./App.css";
+import "./Header.css";
 import React from "react";
 import { CertificateComponents } from "./Certificate";
 import { getGoogleUid } from "./Google";
@@ -6,6 +7,7 @@ import * as CertClient from "gxcert-iota";
 import * as ipfs from "./ipfs";
 import * as image from "./image";
 import Login from "./Login";
+import { IssueComponent } from "./Issue";
 import CommunicationLoading from "./loading";
 
 const resultRef = React.createRef();
@@ -178,7 +180,7 @@ class CertApp extends React.Component {
     UI.showMessage("Successfully completed issuesing a certificate.");
   }
   componentDidMount() {
-    this.showPubkey();
+    //this.showPubkey();
     const queries = getUrlQueries();
     if (isShowPage(queries)) {
       this.showCertificate(queries.address, parseInt(queries.index));
@@ -187,70 +189,13 @@ class CertApp extends React.Component {
   render() {
     return (
       <div className="App">
+        <header>
+          <h2 className="brand-logo">GxCert</h2>
+          <div className="header-issue-button header-button">Issue</div>
+          <div className="header-show-button header-button">Show</div>
+        </header>
         <div className="main">
-          <p id="error-message"></p>
-          <p id="message"></p>
-          <div className="tabs">
-            <div
-              className="issue-tab tab"
-              id="issue-tab"
-              onClick={UI.changeTabToIssue.bind(UI)}
-            >
-              Issue
-            </div>
-            <div
-              className="show-tab tab selected"
-              id="show-tab"
-              onClick={UI.changeTabToShow.bind(UI)}
-            >
-              Show
-            </div>
-          </div>
-          <br />
-          <div className="pubkey">
-            <span id="my-pubkey"></span>
-            <span onClick={this.copyPubkey} className="copy-pubkey">Copy ID</span>
-          </div>
-          <div id="show" className="show form-group">
-            <h2>Show Certificates</h2>
-            <label>Certificate Holder ID</label>
-            <input
-              type="text"
-              id="holder"
-              className="form-control"
-              placeholder=""
-            />
-            <input
-              type="button"
-              value="Show certificates"
-              onClick={this.showCertificates.bind(this)}
-              id="show-cert"
-              className="form-control"
-            />
-            <br />
-            { this.state.showPageIsLoading ? <CommunicationLoading /> : <CertificateComponents ref={resultRef} certificates={[]} /> }
-          </div>
-          <div className="issue form-group hidden" id="issue">
-            <h2>Issue Certificate</h2>
-            <label>Receiver ID</label>
-            <input
-              type="text"
-              id="receiver"
-              className="form-control"
-              placeholder=""
-            />
-            <label>Certificate Image</label>
-            <input type="file" id="cert-image" className="form-control" />
-            <br />
-            <input
-              type="button"
-              id="issue-button"
-              className="form-control"
-              value="Issue"
-              onClick={this.createCertificate.bind(this)}
-            />
-            { this.state.issuePageIsLoading ? <CommunicationLoading /> : "" }
-          </div>
+          <IssueComponent />
         </div>
       </div>
     );

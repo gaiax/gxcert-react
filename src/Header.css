@@ -1,0 +1,17 @@
+header {
+  width: 100%;
+  height: 48px;
+  display: flex;
+}
+
+.brand-logo {
+  margin-right: auto;
+  line-height: 48px;
+  margin-left: 10px;
+}
+
+.header-button {
+  width: 80px;
+  background-color: cyan;
+  line-height: 48px;
+}
