@@ -1,5 +1,5 @@
 
-.issue {
+.setting {
   width: 60%;
   min-width: 300px;
   margin-left: auto;
@@ -10,26 +10,26 @@
   background-color: #ccc;
 }
 
-.issue-wrapper {
+.setting-wrapper {
   width: 280px;
   margin-left: auto;
   margin-right: auto;
 }
 
-.issue-title {
+.setting-title {
   border-bottom: 1px solid #333;
   margin-bottom: 20px;
   padding-bottom: 10px;
 }
-.issue-input {
+.setting-input {
   width: 280px;
   margin-bottom: 20px;
 }
-.issue-input-title {
+.setting-input-title {
   text-align: left;
 }
 
-.issue-button {
+.setting-button {
   width: 280px;
   height: 40px;
 }
