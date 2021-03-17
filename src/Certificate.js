@@ -1,62 +1,49 @@
 import React from "react";
-import * as ipfs from "./ipfs";
-import "./Certificate.css";
 
 function dateString(date) {
   return (
     date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate()
   );
 }
-class CertificateComponent extends React.Component {
-  componentWillMount() {
-    const that = this;
-    (async () => {
-      try {
-        const imageUrl = await ipfs.getCertificateImage(that.state.ipfs_hash);
-        that.setState({ imageUrl });
-      } catch (err) {
-        console.error(err);
-        return;
-      }
-    })();
-  }
+class CertComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      ipfs_hash: props.ipfs_hash,
-      imageUrl: null,
-      issueser: props.issueser,
-      created_at: props.created_at,
-    };
+      certificate: props.certificate,
+    }
   }
   render() {
     return (
-      <div className="certificate">
-        <img src={this.state.imageUrl} width="200" alt="certificate" />
-        <p>
-          {this.state.issueser.substr(0, 8) + "..."} issuesed at {dateString(new Date(this.state.created_at))}
-        </p>
+      <div className="cert-cell">
+        <img src={this.certificate.imageUrl} width="200" alt="certificate" />
+        <div className="cert-cell-info">
+          <p className="cert-cell-issueser">
+            { this.certificate.issueserName }
+          </p>
+          <p className="cert-cell-date">
+            {
+              dateString(new Date(this.state.certificate.created_at))
+            }
+          </p>
+        </div>
       </div>
     );
   }
 }
-class CertificateComponents extends React.Component {
+
+class CertListComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      certificates: props.certificates,
-    };
+      certificates: [],
+    }
   }
   render() {
     return (
       <div className="certificates">
-        {this.state.certificates.map((certificate) => {
+        { this.state.certificates.map((certificate) => {
           return (
-            <CertificateComponent
-              ipfs_hash={certificate.ipfs}
-              issueser={certificate.by}
-              created_at={certificate.time * 1000}
-            />
+            <CertComponent certificate={certificate} />
           );
         })}
       </div>
@@ -64,4 +51,7 @@ class CertificateComponents extends React.Component {
   }
 }
 
-export { CertificateComponents, CertificateComponent };
+export {
+  CertComponent,
+  CertListComponent
+}

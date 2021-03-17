@@ -1,7 +1,6 @@
 import "./App.css";
 import "./Header.css";
 import React from "react";
-import { CertificateComponents } from "./Certificate";
 import { getGoogleUid } from "./Google";
 import * as CertClient from "gxcert-iota";
 import * as ipfs from "./ipfs";
@@ -10,7 +9,8 @@ import Login from "./Login";
 import { IssueComponent } from "./Issue";
 import { SettingComponent } from "./Setting";
 import CommunicationLoading from "./loading";
-import { CertListComponent } from "./List";
+import { CertListComponent } from "./Certificate";
+import { MyInfoComponent } from "./MyInfo";
 
 const resultRef = React.createRef();
 
@@ -102,10 +102,7 @@ class App extends React.Component {
 class CertApp extends React.Component {
   constructor() {
     super();
-    this.state = {
-      showPageIsLoading: false,
-      issuePageIsLoading: false
-    }
+    this.state = {}
   }
   copyPubkey() {
     const copyFrom = document.createElement("textarea");
@@ -197,6 +194,7 @@ class CertApp extends React.Component {
           <div className="header-show-button header-button">Show</div>
         </header>
         <div className="main">
+          <MyInfoComponent address={client.address} />
           <CertListComponent ref={resultRef} />
         </div>
       </div>

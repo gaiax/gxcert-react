@@ -2,13 +2,19 @@ import "./MyInfo.css";
 import React from "react";
 
 class MyInfoComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      address: props.address,
+    }
+  }
   render() {
     return (
       <div className="myinfo">
-        <img />
+        <img className="myinfo-image" />
         <div className="myinfo-right">
           <p className="myinfo-address">
-            { this.state.address }
+            { this.state.address.substr(0, 32) + "..." }
           </p>
           <button className="myinfo-register">Register your user info</button>
         </div>
