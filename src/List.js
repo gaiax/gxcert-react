@@ -31,11 +31,11 @@ class CertComponent extends React.Component {
   }
 }
 
-class ListComponent extends React.Component {
+class CertListComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      certificates: props.certificates,
+      certificates: [],
     }
   }
   render() {
@@ -49,4 +49,9 @@ class ListComponent extends React.Component {
       </div>
     );
   }
+}
+
+export {
+  CertComponent,
+  CertListComponent
 }

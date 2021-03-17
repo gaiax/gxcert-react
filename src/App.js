@@ -10,6 +10,7 @@ import Login from "./Login";
 import { IssueComponent } from "./Issue";
 import { SettingComponent } from "./Setting";
 import CommunicationLoading from "./loading";
+import { CertListComponent } from "./List";
 
 const resultRef = React.createRef();
 
@@ -196,7 +197,7 @@ class CertApp extends React.Component {
           <div className="header-show-button header-button">Show</div>
         </header>
         <div className="main">
-          <SettingComponent />
+          <CertListComponent ref={resultRef} />
         </div>
       </div>
     );
