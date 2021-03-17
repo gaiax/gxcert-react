@@ -16,3 +16,7 @@ class MyInfoComponent extends React.Component {
     );
   }
 }
+
+export {
+  MyInfoComponent
+}
