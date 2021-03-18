@@ -1,5 +1,6 @@
 import React from "react";
 import CommunicationLoading from "./loading";
+import * as ipfs from "./ipfs";
 
 function dateString(date) {
   return (
@@ -11,19 +12,31 @@ class CertComponent extends React.Component {
     super(props);
     this.state = {
       certificate: props.certificate,
+      imageUrl: "",
     }
+  }
+  componentWillMount() {
+    const that = this;
+    (async () => {
+      console.log(that.state.certificate);
+      const imageUrl = await ipfs.getCertificateImage(that.state.certificate.ipfs);
+      console.log(imageUrl);
+      that.setState({
+        imageUrl
+      });
+    })();
   }
   render() {
     return (
       <div className="cert-cell">
-        <img src={this.certificate.imageUrl} width="200" alt="certificate" />
+        <img src={this.state.imageUrl} width="200" alt="certificate" />
         <div className="cert-cell-info">
           <p className="cert-cell-issueser">
-            { this.certificate.issueserName }
+            { !this.state.certificate.issueserName ? this.state.certificate.by.substr(0, 16) : this.state.certificate.issueserName }
           </p>
           <p className="cert-cell-date">
             {
-              dateString(new Date(this.state.certificate.created_at))
+              dateString(new Date(this.state.certificate.time))
             }
           </p>
         </div>
@@ -61,7 +74,7 @@ class MyCertListComponent extends React.Component {
       certificates: []
     }
   }
-  componentDidMount() {
+  componentWillMount() {
     const that = this;
     (async () => {
       const certificates = await that.client.getCertificates(that.client.address);
