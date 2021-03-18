@@ -10,6 +10,7 @@ import { IssueComponent } from "./Issue";
 import { SettingComponent } from "./Setting";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { ShowComponent } from "./Show";
+import { CertViewComponent } from "./Certificate";
 
 const showRef = React.createRef();
 
@@ -101,6 +102,7 @@ class App extends React.Component {
 class CertApp extends React.Component {
   constructor() {
     super();
+    this.certificatesRef = React.createRef();
     this.state = {
       showPageIsLoading: false,
     }
@@ -186,12 +188,8 @@ class CertApp extends React.Component {
       this.showCertificate(queries.address, parseInt(queries.index));
     }
   }
-  gotoMyInfo() {
-    this.setState({
-      
-    });
-  }
   render() {
+    const that = this;
     return (
         <Router>
       <div className="App">
@@ -199,12 +197,14 @@ class CertApp extends React.Component {
           <h2 className="brand-logo">GxCert</h2>
           <Link to="/issue" className="header-issue-button header-button">Issue</Link>
           <Link to="/" className="header-show-button header-button">Show</Link>
+          <Link to="/certs/1" className="header-show-button header-button">AAA</Link>
           </header>
           <div className="main">
             <Switch>
-              <Route exact path="/" render={ () => <ShowComponent client={client} address={client.address} /> } />
+              <Route exact path="/" render={ () => <ShowComponent client={client} address={client.address} ref={that.certificatesRef} onLoad={(certificates) => { that.certificates = certificates; }} /> } />
               <Route exact path="/issue" render={ () => <IssueComponent /> } />
               <Route exact path="/user" render={ () => <SettingComponent /> } />
+              <Route exact path="/certs/:index" render={ () => <CertViewComponent certificate={that.certificates[0]} />} />
             </Switch>
           </div>
       </div>

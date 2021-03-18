@@ -75,14 +75,6 @@ class CertViewComponent extends React.Component {
     }
   }
   componentWillMount() {
-    const that = this;
-    (async () => {
-      const certificates = await that.client.getCertificates(that.client.address);
-      that.setState({
-        isLoading: false,
-        certificates: certificates,
-      });
-    })();
   }
   render() {
     return (
@@ -111,6 +103,7 @@ class MyCertListComponent extends React.Component {
   constructor(props) {
     super(props);
     this.client = props.client;
+    this.onLoad = props.onLoad;
     this.state = {
       isLoading: true,
       certificates: []
@@ -120,6 +113,7 @@ class MyCertListComponent extends React.Component {
     const that = this;
     (async () => {
       const certificates = await that.client.getCertificates(that.client.address);
+      that.onLoad(certificates);
       that.setState({
         isLoading: false,
         certificates: certificates,
