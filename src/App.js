@@ -207,6 +207,7 @@ class CertApp extends React.Component {
             <Switch>
               <Route exact path="/" render={ () => <ShowComponent address={client.address} /> } />
               <Route exact path="/issue" render={ () => <IssueComponent /> } />
+              <Route exact path="/user" render={ () => <SettingComponent /> } />
             </Switch>
           </div>
       </div>

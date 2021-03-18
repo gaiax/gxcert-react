@@ -1,12 +1,12 @@
 import "./MyInfo.css";
 import React from "react";
+import { Link } from "react-router-dom";
 
 class MyInfoComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       address: props.address,
-      register: props.register,
     }
   }
   render() {
@@ -17,7 +17,7 @@ class MyInfoComponent extends React.Component {
           <p className="myinfo-address">
             { this.state.address.substr(0, 32) + "..." }
           </p>
-          <button className="myinfo-register" onClick={this.state.register} >Register your user info</button>
+          <Link className="myinfo-register" to="/user">Register your user info</Link>
         </div>
       </div>
     );
