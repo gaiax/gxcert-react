@@ -1,10 +1,11 @@
 import React from "react";
 import { MyInfoComponent } from "./MyInfo";
-import { CertListComponent } from "./Certificate";
+import { MyCertListComponent } from "./Certificate";
 
 class ShowComponent extends React.Component {
   constructor(props) {
     super(props);
+    this.client = props.client;
     this.state = {
       address: props.address,
       certificates: [],
@@ -14,7 +15,7 @@ class ShowComponent extends React.Component {
     return (
       <div className="show">
         <MyInfoComponent address={this.state.address} />
-        <CertListComponent certificates={this.state.certificates} />
+        <MyCertListComponent certificates={this.state.certificates} client={this.client} />
       </div>
     );
   }

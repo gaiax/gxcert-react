@@ -1,4 +1,5 @@
 import React from "react";
+import CommunicationLoading from "./loading";
 
 function dateString(date) {
   return (
@@ -35,7 +36,7 @@ class CertListComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      certificates: [],
+      certificates: props.certificates,
     }
   }
   render() {
@@ -51,7 +52,37 @@ class CertListComponent extends React.Component {
   }
 }
 
+class MyCertListComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.client = props.client;
+    this.state = {
+      isLoading: true,
+      certificates: []
+    }
+  }
+  componentDidMount() {
+    const that = this;
+    (async () => {
+      const certificates = await that.client.getCertificates(that.client.address);
+      that.setState({
+        isLoading: false,
+        certificates: certificates,
+      });
+    })();
+  }
+  render() {
+    return (
+      <div className="mycertificates">
+        <h2 className="mycertificates-title">My Certificates</h2>
+        { this.state.isLoading ? <CommunicationLoading /> : <CertListComponent certificates={this.state.certificates} /> }
+      </div>
+    );
+  }
+}
+
 export {
   CertComponent,
-  CertListComponent
+  CertListComponent,
+  MyCertListComponent,
 }
