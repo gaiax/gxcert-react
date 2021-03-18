@@ -37,7 +37,7 @@ class CertComponent extends React.Component {
           </p>
           <p className="cert-cell-date">
             {
-              dateString(new Date(this.state.certificate.time))
+              dateString(new Date(this.state.certificate.time * 1000))
             }
           </p>
         </div>
