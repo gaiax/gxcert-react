@@ -6,6 +6,7 @@ class MyInfoComponent extends React.Component {
     super(props);
     this.state = {
       address: props.address,
+      register: props.register,
     }
   }
   render() {
@@ -16,7 +17,7 @@ class MyInfoComponent extends React.Component {
           <p className="myinfo-address">
             { this.state.address.substr(0, 32) + "..." }
           </p>
-          <button className="myinfo-register">Register your user info</button>
+          <button className="myinfo-register" onClick={this.state.register} >Register your user info</button>
         </div>
       </div>
     );

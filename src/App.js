@@ -11,8 +11,10 @@ import { SettingComponent } from "./Setting";
 import CommunicationLoading from "./loading";
 import { CertListComponent } from "./Certificate";
 import { MyInfoComponent } from "./MyInfo";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { ShowComponent } from "./Show";
 
-const resultRef = React.createRef();
+const showRef = React.createRef();
 
 let uid = sessionStorage.getItem("uid");
 let client = null;
@@ -33,8 +35,8 @@ const UI = {
     this.byId("message").innerText = message;
   },
   refreshCertificates: function(certificates) {
-    resultRef.current.setState({ certificates: [] });
-    resultRef.current.setState({ certificates: certificates });
+    showRef.current.setState({ certificates: [] });
+    showRef.current.setState({ certificates: certificates });
   },
   resetTabSelected: function () {
     this.byId("issue-tab").classList.remove("selected");
@@ -102,7 +104,9 @@ class App extends React.Component {
 class CertApp extends React.Component {
   constructor() {
     super();
-    this.state = {}
+    this.state = {
+      showPageIsLoading: false,
+    }
   }
   copyPubkey() {
     const copyFrom = document.createElement("textarea");
@@ -185,19 +189,28 @@ class CertApp extends React.Component {
       this.showCertificate(queries.address, parseInt(queries.index));
     }
   }
+  gotoMyInfo() {
+    this.setState({
+      
+    });
+  }
   render() {
     return (
+        <Router>
       <div className="App">
-        <header>
+          <header>
           <h2 className="brand-logo">GxCert</h2>
-          <div className="header-issue-button header-button">Issue</div>
-          <div className="header-show-button header-button">Show</div>
-        </header>
-        <div className="main">
-          <MyInfoComponent address={client.address} />
-          <CertListComponent ref={resultRef} />
-        </div>
+          <Link to="/issue" className="header-issue-button header-button">Issue</Link>
+          <Link to="/" className="header-show-button header-button">Show</Link>
+          </header>
+          <div className="main">
+            <Switch>
+              <Route exact path="/" render={ () => <ShowComponent address={client.address} /> } />
+              <Route exact path="/issue" render={ () => <IssueComponent /> } />
+            </Switch>
+          </div>
       </div>
+      </Router>
     );
   }
 }
