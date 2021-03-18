@@ -78,17 +78,17 @@ class CertViewComponent extends React.Component {
   }
   render() {
     return (
-      <div className="certificate-view">
-        <div className="certificate-view-top">
+      <div className="cert-view">
+        <div className="cert-view-top">
           <button className="back">＜</button>
-          <img src={this.state.imageUrl} className="certificate-view-image" alt="GxCert" />
+          <img src={this.state.imageUrl} className="cert-view-image" alt="GxCert" />
           <button className="next">＞</button>
         </div>
-        <div className="certificate-view-bottom">
-          <p className="certificate-view-issueser">
+        <div className="cert-view-bottom">
+          <p className="cert-view-issueser">
             { !this.state.certificate.issueserName ? this.state.certificate.by.substr(0, 16) : this.state.certificate.issueserName }
           </p>
-          <p className="certificate-view-date">
+          <p className="cert-view-date">
             {
               dateString(new Date(this.state.certificate.time))
             }

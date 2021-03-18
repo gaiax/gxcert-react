@@ -19,3 +19,26 @@
   height: 80px;
   object-fit: contain;
 }
+
+.cert-view-top {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 40px;
+}
+.cert-view-bottom {
+  width: 40%;
+  min-width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.cert-view-bottom p{
+  text-align: left;
+}
+.cert-view-image {
+  width: 100px;
+}
+.back, .next {
+  height: 240px;
+  width: 10%;
+  max-width: 80px;
+}
