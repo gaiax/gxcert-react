@@ -197,7 +197,6 @@ class CertApp extends React.Component {
           <h2 className="brand-logo">GxCert</h2>
           <Link to="/issue" className="header-issue-button header-button">Issue</Link>
           <Link to="/" className="header-show-button header-button">Show</Link>
-          <Link to="/certs/1" className="header-show-button header-button">AAA</Link>
           </header>
           <div className="main">
             <Switch>

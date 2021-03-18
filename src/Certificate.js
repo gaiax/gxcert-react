@@ -58,9 +58,11 @@ class CertListComponent extends React.Component {
   render() {
     return (
       <div className="certificates">
-        { this.state.certificates.map((certificate) => {
+        { this.state.certificates.map((certificate, index) => {
           return (
-            <CertComponent certificate={certificate} />
+            <Link to={"/certs/" + index}>
+              <CertComponent certificate={certificate} />
+            </Link>
           );
         })}
       </div>
