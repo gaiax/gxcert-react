@@ -35,7 +35,8 @@
   text-align: left;
 }
 .cert-view-image {
-  width: 100px;
+  width: 40%;
+  min-width: 210px;
 }
 .back, .next {
   height: 240px;

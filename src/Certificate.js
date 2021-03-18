@@ -75,6 +75,15 @@ class CertViewComponent extends React.Component {
     }
   }
   componentWillMount() {
+    const that = this;
+    (async () => {
+      console.log(that.state.certificate);
+      const imageUrl = await ipfs.getCertificateImage(that.state.certificate.ipfs);
+      console.log(imageUrl);
+      that.setState({
+        imageUrl
+      });
+    })();
   }
   render() {
     return (
@@ -90,7 +99,7 @@ class CertViewComponent extends React.Component {
           </p>
           <p className="cert-view-date">
             {
-              dateString(new Date(this.state.certificate.time))
+              dateString(new Date(this.state.certificate.time * 1000))
             }
           </p>
         </div>
