@@ -2,6 +2,8 @@ import React from "react";
 import CommunicationLoading from "./loading";
 import * as ipfs from "./ipfs";
 import "./Certificate.css";
+import { Link } from "react-router-dom";
+
 
 function dateString(date) {
   return (
@@ -70,8 +72,10 @@ class CertViewComponent extends React.Component {
   constructor(props) {
     super(props);
     this.client = props.client;
+    const index = parseInt(props.match.params.index);
+    this.index = index;
     this.state = {
-      certificate: props.certificate,
+      certificate: props.certificates[index],
     }
   }
   componentWillMount() {

@@ -204,7 +204,7 @@ class CertApp extends React.Component {
               <Route exact path="/" render={ () => <ShowComponent client={client} address={client.address} ref={that.certificatesRef} onLoad={(certificates) => { that.certificates = certificates; }} /> } />
               <Route exact path="/issue" render={ () => <IssueComponent /> } />
               <Route exact path="/user" render={ () => <SettingComponent /> } />
-              <Route exact path="/certs/:index" render={ () => <CertViewComponent certificate={that.certificates[0]} />} />
+              <Route exact path="/certs/:index" render={ (routeProps) => <CertViewComponent {...routeProps} certificates={that.certificates} />} />
             </Switch>
           </div>
       </div>
