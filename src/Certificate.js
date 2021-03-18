@@ -66,6 +66,47 @@ class CertListComponent extends React.Component {
   }
 }
 
+class CertViewComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.client = props.client;
+    this.state = {
+      certificate: props.certificate,
+    }
+  }
+  componentWillMount() {
+    const that = this;
+    (async () => {
+      const certificates = await that.client.getCertificates(that.client.address);
+      that.setState({
+        isLoading: false,
+        certificates: certificates,
+      });
+    })();
+  }
+  render() {
+    return (
+      <div className="certificate-view">
+        <div className="certificate-view-top">
+          <button className="back">＜</button>
+          <img src={this.state.imageUrl} className="certificate-view-image" />
+          <button className="next">＞</button>
+        </div>
+        <div className="certificate-view-bottom">
+          <p className="certificate-view-issueser">
+            { !this.state.certificate.issueserName ? this.state.certificate.by.substr(0, 16) : this.state.certificate.issueserName }
+          </p>
+          <p className="certificate-view-date">
+            {
+              dateString(new Date(this.state.certificate.time))
+            }
+          </p>
+        </div>
+      </div>
+    );
+  }
+}
+
 class MyCertListComponent extends React.Component {
   constructor(props) {
     super(props);

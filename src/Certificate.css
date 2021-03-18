@@ -7,6 +7,7 @@
   
 }
 .cert-cell {
+  border-top: 1px solid #333;
   display: flex;
   padding: 10px;
 }
