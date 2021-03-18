@@ -89,7 +89,7 @@ class CertViewComponent extends React.Component {
       <div className="certificate-view">
         <div className="certificate-view-top">
           <button className="back">＜</button>
-          <img src={this.state.imageUrl} className="certificate-view-image" />
+          <img src={this.state.imageUrl} className="certificate-view-image" alt="GxCert" />
           <button className="next">＞</button>
         </div>
         <div className="certificate-view-bottom">
@@ -140,4 +140,5 @@ export {
   CertComponent,
   CertListComponent,
   MyCertListComponent,
+  CertViewComponent,
 }

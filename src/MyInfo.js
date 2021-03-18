@@ -12,7 +12,7 @@ class MyInfoComponent extends React.Component {
   render() {
     return (
       <div className="myinfo">
-        <img className="myinfo-image" />
+        <img className="myinfo-image" alt="GxCert icon" />
         <div className="myinfo-right">
           <p className="myinfo-address">
             { this.state.address.substr(0, 32) + "..." }

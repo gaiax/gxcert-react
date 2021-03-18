@@ -8,9 +8,6 @@ import * as image from "./image";
 import Login from "./Login";
 import { IssueComponent } from "./Issue";
 import { SettingComponent } from "./Setting";
-import CommunicationLoading from "./loading";
-import { CertListComponent } from "./Certificate";
-import { MyInfoComponent } from "./MyInfo";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { ShowComponent } from "./Show";
 
