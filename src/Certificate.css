@@ -1,0 +1,20 @@
+
+.certificates {
+  width: 60%;
+  min-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+.cert-cell {
+  display: flex;
+  padding: 10px;
+}
+.cert-cell-info {
+  margin-left: 10px;
+}
+.cert-cell-image {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}

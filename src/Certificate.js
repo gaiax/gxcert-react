@@ -1,6 +1,7 @@
 import React from "react";
 import CommunicationLoading from "./loading";
 import * as ipfs from "./ipfs";
+import "./Certificate.css";
 
 function dateString(date) {
   return (
@@ -29,7 +30,7 @@ class CertComponent extends React.Component {
   render() {
     return (
       <div className="cert-cell">
-        <img src={this.state.imageUrl} width="200" alt="certificate" />
+        <img src={this.state.imageUrl} className="cert-cell-image" alt="certificate" />
         <div className="cert-cell-info">
           <p className="cert-cell-issueser">
             { !this.state.certificate.issueserName ? this.state.certificate.by.substr(0, 16) : this.state.certificate.issueserName }
