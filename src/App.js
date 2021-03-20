@@ -3,15 +3,13 @@ import "./Header.css";
 import React from "react";
 import { getGoogleUid } from "./Google";
 import * as CertClient from "gxcert-iota";
-import * as ipfs from "./ipfs";
-import * as image from "./image";
 import Login from "./Login";
 import { IssueComponent } from "./Issue";
 import { SettingComponent } from "./Setting";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { ShowComponent } from "./Show";
 import { CertViewComponent } from "./Certificate";
-import "bootstrap/dist/css/bootstrap.min.css";
+import Modal from "react-modal";
 
 const showRef = React.createRef();
 
@@ -105,6 +103,7 @@ class CertApp extends React.Component {
     this.certificatesRef = React.createRef();
     this.state = {
       showPageIsLoading: false,
+      modalIsOpen: false,
     }
   }
   copyPubkey() {
@@ -176,6 +175,14 @@ class CertApp extends React.Component {
   }
   render() {
     const that = this;
+    const modalStyles = {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)"
+    }
     return (
         <Router>
       <div className="App">
@@ -192,6 +199,11 @@ class CertApp extends React.Component {
               <Route exact path="/certs/:index" render={ (routeProps) => <CertViewComponent {...routeProps} certificates={that.certificates} />} />
             </Switch>
           </div>
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          style={modalStyles}
+        >
+        </Modal>
       </div>
       </Router>
     );
