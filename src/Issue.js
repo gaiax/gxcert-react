@@ -1,4 +1,5 @@
 import React from "react";
+import "./Issue.css";
 
 
 class IssueComponent extends React.Component {
@@ -11,12 +12,14 @@ class IssueComponent extends React.Component {
   render() {
     return (
       <div className="issue">
-        <h2 className="issue-title">Issue Certificate</h2>
-        <h4 className="issue-image-title">Certificate Image</h4>
-        <input type="text" id="issue-image" className="issue-image" />
-        <h4 className="issue-to-title">To</h4>
-        <input type="text" id="issue-to" className="issue-to" />
-        <button className="issue-button" id="issue-button" />
+        <div className="issue-wrapper">
+          <h2 className="issue-title">Issue Certificate</h2>
+          <h5 className="issue-image-title issue-input-title">Certificate Image</h5>
+          <input type="text" id="issue-image" className="issue-image issue-input" />
+          <h5 className="issue-to-title issue-input-title">To</h5>
+          <input type="text" id="issue-to" className="issue-to issue-input" /><br/>
+          <button className="issue-button" id="issue-button">Issue</button>
+        </div>
       </div>
     );
   }

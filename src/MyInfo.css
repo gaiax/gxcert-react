@@ -1,0 +1,29 @@
+.myinfo {
+  background-color: #eee;
+  padding: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+  min-width: 300px;
+  display: flex;
+}
+
+.myinfo-image {
+  width: 80px;
+  height: 80px;
+}
+
+.myinfo-right {
+  margin-left: 10px;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.myinfo-address {
+  font-size: 11px;
+  margin-bottom: 5px;
+}
+
+.myinfo-register {
+  border-radius: 8px;
+}

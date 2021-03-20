@@ -1,0 +1,35 @@
+
+.issue {
+  width: 60%;
+  min-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  border-radius: 10px;
+  background-color: #ccc;
+}
+
+.issue-wrapper {
+  width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.issue-title {
+  border-bottom: 1px solid #333;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+.issue-input {
+  width: 280px;
+  margin-bottom: 20px;
+}
+.issue-input-title {
+  text-align: left;
+}
+
+.issue-button {
+  width: 280px;
+  height: 40px;
+}
