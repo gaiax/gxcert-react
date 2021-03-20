@@ -19,6 +19,7 @@ let client = null;
 if (uid !== null) {
   client = new CertClient("https://nodes.devnet.iota.org", uid);
   client.address = sessionStorage.getItem("address");
+  console.log(client.address);
 }
 
 
@@ -153,27 +154,13 @@ class CertApp extends React.Component {
     console.log(certificates);
     UI.refreshCertificates(certificates);
   }
-  async createCertificate() {
-    if (client === null) {
-      return;
-    }
-    let ipfsHash = null;
-    const address = UI.byId("receiver").value;
-    this.setState({
-      issuePageIsLoading: true,
-    });
-    const imageData = await image.fileInputToDataURL(UI.byId("cert-image"));
-    try {
-      const blob = image.createBlobFromImageDataURI(imageData);
-      ipfsHash = await ipfs.postCertificate(blob);
-    } catch (err) {
-      UI.showErrorMessage("Failed to issue a certificate.");
-      return;
-    }
+  async issue(evt) {
+    const address = evt.address;
+    const ipfsHash = evt.ipfsHash;
     const certificate = client.createCertificateObject(ipfsHash);
     try {
       await client.issueCertificate(certificate, address);
-    } catch (err) {
+    } catch(err) {
       UI.showErrorMessage("Failed to issue a certificate.");
     }
     this.setState({
@@ -201,7 +188,7 @@ class CertApp extends React.Component {
           <div className="main">
             <Switch>
               <Route exact path="/" render={ () => <ShowComponent client={client} address={client.address} ref={that.certificatesRef} onLoad={(certificates) => { that.certificates = certificates; }} /> } />
-              <Route exact path="/issue" render={ () => <IssueComponent /> } />
+              <Route exact path="/issue" render={ () => <IssueComponent onClickIssueButton={this.issue} /> } />
               <Route exact path="/user" render={ () => <SettingComponent /> } />
               <Route exact path="/certs/:index" render={ (routeProps) => <CertViewComponent {...routeProps} certificates={that.certificates} />} />
             </Switch>
