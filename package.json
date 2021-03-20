@@ -7,7 +7,6 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "bootstrap": "^4.6.0",
-    "bootstrap-popups": "^1.0.1",
     "crypto": "^1.0.1",
     "cutestrap": "^2.0.0-4",
     "eosjs": "^21.0.3",

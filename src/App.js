@@ -12,7 +12,6 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { ShowComponent } from "./Show";
 import { CertViewComponent } from "./Certificate";
 import "bootstrap/dist/css/bootstrap.min.css";
-import popups from "bootstrap-popups";
 
 const showRef = React.createRef();
 
@@ -30,10 +29,8 @@ const UI = {
     return document.getElementById(id);
   },
   showErrorMessage: function(message) {
-    popups.alert(message);
   },
   showMessage: function(message) {
-    popups.alert(message);
   },
   refreshCertificates: function(certificates) {
     showRef.current.setState({ certificates: [] });
