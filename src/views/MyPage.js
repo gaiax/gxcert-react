@@ -5,18 +5,17 @@ import { MyCertListComponent } from "./CertList";
 class MyPageComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.client = props.client;
-    this.onLoad = props.onLoad;
     this.state = {
+      isLoading: true,
       address: props.address,
-      certificates: [],
+      certificates: props.certificates,
     }
   }
   render() {
     return (
       <div className="show">
         <MyInfoComponent address={this.state.address} />
-        <MyCertListComponent certificates={this.state.certificates} client={this.client} onLoad={this.onLoad} />
+        <MyCertListComponent certificates={this.state.certificates} isLoading={this.state.isLoading} />
       </div>
     );
   }

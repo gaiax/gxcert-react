@@ -31,10 +31,13 @@ class CertListComponent extends React.Component {
 class MyCertListComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.client = props.client;
+    let certificates = [];
+    if (props.certificates) {
+      certificates = props.certificates;
+    }
     this.state = {
-      isLoading: true,
-      certificates: props.certificates,
+      isLoading: props.isLoading,
+      certificates: certificates,
     }
   }
   render() {
