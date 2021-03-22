@@ -8,7 +8,6 @@ import { SettingComponent } from "./views/Setting";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { MyPageComponent } from "./views/MyPage";
 import { CertViewComponent } from "./views/CertView";
-import Modal from "react-modal";
 
 let client = null;
 function initializeClient() {
@@ -62,7 +61,6 @@ class CertApp extends React.Component {
     this.myPageRef = React.createRef();
     this.state = {
       showPageIsLoading: false,
-      modalIsOpen: false,
     }
   }
   showPubkey() {
@@ -104,17 +102,9 @@ class CertApp extends React.Component {
   }
   render() {
     const that = this;
-    const modalStyles = {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)"
-    }
     return (
-        <Router>
-      <div className="App">
+      <Router>
+        <div className="App">
           <header>
           <h2 className="brand-logo">GxCert</h2>
           <Link to="/issue" className="header-issue-button header-button">Issue</Link>
@@ -128,12 +118,7 @@ class CertApp extends React.Component {
               <Route exact path="/certs/:index" render={ (routeProps) => <CertViewComponent {...routeProps} certificates={that.certificates} />} />
             </Switch>
           </div>
-        <Modal
-          isOpen={this.state.modalIsOpen}
-          style={modalStyles}
-        >
-        </Modal>
-      </div>
+        </div>
       </Router>
     );
   }
