@@ -6,7 +6,7 @@ class MyPageComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: true,
+      isLoading: props.isLoading,
       address: props.address,
       certificates: props.certificates,
     }

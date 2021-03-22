@@ -61,6 +61,7 @@ class CertApp extends React.Component {
     this.myPageRef = React.createRef();
     this.state = {
       showPageIsLoading: false,
+      isLoading: true,
     }
   }
   showPubkey() {
@@ -91,13 +92,10 @@ class CertApp extends React.Component {
       UI.showErrorMessage("Failed to fetch your certificates.");
       return;
     }
-    this.myPageRef.current.setState({
-      certificates: [],
+    console.log(certificates);
+    this.setState({
       isLoading: false,
-    });
-    this.myPageRef.current.setState({
       certificates,
-      isLoading: false,
     });
   }
   render() {
@@ -112,7 +110,7 @@ class CertApp extends React.Component {
           </header>
           <div className="main">
             <Switch>
-              <Route exact path="/" render={ () => <MyPageComponent address={client.address} ref={that.myPageRef} /> } />
+              <Route exact path="/" render={ () => <MyPageComponent address={client.address} ref={that.myPageRef} isLoading={this.state.isLoading} certificates={this.state.certificates} /> } />
               <Route exact path="/issue" render={ () => <IssueComponent onClickIssueButton={this.issue} /> } />
               <Route exact path="/user" render={ () => <SettingComponent /> } />
               <Route exact path="/certs/:index" render={ (routeProps) => <CertViewComponent {...routeProps} certificates={that.certificates} />} />
