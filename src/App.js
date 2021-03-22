@@ -30,26 +30,17 @@ const UI = {
   },
   showMessage: function(message) {
   },
-  refreshCertificates: function(certificates) {
-    showRef.current.setState({ certificates: [] });
-    showRef.current.setState({ certificates: certificates });
-  },
-  resetTabSelected: function () {
-    this.byId("issue-tab").classList.remove("selected");
-    this.byId("show-tab").classList.remove("selected");
-    this.byId("issue").classList.remove("hidden");
-    this.byId("show").classList.remove("hidden");
-  },
-  changeTabToIssue: function() {
-    this.resetTabSelected();
-    this.byId("issue-tab").classList.add("selected");
-    this.byId("show").classList.add("hidden");
-  },
-  changeTabToShow: function() {
-    this.resetTabSelected();
-    this.byId("show-tab").classList.add("selected");
-    this.byId("issue").classList.add("hidden");
-  }
+}
+
+function copyPubkey(text) {
+  const copyFrom = document.createElement("textarea");
+  copyFrom.textContent = text;
+  const bodyElm = document.getElementsByTagName("body")[0];
+  bodyElm.appendChild(copyFrom);
+  copyFrom.select();
+  document.execCommand('copy');
+  bodyElm.removeChild(copyFrom);
+  UI.showMessage("Copied your ID!");
 }
 
 
@@ -105,16 +96,6 @@ class CertApp extends React.Component {
       showPageIsLoading: false,
       modalIsOpen: false,
     }
-  }
-  copyPubkey() {
-    const copyFrom = document.createElement("textarea");
-    copyFrom.textContent = client.address;
-    const bodyElm = document.getElementsByTagName("body")[0];
-    bodyElm.appendChild(copyFrom);
-    copyFrom.select();
-    document.execCommand('copy');
-    bodyElm.removeChild(copyFrom);
-    UI.showMessage("Copied your ID!");
   }
   showPubkey() {
     UI.byId("my-pubkey").innerText = "Your ID is " + client.address.substr(0, 8) + "...   ";
