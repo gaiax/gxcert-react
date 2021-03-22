@@ -1,3 +1,4 @@
+import { getGoogleUid } from "./Google";
 
 function copyPubkey(text) {
   const copyFrom = document.createElement("textarea");
@@ -25,5 +26,6 @@ function getUrlQueries() {
 export {
   copyPubkey,
   getUrlQueries,
+  getGoogleUid,
 }
 
