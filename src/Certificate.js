@@ -16,9 +16,7 @@ class CertComponent extends React.Component {
   componentWillMount() {
     const that = this;
     (async () => {
-      console.log(that.state.certificate);
       const imageUrl = await ipfs.getCertificateImage(that.state.certificate.ipfs);
-      console.log(imageUrl);
       that.setState({
         imageUrl
       });
@@ -70,22 +68,10 @@ class MyCertListComponent extends React.Component {
   constructor(props) {
     super(props);
     this.client = props.client;
-    this.onLoad = props.onLoad;
     this.state = {
       isLoading: true,
-      certificates: []
+      certificates: props.certificates,
     }
-  }
-  componentWillMount() {
-    const that = this;
-    (async () => {
-      const certificates = await that.client.getCertificates(that.client.address);
-      that.onLoad(certificates);
-      that.setState({
-        isLoading: false,
-        certificates: certificates,
-      });
-    })();
   }
   render() {
     return (
