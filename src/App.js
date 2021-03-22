@@ -1,5 +1,4 @@
 import "./App.css";
-import "./Header.css";
 import React from "react";
 import { getGoogleUid } from "./util";
 import * as CertClient from "gxcert-iota";
