@@ -2,7 +2,7 @@ import "./App.css";
 import React from "react";
 import { getGoogleUid } from "./util";
 import * as CertClient from "gxcert-iota";
-import Login from "./views/LoginView";
+import Login from "./views/Login";
 import { IssueComponent } from "./views/Issue";
 import { SettingComponent } from "./views/Setting";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
