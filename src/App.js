@@ -119,39 +119,6 @@ class CertApp extends React.Component {
   showPubkey() {
     UI.byId("my-pubkey").innerText = "Your ID is " + client.address.substr(0, 8) + "...   ";
   }
-  async showCertificate(holder, index) {
-    let certificate;
-    try {
-      certificate = await client.getCertificate(holder, index);
-    } catch(err) {
-      console.error(err);
-      UI.showErrorMessage("Failed to fetch certificate.");
-    }
-    if (certificate === undefined) {
-      UI.showErrorMessage("Certificate not found.");
-      return;
-    }
-    UI.refreshCertificates([certificate]);
-  }
-  async showCertificates() {
-    const holder = parseInt(UI.byId("holder").value);
-    console.log(holder);
-    let certificates;
-    this.setState({
-      showPageIsLoading: true,
-    });
-    try {
-      certificates = await client.getCertificates(holder);
-    } catch (err) {
-      console.error(err);
-      UI.showErrorMessage("Failed to fetch certificates.");
-    }
-    this.setState({
-      showPageIsLoading: false,
-    });
-    console.log(certificates);
-    UI.refreshCertificates(certificates);
-  }
   async issue(evt) {
     const address = evt.address;
     const ipfsHash = evt.ipfsHash;
@@ -167,10 +134,8 @@ class CertApp extends React.Component {
     UI.showMessage("Successfully completed issuesing a certificate.");
   }
   componentDidMount() {
-    //this.showPubkey();
     const queries = getUrlQueries();
     if (isShowPage(queries)) {
-      this.showCertificate(queries.address, parseInt(queries.index));
     }
   }
   render() {
