@@ -11,7 +11,6 @@ import { MyPageComponent } from "./MyPage";
 import { CertViewComponent } from "./CertView";
 import Modal from "react-modal";
 
-const showRef = React.createRef();
 let client = null;
 function initializeClient() {
   let uid = sessionStorage.getItem("uid");
@@ -27,14 +26,12 @@ const UI = {
     return document.getElementById(id);
   },
   showErrorMessage: function(message) {
-
+    console.error(message);
   },
   showMessage: function(message) {
-
+    console.log(message);
   }
 }
-
-
 
 class App extends React.Component {
   saveToSessionStorage(uid, address) {
