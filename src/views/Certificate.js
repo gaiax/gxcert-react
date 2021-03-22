@@ -1,5 +1,5 @@
 import React from "react";
-import CommunicationLoading from "./components/loading";
+import { CommunicationLoading } from "./components";
 import { getCertificateImage } from "../image-upload";
 import "./Certificate.css";
 import { Link } from "react-router-dom";
