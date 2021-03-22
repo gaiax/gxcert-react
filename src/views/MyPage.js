@@ -1,6 +1,6 @@
 import React from "react";
 import { MyInfoComponent } from "./MyInfo";
-import { MyCertListComponent } from "./Certificate";
+import { MyCertListComponent } from "./CertList";
 
 class MyPageComponent extends React.Component {
   constructor(props) {
