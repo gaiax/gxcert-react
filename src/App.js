@@ -7,8 +7,8 @@ import Login from "./Login";
 import { IssueComponent } from "./Issue";
 import { SettingComponent } from "./Setting";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import { ShowComponent } from "./Show";
-import { CertViewComponent } from "./Certificate";
+import { MyPageComponent } from "./MyPage";
+import { CertViewComponent } from "./CertView";
 import Modal from "react-modal";
 
 const showRef = React.createRef();
@@ -193,7 +193,7 @@ class CertApp extends React.Component {
           </header>
           <div className="main">
             <Switch>
-              <Route exact path="/" render={ () => <ShowComponent client={client} address={client.address} ref={that.certificatesRef} onLoad={(certificates) => { that.certificates = certificates; }} /> } />
+              <Route exact path="/" render={ () => <MyPageComponent client={client} address={client.address} onLoad={(certificates) => { that.certificates = certificates; }} ref={that.certificatesRef} /> } />
               <Route exact path="/issue" render={ () => <IssueComponent onClickIssueButton={this.issue} /> } />
               <Route exact path="/user" render={ () => <SettingComponent /> } />
               <Route exact path="/certs/:index" render={ (routeProps) => <CertViewComponent {...routeProps} certificates={that.certificates} />} />
