@@ -3,12 +3,12 @@ import "./Header.css";
 import React from "react";
 import { getGoogleUid } from "./util";
 import * as CertClient from "gxcert-iota";
-import Login from "./LoginView";
-import { IssueComponent } from "./Issue";
-import { SettingComponent } from "./Setting";
+import Login from "./views/LoginView";
+import { IssueComponent } from "./views/Issue";
+import { SettingComponent } from "./views/Setting";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import { MyPageComponent } from "./MyPage";
-import { CertViewComponent } from "./CertView";
+import { MyPageComponent } from "./views/MyPage";
+import { CertViewComponent } from "./views/CertView";
 import Modal from "react-modal";
 
 let client = null;

@@ -22,10 +22,17 @@ function getUrlQueries() {
   });
   return queries;
 }
+function dateString(date) {
+  return (
+    date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate()
+  );
+}
+
 
 export {
   copyPubkey,
   getUrlQueries,
   getGoogleUid,
+  dateString,
 }
 
