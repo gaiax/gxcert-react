@@ -1,10 +1,10 @@
 import React from "react";
-import CommunicationLoading from "./loading";
-import * as ipfs from "./ipfs";
+import { CommunicationLoading } from "./components";
+import { getCertificateImage } from "../image-upload";
 import "./Certificate.css";
 import { Link } from "react-router-dom";
+import { dateString } from "../util";
 
-import { dateString } from "./date";
 class CertComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -16,9 +16,7 @@ class CertComponent extends React.Component {
   componentWillMount() {
     const that = this;
     (async () => {
-      console.log(that.state.certificate);
-      const imageUrl = await ipfs.getCertificateImage(that.state.certificate.ipfs);
-      console.log(imageUrl);
+      const imageUrl = await getCertificateImage(that.state.certificate.ipfs);
       that.setState({
         imageUrl
       });
@@ -70,22 +68,10 @@ class MyCertListComponent extends React.Component {
   constructor(props) {
     super(props);
     this.client = props.client;
-    this.onLoad = props.onLoad;
     this.state = {
       isLoading: true,
-      certificates: []
+      certificates: props.certificates,
     }
-  }
-  componentWillMount() {
-    const that = this;
-    (async () => {
-      const certificates = await that.client.getCertificates(that.client.address);
-      that.onLoad(certificates);
-      that.setState({
-        isLoading: false,
-        certificates: certificates,
-      });
-    })();
   }
   render() {
     return (

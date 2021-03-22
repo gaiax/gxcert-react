@@ -1,7 +1,6 @@
 import React from "react";
 import "./Issue.css";
-import * as image from "./image";
-import * as ipfs from "./ipfs";
+import { fileInputToDataURL, createBlobFromImageDataURI, postCertificate } from "../image-upload";
 
 
 class IssueComponent extends React.Component {
@@ -22,11 +21,11 @@ class IssueComponent extends React.Component {
           <input type="text" id="issue-to" className="issue-to issue-input" /><br/>
           <button className="issue-button" id="issue-button" onClick={async () => {
             const address = document.getElementById("issue-to").value;
-            const imageData = await image.fileInputToDataURL(document.getElementById("issue-image"));
+            const imageData = await fileInputToDataURL(document.getElementById("issue-image"));
             let ipfsHash = null;
             try {
-              const blob = image.createBlobFromImageDataURI(imageData);
-              ipfsHash = await ipfs.postCertificate(blob);
+              const blob = createBlobFromImageDataURI(imageData);
+              ipfsHash = await postCertificate(blob);
             } catch(err) {
               console.error(err);
               return;
