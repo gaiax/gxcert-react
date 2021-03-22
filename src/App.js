@@ -12,57 +12,29 @@ import { CertViewComponent } from "./CertView";
 import Modal from "react-modal";
 
 const showRef = React.createRef();
-
-let uid = sessionStorage.getItem("uid");
 let client = null;
-if (uid !== null) {
-  client = new CertClient("https://nodes.devnet.iota.org", uid);
-  client.address = sessionStorage.getItem("address");
-  console.log(client.address);
+function initializeClient() {
+  let uid = sessionStorage.getItem("uid");
+  if (uid !== null) {
+    client = new CertClient("https://nodes.devnet.iota.org", uid);
+    client.address = sessionStorage.getItem("address");
+    console.log(client.address);
+  }
 }
-
 
 const UI = {
   byId: function(id) {
     return document.getElementById(id);
   },
   showErrorMessage: function(message) {
+
   },
   showMessage: function(message) {
-  },
-}
 
-function copyPubkey(text) {
-  const copyFrom = document.createElement("textarea");
-  copyFrom.textContent = text;
-  const bodyElm = document.getElementsByTagName("body")[0];
-  bodyElm.appendChild(copyFrom);
-  copyFrom.select();
-  document.execCommand('copy');
-  bodyElm.removeChild(copyFrom);
-  UI.showMessage("Copied your ID!");
-}
-
-
-
-function isShowPage(queries) {
-  if ("index" in queries && "address" in queries) {
-    return true;
   }
-  return false;
 }
-function getUrlQueries() {
-  let queryStr = window.location.search.slice(1);
-  let queries = {};
-  if (!queryStr) {
-    return queries;
-  }
-  queryStr.split("&").forEach(function (queryStr) {
-    var queryArr = queryStr.split("=");
-    queries[queryArr[0]] = queryArr[1];
-  });
-  return queries;
-}
+
+
 
 class App extends React.Component {
   saveToSessionStorage(uid, address) {
@@ -114,11 +86,6 @@ class CertApp extends React.Component {
     });
     UI.showMessage("Successfully completed issuesing a certificate.");
   }
-  componentDidMount() {
-    const queries = getUrlQueries();
-    if (isShowPage(queries)) {
-    }
-  }
   render() {
     const that = this;
     const modalStyles = {
@@ -156,4 +123,5 @@ class CertApp extends React.Component {
   }
 }
 
+initializeClient();
 export default App;
