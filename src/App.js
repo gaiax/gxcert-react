@@ -61,6 +61,7 @@ class CertApp extends React.Component {
     this.myPageRef = React.createRef();
     this.state = {
       myPageIsLoading: true,
+      issuePageIsLoading: false,
       certificates: [],
     }
   }
@@ -68,6 +69,9 @@ class CertApp extends React.Component {
     UI.byId("my-pubkey").innerText = "Your ID is " + client.address.substr(0, 8) + "...   ";
   }
   async issue(evt) {
+    this.setState({
+      issuePageIsLoading: true,
+    });
     const address = evt.address;
     const ipfsHash = evt.ipfsHash;
     const certificate = client.createCertificateObject(ipfsHash);
