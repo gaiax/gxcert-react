@@ -40,6 +40,12 @@ class MyCertListComponent extends React.Component {
       certificates: certificates,
     }
   }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return {
+      isLoading: nextProps.isLoading,
+      certificates: nextProps.certificates,
+    }
+  }
   render() {
     return (
       <div className="mycertificates">

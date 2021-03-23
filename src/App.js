@@ -60,8 +60,8 @@ class CertApp extends React.Component {
     super();
     this.myPageRef = React.createRef();
     this.state = {
-      showPageIsLoading: false,
-      isLoading: true,
+      myPageIsLoading: true,
+      certificates: [],
     }
   }
   showPubkey() {
@@ -82,21 +82,14 @@ class CertApp extends React.Component {
     UI.showMessage("Successfully completed issuesing a certificate.");
   }
   componentDidMount() {
-    this.fetchMyCertificates();
-  }
-  async fetchMyCertificates() {
-    let certificates = null;
-    try {
-      certificates = await client.getCertificates();
-    } catch (err) {
-      UI.showErrorMessage("Failed to fetch your certificates.");
-      return;
-    }
-    console.log(certificates);
-    this.setState({
-      isLoading: false,
-      certificates,
-    });
+    const that = this;
+    (async () => {
+      const certificates = await client.getCertificates();
+      that.setState({
+        myPageIsLoading: false,
+        certificates: certificates,
+      });
+    })();
   }
   render() {
     const that = this;
@@ -110,7 +103,7 @@ class CertApp extends React.Component {
           </header>
           <div className="main">
             <Switch>
-              <Route exact path="/" render={ () => <MyPageComponent address={client.address} ref={that.myPageRef} isLoading={this.state.isLoading} certificates={this.state.certificates} /> } />
+              <Route exact path="/" render={ () => <MyPageComponent address={client.address} ref={that.myPageRef} isLoading={that.state.myPageIsLoading} certificates={that.state.certificates} /> } />
               <Route exact path="/issue" render={ () => <IssueComponent onClickIssueButton={this.issue} /> } />
               <Route exact path="/user" render={ () => <SettingComponent /> } />
               <Route exact path="/certs/:index" render={ (routeProps) => <CertViewComponent {...routeProps} certificates={that.certificates} />} />
