@@ -40,10 +40,12 @@ class GxModal extends React.Component {
     }
   }
   render() {
-    <Modal isOpen={this.state.isOpen} style={modalStyle}>
-      { this.state.isLoading ? <CommunicationLoading /> : "" }
-      { this.state.message !== undefined ? this.state.message : "" }
-    </Modal>
+    return (
+      <Modal isOpen={this.state.isOpen} style={modalStyle}>
+        { this.state.isLoading ? <CommunicationLoading /> : "" }
+        { this.state.message !== undefined ? this.state.message : "" }
+      </Modal>
+    );
   }
 }
 
