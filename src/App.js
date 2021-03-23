@@ -8,6 +8,7 @@ import { SettingComponent } from "./views/Setting";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { MyPageComponent } from "./views/MyPage";
 import { CertViewComponent } from "./views/CertView";
+import GxModal from "./views/components/Modal";
 
 let client = null;
 function initializeClient() {
@@ -113,6 +114,7 @@ class CertApp extends React.Component {
               <Route exact path="/certs/:index" render={ (routeProps) => <CertViewComponent {...routeProps} certificates={that.certificates} />} />
             </Switch>
           </div>
+          <GxModal isOpen={this.state.issuePageIsLoading} isLoading={this.state.issuePageIsLoading} />
         </div>
       </Router>
     );
