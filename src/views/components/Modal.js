@@ -12,10 +12,10 @@ const modalStyle = {
   },
   content: {
     position: "absolute",
-    top: "5rem",
-    left: "5rem",
-    right: "5rem",
-    bottom: "5rem",
+    width: "240px",
+    height: "240px",
+    marginLeft: "auto",
+    marginRight: "auto",
     backgroundColor: "#DDD",
     borderRadius: "1rem",
     padding: "1.5rem"
