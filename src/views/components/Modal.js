@@ -12,7 +12,7 @@ const modalStyle = {
   },
   content: {
     position: "absolute",
-    top: "200px",
+    top: "20vh",
     width: "240px",
     height: "240px",
     marginLeft: "auto",
