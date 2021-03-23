@@ -1,5 +1,4 @@
 import React from "react";
-import "./Modal.css";
 import Modal from "react-modal";
 import CommunicationLoading from "./Loading";
 
