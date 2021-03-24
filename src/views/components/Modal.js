@@ -29,6 +29,7 @@ class GxModal extends React.Component {
       isOpen: props.isOpen,
       isLoading: props.isLoading,
       message: props.message,
+      backButton: props.backButton,
     }
   }
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -36,6 +37,7 @@ class GxModal extends React.Component {
       isOpen: nextProps.isOpen !== undefined ? nextProps.isOpen : prevState.isOpen,
       isLoading: nextProps.isLoading !== undefined ? nextProps.isLoading : prevState.isLoading,
       message: nextProps.message !== undefined ? nextProps.message : prevState.message,
+      backButton: nextProps.backButton !== undefined ? nextProps.backButton : prevState.backButton,
 
     }
   }
