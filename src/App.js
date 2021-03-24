@@ -152,7 +152,7 @@ class CertApp extends React.Component {
               <Route exact path="/" render={ () => <MyPageComponent address={client.address} ref={that.myPageRef} isLoading={that.state.myPageIsLoading} certificates={that.state.certificates} /> } />
               <Route exact path="/issue" render={ () => <IssueComponent onClickIssueButton={this.issue.bind(that)} /> } />
               <Route exact path="/user" render={ () => <SettingComponent onClickUpdateButton={this.updateUserSetting.bind(this)} /> } />
-              <Route exact path="/certs/:index" render={ (routeProps) => <CertViewComponent {...routeProps} certificates={that.certificates} />} />
+              <Route exact path="/certs/:index" render={ (routeProps) => <CertViewComponent {...routeProps} certificates={that.state.certificates} />} />
             </Switch>
           </div>
           <BsModal show={modalIsShow} onClickBackButton={this.closeModal.bind(this)} isLoading={isLoading} message={this.state.message}/>
