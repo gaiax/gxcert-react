@@ -8,7 +8,6 @@ import { SettingComponent } from "./views/Setting";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { MyPageComponent } from "./views/MyPage";
 import { CertViewComponent } from "./views/CertView";
-import GxModal from "./views/components/Modal";
 import BsModal from "./views/components/BsModal";
 
 let client = null;
