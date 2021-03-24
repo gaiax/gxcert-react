@@ -8,6 +8,8 @@ import { SettingComponent } from "./views/Setting";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { MyPageComponent } from "./views/MyPage";
 import { CertViewComponent } from "./views/CertView";
+import GxModal from "./views/components/Modal";
+import BsModal from "./views/components/BsModal";
 
 let client = null;
 function initializeClient() {
@@ -63,6 +65,7 @@ class CertApp extends React.Component {
       myPageIsLoading: true,
       issuePageIsLoading: false,
       certificates: [],
+      message: null,
     }
   }
   showPubkey() {
@@ -82,8 +85,8 @@ class CertApp extends React.Component {
     }
     this.setState({
       issuePageIsLoading: false,
+      message: "Successfully completed issuesing a certificate."
     });
-    UI.showMessage("Successfully completed issuesing a certificate.");
   }
   componentDidMount() {
     const that = this;
@@ -95,8 +98,15 @@ class CertApp extends React.Component {
       });
     })();
   }
+  closeModal() {
+    this.setState({
+      issuePageIsLoading: false,
+      message: null,
+    });
+  }
   render() {
     const that = this;
+    const modalIsShow = this.state.issuePageIsLoading || this.state.message !== null;
     return (
       <Router>
         <div className="App">
@@ -108,11 +118,12 @@ class CertApp extends React.Component {
           <div className="main">
             <Switch>
               <Route exact path="/" render={ () => <MyPageComponent address={client.address} ref={that.myPageRef} isLoading={that.state.myPageIsLoading} certificates={that.state.certificates} /> } />
-              <Route exact path="/issue" render={ () => <IssueComponent onClickIssueButton={this.issue} /> } />
+              <Route exact path="/issue" render={ () => <IssueComponent onClickIssueButton={this.issue.bind(that)} /> } />
               <Route exact path="/user" render={ () => <SettingComponent /> } />
               <Route exact path="/certs/:index" render={ (routeProps) => <CertViewComponent {...routeProps} certificates={that.certificates} />} />
             </Switch>
           </div>
+          <BsModal show={modalIsShow} onClickBackButton={this.closeModal.bind(this)} isLoading={this.state.issuePageIsLoading} message={this.state.message}/>
         </div>
       </Router>
     );
