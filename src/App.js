@@ -81,7 +81,12 @@ class CertApp extends React.Component {
     try {
       await client.issueCertificate(certificate, address);
     } catch(err) {
-      UI.showErrorMessage("Failed to issue a certificate.");
+      console.error(err);
+      this.setState({
+        issuePageIsLoading: false,
+        message: "Failed to issue a certificate.",
+      });
+      return;
     }
     this.setState({
       issuePageIsLoading: false,
@@ -111,7 +116,13 @@ class CertApp extends React.Component {
   componentDidMount() {
     const that = this;
     (async () => {
-      const certificates = await client.getCertificates();
+      let certificates;
+      try {
+        certificates = await client.getCertificates();
+      } catch(err) {
+        console.error(err);
+        return;
+      }
       that.setState({
         myPageIsLoading: false,
         certificates: certificates,
