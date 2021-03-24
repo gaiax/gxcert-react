@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { MyPageComponent } from "./views/MyPage";
 import { CertViewComponent } from "./views/CertView";
 import BsModal from "./views/components/BsModal";
+import { getImageOnIpfs } from "./image-upload";
 
 let client = null;
 function initializeClient() {
@@ -96,6 +97,19 @@ class CertApp extends React.Component {
     this.setState({
       userSettingPageIsLoading: true,
     });
+    if (evt.icon !== null) {
+      console.log(evt);
+      try {
+        await client.registerIcon(evt.icon);
+      } catch(err) {
+        console.error(err);
+        this.setState({
+          userSettingPageIsLoading: false,
+          message: "Failed to update your name.",
+        });
+        return;
+      }
+    }
     const name = evt.name;
     try {
       await client.registerName(name);
@@ -115,7 +129,20 @@ class CertApp extends React.Component {
   componentDidMount() {
     const that = this;
     (async () => {
-      let certificates;
+      let profile = null;
+      let icon = null;
+      try {
+        profile = await client.getProfile(client.address);
+        console.log(profile);
+        const ipfsHash = profile.icon;       
+        icon = await getImageOnIpfs(ipfsHash);
+        that.setState({
+          icon,
+        });
+      } catch(err) {
+        console.error(err);
+      }
+      let certificates = null;
       try {
         certificates = await client.getCertificates();
       } catch(err) {
@@ -148,7 +175,7 @@ class CertApp extends React.Component {
           </header>
           <div className="main">
             <Switch>
-              <Route exact path="/" render={ () => <MyPageComponent address={client.address} ref={that.myPageRef} isLoading={that.state.myPageIsLoading} certificates={that.state.certificates} /> } />
+              <Route exact path="/" render={ () => <MyPageComponent address={client.address} ref={that.myPageRef} isLoading={that.state.myPageIsLoading} certificates={that.state.certificates} icon={this.state.icon} /> } />
               <Route exact path="/issue" render={ () => <IssueComponent onClickIssueButton={this.issue.bind(that)} /> } />
               <Route exact path="/user" render={ () => <SettingComponent onClickUpdateButton={this.updateUserSetting.bind(this)} /> } />
               <Route exact path="/certs/:index" render={ (routeProps) => <CertViewComponent {...routeProps} certificates={that.state.certificates} />} />
