@@ -7,12 +7,19 @@ class MyInfoComponent extends React.Component {
     super(props);
     this.state = {
       address: props.address,
+      icon: props.icon,
+    }
+  }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return {
+      address: nextProps.address,
+      icon: nextProps.icon,
     }
   }
   render() {
     return (
       <div className="myinfo">
-        <img className="myinfo-image" alt="GxCert icon" />
+        <img className="myinfo-image" alt="GxCert icon" src={this.state.icon} />
         <div className="myinfo-right">
           <p className="myinfo-address">
             { this.state.address.substr(0, 32) + "..." }

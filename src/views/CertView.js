@@ -38,7 +38,7 @@ class CertViewComponent extends React.Component {
       imageUrl
     });
   }
-  componentWillMount() {
+  componentDidMount() {
     this.loadImage();
   }
   render() {

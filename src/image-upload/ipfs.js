@@ -39,4 +39,6 @@ async function getCertificateImage(ipfsHash) {
   return null;
 }
 
-export { getCertificateImage, postCertificate };
+const getImageOnIpfs = getCertificateImage;
+
+export { getCertificateImage, getImageOnIpfs, postCertificate };

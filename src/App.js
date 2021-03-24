@@ -8,8 +8,8 @@ import { SettingComponent } from "./views/Setting";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { MyPageComponent } from "./views/MyPage";
 import { CertViewComponent } from "./views/CertView";
-import GxModal from "./views/components/Modal";
 import BsModal from "./views/components/BsModal";
+import { getImageOnIpfs } from "./image-upload";
 
 let client = null;
 function initializeClient() {
@@ -81,17 +81,74 @@ class CertApp extends React.Component {
     try {
       await client.issueCertificate(certificate, address);
     } catch(err) {
-      UI.showErrorMessage("Failed to issue a certificate.");
+      console.error(err);
+      this.setState({
+        issuePageIsLoading: false,
+        message: "Failed to issue a certificate.",
+      });
+      return;
     }
     this.setState({
       issuePageIsLoading: false,
       message: "Successfully completed issuesing a certificate."
     });
   }
+  async updateUserSetting(evt) {
+    this.setState({
+      userSettingPageIsLoading: true,
+    });
+    if (evt.icon !== null) {
+      console.log(evt);
+      try {
+        await client.registerIcon(evt.icon);
+      } catch(err) {
+        console.error(err);
+        this.setState({
+          userSettingPageIsLoading: false,
+          message: "Failed to update your name.",
+        });
+        return;
+      }
+    }
+    const name = evt.name;
+    try {
+      await client.registerName(name);
+    } catch(err) {
+      console.error(err);
+      this.setState({
+        userSettingPageIsLoading: false,
+        message: "Failed to update your name.",
+      });
+      return;
+    }
+    this.setState({
+      userSettingPageIsLoading: false,
+      message: "Successfully updated your name.",
+    });
+  }
   componentDidMount() {
     const that = this;
     (async () => {
-      const certificates = await client.getCertificates();
+      let profile = null;
+      let icon = null;
+      try {
+        profile = await client.getProfile(client.address);
+        console.log(profile);
+        const ipfsHash = profile.icon;       
+        icon = await getImageOnIpfs(ipfsHash);
+        that.setState({
+          icon,
+        });
+      } catch(err) {
+        console.error(err);
+      }
+      let certificates = null;
+      try {
+        certificates = await client.getCertificates();
+      } catch(err) {
+        console.error(err);
+        return;
+      }
       that.setState({
         myPageIsLoading: false,
         certificates: certificates,
@@ -106,7 +163,8 @@ class CertApp extends React.Component {
   }
   render() {
     const that = this;
-    const modalIsShow = this.state.issuePageIsLoading || this.state.message !== null;
+    const modalIsShow = this.state.issuePageIsLoading || this.state.userSettingPageIsLoading || this.state.message !== null;
+    const isLoading = this.state.issuePageIsLoading || this.state.userSettingPageIsLoading;
     return (
       <Router>
         <div className="App">
@@ -117,13 +175,13 @@ class CertApp extends React.Component {
           </header>
           <div className="main">
             <Switch>
-              <Route exact path="/" render={ () => <MyPageComponent address={client.address} ref={that.myPageRef} isLoading={that.state.myPageIsLoading} certificates={that.state.certificates} /> } />
+              <Route exact path="/" render={ () => <MyPageComponent address={client.address} ref={that.myPageRef} isLoading={that.state.myPageIsLoading} certificates={that.state.certificates} icon={this.state.icon} /> } />
               <Route exact path="/issue" render={ () => <IssueComponent onClickIssueButton={this.issue.bind(that)} /> } />
-              <Route exact path="/user" render={ () => <SettingComponent /> } />
-              <Route exact path="/certs/:index" render={ (routeProps) => <CertViewComponent {...routeProps} certificates={that.certificates} />} />
+              <Route exact path="/user" render={ () => <SettingComponent onClickUpdateButton={this.updateUserSetting.bind(this)} /> } />
+              <Route exact path="/certs/:index" render={ (routeProps) => <CertViewComponent {...routeProps} certificates={that.state.certificates} />} />
             </Switch>
           </div>
-          <BsModal show={modalIsShow} onClickBackButton={this.closeModal.bind(this)} isLoading={this.state.issuePageIsLoading} message={this.state.message}/>
+          <BsModal show={modalIsShow} onClickBackButton={this.closeModal.bind(this)} isLoading={isLoading} message={this.state.message}/>
         </div>
       </Router>
     );
