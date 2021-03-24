@@ -88,6 +88,26 @@ class CertApp extends React.Component {
       message: "Successfully completed issuesing a certificate."
     });
   }
+  async updateUserSetting(evt) {
+    this.setState({
+      userSettingPageIsLoading: true,
+    });
+    const name = evt.name;
+    try {
+      await client.registerName(name);
+    } catch(err) {
+      console.error(err);
+      this.setState({
+        userSettingPageIsLoading: false,
+        message: "Failed to update your name.",
+      });
+      return;
+    }
+    this.setState({
+      userSettingPageIsLoading: false,
+      message: "Successfully updated your name.",
+    });
+  }
   componentDidMount() {
     const that = this;
     (async () => {
@@ -106,7 +126,8 @@ class CertApp extends React.Component {
   }
   render() {
     const that = this;
-    const modalIsShow = this.state.issuePageIsLoading || this.state.message !== null;
+    const modalIsShow = this.state.issuePageIsLoading || this.state.userSettingPageIsLoading || this.state.message !== null;
+    const isLoading = this.state.issuePageIsLoading || this.state.userSettingPageIsLoading;
     return (
       <Router>
         <div className="App">
@@ -119,11 +140,11 @@ class CertApp extends React.Component {
             <Switch>
               <Route exact path="/" render={ () => <MyPageComponent address={client.address} ref={that.myPageRef} isLoading={that.state.myPageIsLoading} certificates={that.state.certificates} /> } />
               <Route exact path="/issue" render={ () => <IssueComponent onClickIssueButton={this.issue.bind(that)} /> } />
-              <Route exact path="/user" render={ () => <SettingComponent /> } />
+              <Route exact path="/user" render={ () => <SettingComponent onClickUpdateButton={this.updateUserSetting.bind(this)} /> } />
               <Route exact path="/certs/:index" render={ (routeProps) => <CertViewComponent {...routeProps} certificates={that.certificates} />} />
             </Switch>
           </div>
-          <BsModal show={modalIsShow} onClickBackButton={this.closeModal.bind(this)} isLoading={this.state.issuePageIsLoading} message={this.state.message}/>
+          <BsModal show={modalIsShow} onClickBackButton={this.closeModal.bind(this)} isLoading={isLoading} message={this.state.message}/>
         </div>
       </Router>
     );
