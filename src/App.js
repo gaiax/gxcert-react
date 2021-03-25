@@ -72,6 +72,10 @@ class CertApp extends React.Component {
     UI.byId("my-pubkey").innerText = "Your ID is " + client.address.substr(0, 8) + "...   ";
   }
   async issue(evt) {
+    if (this.isProcessing) {
+      return;
+    }
+    this.isProcessing = true;
     this.setState({
       issuePageIsLoading: true,
     });
@@ -82,18 +86,24 @@ class CertApp extends React.Component {
       await client.issueCertificate(certificate, address);
     } catch(err) {
       console.error(err);
+      this.isProcessing = false;
       this.setState({
         issuePageIsLoading: false,
         message: "Failed to issue a certificate.",
       });
       return;
     }
+    this.isProcessing = false;
     this.setState({
       issuePageIsLoading: false,
       message: "Successfully completed issuesing a certificate."
     });
   }
   async updateUserSetting(evt) {
+    if (this.isProcessing) {
+      return;
+    }
+    this.isProcessing = true;
     this.setState({
       userSettingPageIsLoading: true,
     });
@@ -103,6 +113,7 @@ class CertApp extends React.Component {
         await client.registerIcon(evt.icon);
       } catch(err) {
         console.error(err);
+        this.isProcessing = false;
         this.setState({
           userSettingPageIsLoading: false,
           message: "Failed to update your name.",
@@ -116,6 +127,7 @@ class CertApp extends React.Component {
         await client.registerName(name);
       } catch(err) {
         console.error(err);
+        this.isProcessing = false;
         this.setState({
           userSettingPageIsLoading: false,
           message: "Failed to update your profile.",
@@ -123,6 +135,7 @@ class CertApp extends React.Component {
         return;
       }
     }
+    this.isProcessing = false;
     this.setState({
       userSettingPageIsLoading: false,
       message: "Successfully updated your profile.",
