@@ -22,7 +22,7 @@ class MyInfoComponent extends React.Component {
         <img className="myinfo-image" alt="GxCert icon" src={this.state.icon} />
         <div className="myinfo-right">
           <div className="myinfo-address">
-            { this.state.address }
+            { "Your ID: " + this.state.address }
           </div>
           <Link className="myinfo-register" to="/user">Register your user info</Link>
         </div>
