@@ -50,3 +50,53 @@ http://localhost:3000
 
 4. Issueボタンをクリックする
 
+### 通信の種類
+**getProfile**
+
+params:
+ - IOTA First Address
+
+response:
+ - name
+ - thumbnail icon
+ - RSA public key
+
+**getCertificates**
+
+params:
+ - IOTA First Address
+
+response:
+ - certificates
+   - IPFS Hash
+   - timestamp
+   - RSA signature
+   - issueser
+
+**registerName**
+
+params:
+ - name
+
+**registerIcon**
+
+params:
+ - icon (IPFS Hash)
+
+**registerPubKey**
+
+params:
+ - RSA public key
+
+**getFirstAddress**
+
+params:
+ - IOTA Seed
+
+**getBundles**
+
+params:
+ - IOTA First Address
+
+
+
