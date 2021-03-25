@@ -7,5 +7,8 @@ export default {
       type: "GET_CERTIFICATE",
       certificates,
     });
+  },
+  issue: async (dispatch) => {
+    const client = CertClient();
   }
 }
