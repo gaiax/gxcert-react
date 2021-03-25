@@ -4,10 +4,26 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import CertClient from "./client";
+import { getCertificates } from "./actions";
+
+function mapStateToProps(state, props) {
+  return state;
+}
+
+function mapDispatchToProps(dispatch, props) {
+  return {
+    getCertificates: () => {
+      dispatch(getCertificates());
+    }
+  }
+}
+
+const RxApp = connect(mapStateToProps, mapDispatchToProps)(App);
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <RxApp />
   </React.StrictMode>,
   document.getElementById("root")
 );
