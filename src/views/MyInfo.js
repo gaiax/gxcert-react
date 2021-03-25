@@ -21,9 +21,9 @@ class MyInfoComponent extends React.Component {
       <div className="myinfo">
         <img className="myinfo-image" alt="GxCert icon" src={this.state.icon} />
         <div className="myinfo-right">
-          <p className="myinfo-address">
-            { this.state.address.substr(0, 32) + "..." }
-          </p>
+          <div className="myinfo-address">
+            { this.state.address }
+          </div>
           <Link className="myinfo-register" to="/user">Register your user info</Link>
         </div>
       </div>
