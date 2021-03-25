@@ -1,4 +1,5 @@
 import CertClient from "../client"
+import { getGoogleUid } from "../util";
 async function getCertificates(dispatch) {
   const client = CertClient();
   const certificates = await client.getCertificates();
@@ -11,6 +12,18 @@ async function issue(dispatch) {
   const client = CertClient();
   console.log("issue");
   console.log(client);
+  dispatch({
+    type: "ISSUE",
+    payload: null,
+  });
+}
+
+async function login(dispatch) {
+  const uid = getGoogleUid();
+  dispatch({
+    type: "LOGIN",
+    payload: uid,
+  });
 }
 export {
   getCertificates,
