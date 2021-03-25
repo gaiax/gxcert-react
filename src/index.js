@@ -5,7 +5,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import CertClient from "./client";
-import { getCertificates } from "./actions";
+import { getCertificates, issue } from "./actions";
 import { connect, Provider } from "react-redux";
 import store from "./store";
 
@@ -17,6 +17,9 @@ function mapDispatchToProps(dispatch, props) {
   return {
     getCertificates: () => {
       dispatch(getCertificates());
+    },
+    issue: () => {
+      dispatch(issue());
     }
   }
 }

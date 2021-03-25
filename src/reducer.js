@@ -2,18 +2,16 @@
 
 const initialState = {
   isLoading: false,
-  receiver: null,
+  certificates: [],
 }
 
 export default function Reducer(state=initialState, action) {
   switch(action.type) {
     case "ISSUE":
-      return Object.assign({}, state, {
-        
-      });
+      return state;
     case "GET_CERTIFICATES":
       return Object.assign({}, state, {
-        certificates: action.certificates,
+        certificates: action.payload,
       });
     default:
       return state;

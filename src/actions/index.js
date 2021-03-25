@@ -4,7 +4,7 @@ async function getCertificates(dispatch) {
   const certificates = await client.getCertificates();
   dispatch({
     type: "GET_CERTIFICATE",
-    certificates,
+    payload: certificates,
   });
 }
 async function issue(dispatch) {
