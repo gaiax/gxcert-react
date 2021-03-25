@@ -20,15 +20,17 @@ class SettingComponent extends React.Component {
           <h5 className="setting-icon-title setting-input-title">Icon</h5>
           <input type="file" id="setting-icon" className="setting-icon setting-input" />
           <button className="setting-button" id="setting-button" onClick={async () => {
-            const name = document.getElementById("setting-name").value;
-            const imageData = await fileInputToDataURL(document.getElementById("setting-icon"));
+            let name = document.getElementById("setting-name").value.trim();
+            if (name === "") {
+              name = null;
+            }
             let icon = null;
             try {
+              const imageData = await fileInputToDataURL(document.getElementById("setting-icon"));
               const blob = createBlobFromImageDataURI(imageData);
               icon = await postCertificate(blob);
             } catch(err) {
               console.error(err);
-              return;
             }
             that.onClickUpdateButton({
               name,

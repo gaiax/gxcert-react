@@ -110,20 +110,22 @@ class CertApp extends React.Component {
         return;
       }
     }
-    const name = evt.name;
-    try {
-      await client.registerName(name);
-    } catch(err) {
-      console.error(err);
-      this.setState({
-        userSettingPageIsLoading: false,
-        message: "Failed to update your name.",
-      });
-      return;
+    if (evt.name !== null) {
+      const name = evt.name;
+      try {
+        await client.registerName(name);
+      } catch(err) {
+        console.error(err);
+        this.setState({
+          userSettingPageIsLoading: false,
+          message: "Failed to update your profile.",
+        });
+        return;
+      }
     }
     this.setState({
       userSettingPageIsLoading: false,
-      message: "Successfully updated your name.",
+      message: "Successfully updated your profile.",
     });
   }
   componentDidMount() {
