@@ -19,22 +19,7 @@ class IssueComponent extends React.Component {
           <input type="file" id="issue-image" className="issue-image issue-input" />
           <h5 className="issue-to-title issue-input-title">To</h5>
           <input type="text" id="issue-to" className="issue-to issue-input" /><br/>
-          <button className="issue-button" id="issue-button" onClick={async () => {
-            const address = document.getElementById("issue-to").value;
-            const imageData = await fileInputToDataURL(document.getElementById("issue-image"));
-            let ipfsHash = null;
-            try {
-              const blob = createBlobFromImageDataURI(imageData);
-              ipfsHash = await postCertificate(blob);
-            } catch(err) {
-              console.error(err);
-              return;
-            }
-            that.onClickIssueButton({
-              ipfsHash,
-              address,
-            });
-          }}>Issue</button>
+          <button className="issue-button" id="issue-button" onClick={this.onClickIssueButton}>Issue</button>
         </div>
       </div>
     );

@@ -6,6 +6,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import CertClient from "./client";
 import { getCertificates } from "./actions";
+import { connect, Provider } from "react-redux";
+import store from "./store";
 
 function mapStateToProps(state, props) {
   return state;
@@ -22,9 +24,9 @@ function mapDispatchToProps(dispatch, props) {
 const RxApp = connect(mapStateToProps, mapDispatchToProps)(App);
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <RxApp />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById("root")
 );
 
