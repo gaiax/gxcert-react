@@ -102,6 +102,49 @@ const onChangeIcon = (evt) => async (dispatch) => {
   });
 }
 
+const updateUserSetting = () => async (dispatch, getState) => {
+  dispatch({
+    type: "START_UPDATE_USER_SETTING",
+    payload: null,
+  });
+  const client = CertClient();
+  const state = getState().state;
+  if (state.name !== null && state.name.trim() !== "") {
+    const name = state.name.trim();
+    try {
+      await client.registerName(name);
+    } catch(err) {
+      dispatch({
+        type: "UPDATE_USER_SETTING",
+        payload: null,
+        error: err,
+      });
+      return;
+    }
+  }
+  if (state.icon !== null) {
+    const imageData = await fileInputToDataURL(state.icon);
+    let ipfsHash = null;
+    try {
+      const blob = createBlobFromImageDataURI(imageData);
+      ipfsHash = await postCertificate(blob);
+      await client.registerIcon(ipfsHash);
+    } catch(err) {
+      dispatch({
+        type: "UPDATE_USER_SETTING",
+        payload: null,
+        error: err,
+      });
+      return;
+    }
+  }
+  dispatch({
+    type: "UPDATE_USER_SETTING",
+    payload: null,
+    error: null,
+  });
+}
+
 export {
   getMyProfile,
   getCertificates,
@@ -110,4 +153,5 @@ export {
   onChangeIssueTo,
   onChangeName,
   onChangeIcon,
+  updateUserSetting,
 }

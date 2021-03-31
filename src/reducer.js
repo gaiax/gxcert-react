@@ -17,6 +17,14 @@ export default function Reducer(state=initialState, action) {
       return Object.assign({}, state, {
         isLoading: true,
       }); 
+    case "START_UPDATE_USER_SETTING":
+      return Object.assign({}, state, {
+        isLoading: true,
+      }); 
+    case "UPDATE_USER_SETTING":
+      return Object.assign({}, state, {
+        isLoading: false,
+      }); 
     case "ISSUE":
       return Object.assign({}, state, {
         isLoading: false,

@@ -5,7 +5,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import CertClient from "./client";
-import { getMyProfile, getCertificates, issue, onChangeIssueTo, onChangeCertificateImage, onChangeName, onChangeIcon } from "./actions";
+import { getMyProfile, getCertificates, issue, onChangeIssueTo, onChangeCertificateImage, onChangeName, onChangeIcon, updateUserSetting } from "./actions";
 import { connect, Provider } from "react-redux";
 import store from "./store";
 
@@ -35,6 +35,9 @@ function mapDispatchToProps(dispatch, props) {
     },
     onChangeIcon: (evt) => {
       dispatch(onChangeIcon(evt));
+    },
+    updateUserSetting: () => {
+      dispatch(updateUserSetting());
     }
   }
 }

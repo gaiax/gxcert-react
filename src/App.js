@@ -160,7 +160,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" render={ () => <MyPageComponent address={client.address} isLoading={that.props.state.myPageIsLoading} certificates={that.props.state.certificates} icon={icon} getCertificates={that.props.getCertificates} /> } />
             <Route exact path="/issue" render={ () => <IssueComponent onClickIssueButton={this.props.issue} onChangeCertificateImage={this.props.onChangeCertificateImage} onChangeIssueTo={this.props.onChangeIssueTo} /> } />
-            <Route exact path="/user" render={ () => <SettingComponent onClickUpdateButton={this.updateUserSetting.bind(this)} onChangeName={this.props.onChangeName} onChangeIcon={this.props.onChangeIcon} /> } />
+            <Route exact path="/user" render={ () => <SettingComponent onClickUpdateButton={this.props.updateUserSetting} onChangeName={this.props.onChangeName} onChangeIcon={this.props.onChangeIcon} /> } />
             <Route exact path="/certs/:index" render={ (routeProps) => <CertViewComponent {...routeProps} certificates={that.props.state.certificates} />} />
           </Switch>
         </div>
