@@ -51,9 +51,8 @@ function makeHashFromPixels(pixels) {
   return md5.update(text, "binary").digest("hex");
 }
 
-function fileInputToDataURL(element) {
+function fileInputToDataURL(file) {
   return new Promise((resolve, reject) => {
-    const file = element.files[0];
     const reader = new FileReader();
     reader.addEventListener(
       "load",
