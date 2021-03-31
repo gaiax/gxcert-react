@@ -132,22 +132,7 @@ class App extends React.Component {
     });
   }
   componentDidMount() {
-    const that = this;
-    (async () => {
-      let profile = null;
-      let icon = null;
-      try {
-        profile = await client.getProfile(client.address);
-        console.log(profile);
-        const ipfsHash = profile.icon;       
-        icon = await getImageOnIpfs(ipfsHash);
-        that.setState({
-          icon,
-        });
-      } catch(err) {
-        console.error(err);
-      }
-    })();
+    this.props.getMyProfile();
   }
   closeModal() {
     this.setState({
@@ -159,6 +144,11 @@ class App extends React.Component {
     const that = this;
     const modalIsShow = this.props.state.isLoading;
     const isLoading = this.props.state.isLoading;
+    const profile = this.props.state.myProfile;
+    let icon = "";
+    if (profile) {
+      icon = profile.icon;
+    }
     const login = (
       <Login onClick={this.init.bind(this)} />
     );
@@ -171,7 +161,7 @@ class App extends React.Component {
         </header>
         <div className="main">
           <Switch>
-            <Route exact path="/" render={ () => <MyPageComponent address={client.address} isLoading={that.props.state.myPageIsLoading} certificates={that.props.state.certificates} icon={this.state.icon} getCertificates={that.props.getCertificates} /> } />
+            <Route exact path="/" render={ () => <MyPageComponent address={client.address} isLoading={that.props.state.myPageIsLoading} certificates={that.props.state.certificates} icon={icon} getCertificates={that.props.getCertificates} /> } />
             <Route exact path="/issue" render={ () => <IssueComponent onClickIssueButton={this.props.issue} onChangeCertificateImage={this.props.onChangeCertificateImage} onChangeIssueTo={this.props.onChangeIssueTo} /> } />
             <Route exact path="/user" render={ () => <SettingComponent onClickUpdateButton={this.updateUserSetting.bind(this)} /> } />
             <Route exact path="/certs/:index" render={ (routeProps) => <CertViewComponent {...routeProps} certificates={that.state.certificates} />} />

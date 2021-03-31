@@ -6,6 +6,7 @@ const initialState = {
   issueTo: null,
   certificates: [],
   myPageIsLoading: false,
+  myProfile: null,
 }
 
 export default function Reducer(state=initialState, action) {
@@ -34,6 +35,10 @@ export default function Reducer(state=initialState, action) {
     case "START_GETTING_CERTIFICATES":
       return Object.assign({}, state, {
         myPageIsLoading: true,
+      });
+    case "GET_MYPROFILE":
+      return Object.assign({}, state, {
+        myProfile: action.payload,
       });
     default:
       return state;

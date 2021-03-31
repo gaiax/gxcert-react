@@ -1,6 +1,18 @@
 import CertClient from "../client"
-import { fileInputToDataURL, createBlobFromImageDataURI, postCertificate } from "../image-upload";
+import { fileInputToDataURL, createBlobFromImageDataURI, postCertificate, getImageOnIpfs } from "../image-upload";
 import { getGoogleUid } from "../util";
+
+const getMyProfile = () => async (dispatch) => {
+  const client = CertClient();
+  const profile = await client.getProfile(client.address);
+  const ipfsHash = profile.icon;
+  const icon = await getImageOnIpfs(ipfsHash);
+  profile.icon = icon;
+  dispatch({
+    type: "GET_MYPROFILE",
+    payload: profile,
+  });
+}
 const getCertificates = () => async (dispatch) => {
   dispatch({
     type: "START_GETTING_CERTIFICATES",
@@ -77,6 +89,7 @@ const onChangeIssueTo = (evt) => async (dispatch) => {
 }
 
 export {
+  getMyProfile,
   getCertificates,
   issue,
   onChangeCertificateImage,
