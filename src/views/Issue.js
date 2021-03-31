@@ -1,6 +1,5 @@
 import React from "react";
 import "./Issue.css";
-import { fileInputToDataURL, createBlobFromImageDataURI, postCertificate } from "../image-upload";
 
 
 class IssueComponent extends React.Component {
@@ -10,7 +9,6 @@ class IssueComponent extends React.Component {
     this.state = {}
   }
   render() {
-    const that = this;
     return (
       <div className="issue">
         <div className="issue-wrapper">
