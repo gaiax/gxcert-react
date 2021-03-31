@@ -88,10 +88,26 @@ const onChangeIssueTo = (evt) => async (dispatch) => {
   });
 }
 
+const onChangeName = (evt) => async (dispatch) => {
+  dispatch({
+    type: "ON_CHANGE_NAME",
+    payload: evt.target.value,
+  });
+}
+
+const onChangeIcon = (evt) => async (dispatch) => {
+  dispatch({
+    type: "ON_CHANGE_ICON",
+    payload: evt.target.files[0],
+  });
+}
+
 export {
   getMyProfile,
   getCertificates,
   issue,
   onChangeCertificateImage,
   onChangeIssueTo,
+  onChangeName,
+  onChangeIcon,
 }

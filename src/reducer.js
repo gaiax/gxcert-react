@@ -7,6 +7,8 @@ const initialState = {
   certificates: [],
   myPageIsLoading: false,
   myProfile: null,
+  name: "",
+  icon: null,
 }
 
 export default function Reducer(state=initialState, action) {
@@ -39,6 +41,14 @@ export default function Reducer(state=initialState, action) {
     case "GET_MYPROFILE":
       return Object.assign({}, state, {
         myProfile: action.payload,
+      });
+    case "ON_CHANGE_NAME":
+      return Object.assign({}, state, {
+        name: action.payload,
+      });
+    case "ON_CHANGE_ICON":
+      return Object.assign({}, state, {
+        icon: action.payload,
       });
     default:
       return state;

@@ -5,7 +5,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import CertClient from "./client";
-import { getMyProfile, getCertificates, issue, onChangeIssueTo, onChangeCertificateImage } from "./actions";
+import { getMyProfile, getCertificates, issue, onChangeIssueTo, onChangeCertificateImage, onChangeName, onChangeIcon } from "./actions";
 import { connect, Provider } from "react-redux";
 import store from "./store";
 
@@ -29,6 +29,12 @@ function mapDispatchToProps(dispatch, props) {
     },
     getMyProfile: () => {
       dispatch(getMyProfile());
+    },
+    onChangeName: (evt) => {
+      dispatch(onChangeName(evt));
+    },
+    onChangeIcon: (evt) => {
+      dispatch(onChangeIcon(evt));
     }
   }
 }
