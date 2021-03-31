@@ -34,6 +34,19 @@ const UI = {
 }
 
 class App extends React.Component {
+  constructor() {
+    super();
+    this.myPageRef = React.createRef();
+    this.state = {
+      myPageIsLoading: true,
+      issuePageIsLoading: false,
+      certificates: [],
+      message: null,
+    }
+  }
+  showPubkey() {
+    UI.byId("my-pubkey").innerText = "Your ID is " + client.address.substr(0, 8) + "...   ";
+  }
   saveToSessionStorage(uid, address) {
     sessionStorage.setItem("uid", uid);
     sessionStorage.setItem("address", address);
@@ -47,29 +60,6 @@ class App extends React.Component {
     }
     console.log(client.address); 
     this.forceUpdate();
-  }
-  render() {
-    return (
-      <div className="App">
-        { client === null?  <Login onClick={this.init.bind(this)} /> : <CertApp /> }
-      </div>
-    );
-  }
-}
-
-class CertApp extends React.Component {
-  constructor() {
-    super();
-    this.myPageRef = React.createRef();
-    this.state = {
-      myPageIsLoading: true,
-      issuePageIsLoading: false,
-      certificates: [],
-      message: null,
-    }
-  }
-  showPubkey() {
-    UI.byId("my-pubkey").innerText = "Your ID is " + client.address.substr(0, 8) + "...   ";
   }
   async issue(evt) {
     if (this.isProcessing) {
@@ -180,23 +170,31 @@ class CertApp extends React.Component {
     const that = this;
     const modalIsShow = this.state.issuePageIsLoading || this.state.userSettingPageIsLoading || this.state.message !== null;
     const isLoading = this.state.issuePageIsLoading || this.state.userSettingPageIsLoading;
+    const login = (
+      <Login onClick={this.init.bind(this)} />
+    );
+    const main = (
+      <div className="main">
+        <header>
+        <h2 className="brand-logo">GxCert</h2>
+        <Link to="/issue" className="header-issue-button header-button">Issue</Link>
+        <Link to="/" className="header-show-button header-button">Show</Link>
+        </header>
+        <div className="main">
+          <Switch>
+            <Route exact path="/" render={ () => <MyPageComponent address={client.address} ref={that.myPageRef} isLoading={that.state.myPageIsLoading} certificates={that.state.certificates} icon={this.state.icon} /> } />
+            <Route exact path="/issue" render={ () => <IssueComponent onClickIssueButton={this.props.issue} /> } />
+            <Route exact path="/user" render={ () => <SettingComponent onClickUpdateButton={this.updateUserSetting.bind(this)} /> } />
+            <Route exact path="/certs/:index" render={ (routeProps) => <CertViewComponent {...routeProps} certificates={that.state.certificates} />} />
+          </Switch>
+        </div>
+        <BsModal show={modalIsShow} onClickBackButton={this.closeModal.bind(this)} isLoading={isLoading} message={this.state.message}/>
+      </div>
+    );
     return (
       <Router>
         <div className="App">
-          <header>
-          <h2 className="brand-logo">GxCert</h2>
-          <Link to="/issue" className="header-issue-button header-button">Issue</Link>
-          <Link to="/" className="header-show-button header-button">Show</Link>
-          </header>
-          <div className="main">
-            <Switch>
-              <Route exact path="/" render={ () => <MyPageComponent address={client.address} ref={that.myPageRef} isLoading={that.state.myPageIsLoading} certificates={that.state.certificates} icon={this.state.icon} /> } />
-              <Route exact path="/issue" render={ () => <IssueComponent onClickIssueButton={this.props.issue} /> } />
-              <Route exact path="/user" render={ () => <SettingComponent onClickUpdateButton={this.updateUserSetting.bind(this)} /> } />
-              <Route exact path="/certs/:index" render={ (routeProps) => <CertViewComponent {...routeProps} certificates={that.state.certificates} />} />
-            </Switch>
-          </div>
-          <BsModal show={modalIsShow} onClickBackButton={this.closeModal.bind(this)} isLoading={isLoading} message={this.state.message}/>
+          { client === null ? login : main }
         </div>
       </Router>
     );
