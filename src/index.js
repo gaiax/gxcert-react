@@ -5,7 +5,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import CertClient from "./client";
-import { getCertificates, issue } from "./actions";
+import { getCertificates, issue, onChangeIssueTo, onChangeCertificateImage } from "./actions";
 import { connect, Provider } from "react-redux";
 import store from "./store";
 
@@ -20,7 +20,13 @@ function mapDispatchToProps(dispatch, props) {
     },
     issue: () => {
       dispatch(issue());
-    }
+    },
+    onChangeIssueTo: (evt) => {
+      dispatch(onChangeIssueTo(evt));
+    },
+    onChangeCertificateImage: (evt) => {
+      dispatch(onChangeCertificateImage(evt));
+    },
   }
 }
 
