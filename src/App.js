@@ -131,9 +131,6 @@ class App extends React.Component {
       message: "Successfully updated your profile.",
     });
   }
-  componentDidMount() {
-    this.props.getMyProfile();
-  }
   closeModal() {
     this.setState({
       issuePageIsLoading: false,
