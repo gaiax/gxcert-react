@@ -1,6 +1,6 @@
 import CertClient from "../client"
 import { getGoogleUid } from "../util";
-async function getCertificates(dispatch) {
+const getCertificates = () => async (dispatch) => {
   const client = CertClient();
   const certificates = await client.getCertificates();
   dispatch({
@@ -8,7 +8,7 @@ async function getCertificates(dispatch) {
     payload: certificates,
   });
 }
-async function issue(dispatch) {
+const issue = () => async (dispatch) => {
   const client = CertClient();
   console.log("issue");
   console.log(client);
@@ -18,13 +18,6 @@ async function issue(dispatch) {
   });
 }
 
-async function login(dispatch) {
-  const uid = getGoogleUid();
-  dispatch({
-    type: "LOGIN",
-    payload: uid,
-  });
-}
 export {
   getCertificates,
   issue,
