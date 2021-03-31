@@ -25,27 +25,12 @@ const modalStyle = {
 class GxModal extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isOpen: props.isOpen,
-      isLoading: props.isLoading,
-      message: props.message,
-      backButton: props.backButton,
-    }
-  }
-  static getDerivedStateFromProps(nextProps, prevState) {
-    return {
-      isOpen: nextProps.isOpen !== undefined ? nextProps.isOpen : prevState.isOpen,
-      isLoading: nextProps.isLoading !== undefined ? nextProps.isLoading : prevState.isLoading,
-      message: nextProps.message !== undefined ? nextProps.message : prevState.message,
-      backButton: nextProps.backButton !== undefined ? nextProps.backButton : prevState.backButton,
-
-    }
   }
   render() {
     return (
-      <Modal isOpen={this.state.isOpen} style={modalStyle}>
-        { this.state.isLoading ? <CommunicationLoading /> : "" }
-        { this.state.message !== undefined ? this.state.message : "" }
+      <Modal isOpen={this.props.isOpen} style={modalStyle}>
+        { this.props.isLoading ? <CommunicationLoading /> : "" }
+        { this.props.message !== undefined ? this.state.message : "" }
       </Modal>
     );
   }

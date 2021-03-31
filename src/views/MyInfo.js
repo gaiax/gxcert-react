@@ -3,13 +3,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 class MyInfoComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      address: props.address,
-      icon: props.icon,
-    }
-  }
   static getDerivedStateFromProps(nextProps, prevState) {
     return {
       address: nextProps.address,
@@ -19,12 +12,14 @@ class MyInfoComponent extends React.Component {
   render() {
     return (
       <div className="myinfo">
-        <img className="myinfo-image" alt="GxCert icon" src={this.state.icon} />
+        <img className="myinfo-image" alt="GxCert icon" src={this.props.icon} />
         <div className="myinfo-right">
           <div className="myinfo-address">
-            { "Your ID: " + this.state.address }
+            { "Your ID: " + this.props.address }
           </div>
           <Link className="myinfo-register" to="/user">Register your user info</Link>
+          <br/>
+          <a href="javascript:void(0)" onClick={this.props.exportAccount}>Export Account</a>
         </div>
       </div>
     );
