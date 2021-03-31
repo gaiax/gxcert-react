@@ -168,8 +168,8 @@ class App extends React.Component {
   }
   render() {
     const that = this;
-    const modalIsShow = this.state.issuePageIsLoading || this.state.userSettingPageIsLoading || this.state.message !== null;
-    const isLoading = this.state.issuePageIsLoading || this.state.userSettingPageIsLoading;
+    const modalIsShow = this.state.isLoading;
+    const isLoading = this.state.isLoading;
     const login = (
       <Login onClick={this.init.bind(this)} />
     );

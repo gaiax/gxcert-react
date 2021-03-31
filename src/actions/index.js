@@ -10,6 +10,11 @@ const getCertificates = () => async (dispatch) => {
   });
 }
 const issue = () => async (dispatch, getState) => {
+  dispatch({
+    type: "ON_CLICK_ISSUE_BUTTON",
+    payload: null,
+    error: null,
+  });
   const client = CertClient();
   console.log("issue");
   const state = getState();

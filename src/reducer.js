@@ -9,8 +9,14 @@ const initialState = {
 
 export default function Reducer(state=initialState, action) {
   switch(action.type) {
+    case "ON_CLICK_ISSUE_BUTTON":
+      return Object.assign({}, state, {
+        isLoading: true,
+      }); 
     case "ISSUE":
-      return state;
+      return Object.assign({}, state, {
+        isLoading: false,
+      });
     case "GET_CERTIFICATES":
       return Object.assign({}, state, {
         certificates: action.payload,
