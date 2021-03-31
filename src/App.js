@@ -1,7 +1,7 @@
 import "./App.css";
 import React from "react";
 import { getGoogleUid } from "./util";
-import * as CertClient from "gxcert-iota";
+import CertClient from "./client";
 import Login from "./views/Login";
 import { IssueComponent } from "./views/Issue";
 import { SettingComponent } from "./views/Setting";
@@ -15,7 +15,7 @@ let client = null;
 function initializeClient() {
   let uid = sessionStorage.getItem("uid");
   if (uid !== null) {
-    client = new CertClient("https://nodes.devnet.iota.org", uid);
+    client = new CertClient(uid);
     client.address = sessionStorage.getItem("address");
     console.log(client.address);
   }
@@ -53,7 +53,7 @@ class App extends React.Component {
   }
   async init() {
     const uid = await getGoogleUid();
-    client = new CertClient("https://nodes.devnet.iota.org", uid);
+    client = new CertClient(uid);
     await client.init();
     if (uid) {
       this.saveToSessionStorage(uid, client.address);
