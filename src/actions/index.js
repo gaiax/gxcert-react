@@ -123,9 +123,10 @@ const updateUserSetting = () => async (dispatch, getState) => {
     }
   }
   if (state.icon !== null) {
-    const imageData = await fileInputToDataURL(state.icon);
+    console.log(state.icon);
     let ipfsHash = null;
     try {
+      const imageData = await fileInputToDataURL(state.icon);
       const blob = createBlobFromImageDataURI(imageData);
       ipfsHash = await postCertificate(blob);
       await client.registerIcon(ipfsHash);

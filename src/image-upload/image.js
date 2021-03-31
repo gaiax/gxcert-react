@@ -61,11 +61,7 @@ function fileInputToDataURL(file) {
       },
       false
     );
-    if (file) {
-      reader.readAsDataURL(file);
-      return;
-    }
-    reject();
+    reader.readAsDataURL(file);
   });
 }
 

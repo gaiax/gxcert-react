@@ -61,6 +61,11 @@ class App extends React.Component {
     console.log(client.address); 
     this.forceUpdate();
   }
+  componentDidMount() {
+    if (client !== null) {
+      this.props.getMyProfile();
+    }
+  }
   async issue(evt) {
     if (this.isProcessing) {
       return;
@@ -87,48 +92,6 @@ class App extends React.Component {
     this.setState({
       issuePageIsLoading: false,
       message: "Successfully completed issuesing a certificate."
-    });
-  }
-  async updateUserSetting(evt) {
-    if (this.isProcessing) {
-      return;
-    }
-    this.isProcessing = true;
-    this.setState({
-      userSettingPageIsLoading: true,
-    });
-    if (evt.icon !== null) {
-      console.log(evt);
-      try {
-        await client.registerIcon(evt.icon);
-      } catch(err) {
-        console.error(err);
-        this.isProcessing = false;
-        this.setState({
-          userSettingPageIsLoading: false,
-          message: "Failed to update your name.",
-        });
-        return;
-      }
-    }
-    if (evt.name !== null) {
-      const name = evt.name;
-      try {
-        await client.registerName(name);
-      } catch(err) {
-        console.error(err);
-        this.isProcessing = false;
-        this.setState({
-          userSettingPageIsLoading: false,
-          message: "Failed to update your profile.",
-        });
-        return;
-      }
-    }
-    this.isProcessing = false;
-    this.setState({
-      userSettingPageIsLoading: false,
-      message: "Successfully updated your profile.",
     });
   }
   closeModal() {
