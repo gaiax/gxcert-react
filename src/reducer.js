@@ -1,6 +1,7 @@
 
 
 const initialState = {
+  uid: null,
   isLoading: false,
   certificateImage: null,
   issueTo: null,

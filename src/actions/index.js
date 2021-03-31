@@ -123,7 +123,6 @@ const updateUserSetting = () => async (dispatch, getState) => {
     }
   }
   if (state.icon !== null) {
-    console.log(state.icon);
     let ipfsHash = null;
     try {
       const imageData = await fileInputToDataURL(state.icon);
@@ -146,6 +145,19 @@ const updateUserSetting = () => async (dispatch, getState) => {
   });
 }
 
+const exportAccount = (evt) => async (dispatch, getState) => {
+  const state = getState().state;
+  const client = CertClient();
+  const uid = client.uid;
+  const json = JSON.stringify({
+    uid,
+  })
+  const blob = new Blob([json], {type: "application/json"});
+  const a = evt.target;
+  a.download = "account.json";
+  a.href = window.URL.createObjectURL(blob);
+}
+
 export {
   getMyProfile,
   getCertificates,
@@ -155,4 +167,5 @@ export {
   onChangeName,
   onChangeIcon,
   updateUserSetting,
+  exportAccount,
 }

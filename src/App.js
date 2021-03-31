@@ -66,34 +66,6 @@ class App extends React.Component {
       this.props.getMyProfile();
     }
   }
-  async issue(evt) {
-    if (this.isProcessing) {
-      return;
-    }
-    this.isProcessing = true;
-    this.setState({
-      issuePageIsLoading: true,
-    });
-    const address = evt.address;
-    const ipfsHash = evt.ipfsHash;
-    const certificate = client.createCertificateObject(ipfsHash);
-    try {
-      await client.issueCertificate(certificate, address);
-    } catch(err) {
-      console.error(err);
-      this.isProcessing = false;
-      this.setState({
-        issuePageIsLoading: false,
-        message: "Failed to issue a certificate.",
-      });
-      return;
-    }
-    this.isProcessing = false;
-    this.setState({
-      issuePageIsLoading: false,
-      message: "Successfully completed issuesing a certificate."
-    });
-  }
   closeModal() {
     this.setState({
       issuePageIsLoading: false,
@@ -102,6 +74,7 @@ class App extends React.Component {
   }
   render() {
     const that = this;
+    console.log(that.props);
     const modalIsShow = this.props.state.isLoading;
     const isLoading = this.props.state.isLoading;
     const profile = this.props.state.myProfile;
@@ -121,7 +94,14 @@ class App extends React.Component {
         </header>
         <div className="main">
           <Switch>
-            <Route exact path="/" render={ () => <MyPageComponent address={client.address} isLoading={that.props.state.myPageIsLoading} certificates={that.props.state.certificates} icon={icon} getCertificates={that.props.getCertificates} /> } />
+            <Route exact path="/" render={ () => <MyPageComponent 
+              address={client.address} 
+              isLoading={that.props.state.myPageIsLoading} 
+              certificates={that.props.state.certificates} 
+              icon={icon} 
+              getCertificates={that.props.getCertificates} 
+              exportAccount={that.props.exportAccount}
+            /> } />
             <Route exact path="/issue" render={ () => <IssueComponent onClickIssueButton={this.props.issue} onChangeCertificateImage={this.props.onChangeCertificateImage} onChangeIssueTo={this.props.onChangeIssueTo} /> } />
             <Route exact path="/user" render={ () => <SettingComponent onClickUpdateButton={this.props.updateUserSetting} onChangeName={this.props.onChangeName} onChangeIcon={this.props.onChangeIcon} /> } />
             <Route exact path="/certs/:index" render={ (routeProps) => <CertViewComponent {...routeProps} certificates={that.props.state.certificates} />} />

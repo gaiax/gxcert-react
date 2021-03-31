@@ -25,6 +25,8 @@ class MyInfoComponent extends React.Component {
             { "Your ID: " + this.state.address }
           </div>
           <Link className="myinfo-register" to="/user">Register your user info</Link>
+          <br/>
+          <a href="javascript:void(0)" onClick={this.props.exportAccount}>Export Account</a>
         </div>
       </div>
     );

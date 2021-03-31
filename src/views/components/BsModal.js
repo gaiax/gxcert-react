@@ -30,7 +30,6 @@ export default class BsModal extends React.Component {
         </Modal>
       );
     } else if (this.state.message !== null) {
-      console.log(this.state.message);
       modal = (
         <Modal show={this.state.show} animation={true} >
           <Modal.Body>

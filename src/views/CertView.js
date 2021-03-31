@@ -33,7 +33,6 @@ class CertViewComponent extends React.Component {
   async loadImage() {
     const certificate = this.state.certificates[this.state.index];
     const imageUrl = await getCertificateImage(certificate.ipfs);
-    console.log(imageUrl);
     this.setState({
       imageUrl
     });
