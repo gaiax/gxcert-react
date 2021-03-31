@@ -2,10 +2,14 @@ import CertClient from "../client"
 import { fileInputToDataURL, createBlobFromImageDataURI, postCertificate } from "../image-upload";
 import { getGoogleUid } from "../util";
 const getCertificates = () => async (dispatch) => {
+  dispatch({
+    type: "START_GETTING_CERTIFICATES",
+    payload: null,
+  });
   const client = CertClient();
   const certificates = await client.getCertificates();
   dispatch({
-    type: "GET_CERTIFICATE",
+    type: "GET_CERTIFICATES",
     payload: certificates,
   });
 }

@@ -16,6 +16,9 @@ class MyPageComponent extends React.Component {
       icon: props.icon,
     }
   }
+  componentDidMount() {
+    this.props.getCertificates();
+  }
   static getDerivedStateFromProps(nextProps, prevState) {
     return {
       address: prevState.address,
@@ -27,8 +30,8 @@ class MyPageComponent extends React.Component {
   render() {
     return (
       <div className="show">
-        <MyInfoComponent address={this.state.address} icon={this.state.icon} />
-        <MyCertListComponent certificates={this.state.certificates} isLoading={this.state.isLoading} />
+        <MyInfoComponent address={this.props.address} icon={this.props.icon} />
+        <MyCertListComponent certificates={this.props.certificates} isLoading={this.props.isLoading} />
       </div>
     );
   }
