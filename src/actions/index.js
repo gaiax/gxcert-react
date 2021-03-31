@@ -16,11 +16,10 @@ const issue = () => async (dispatch, getState) => {
     error: null,
   });
   const client = CertClient();
-  console.log("issue");
-  const state = getState();
+  const state = getState().state;
   const issueTo = state.issueTo;
-  const address = state.certificateImage;
-  if (issueTo === null || address === null) {
+  const image = state.certificateImage;
+  if (issueTo === null || image === null) {
     dispatch({
       type: "ISSUE",
       payload: null,
@@ -30,7 +29,7 @@ const issue = () => async (dispatch, getState) => {
   }
   let ipfsHash = null;
   try {
-    const imageData = await fileInputToDataURL(state.certificateImage);
+    const imageData = await fileInputToDataURL(image);
     const blob = createBlobFromImageDataURI(imageData);
     ipfsHash = await postCertificate(blob);
   } catch(err) {
@@ -43,7 +42,7 @@ const issue = () => async (dispatch, getState) => {
   }
   const certificate = client.createCertificateObject(ipfsHash);
   try {
-    await client.issueCertificate(certificate, address);
+    await client.issueCertificate(certificate, issueTo);
   } catch(err) {
     dispatch({
       type: "ISSUE",
@@ -60,7 +59,6 @@ const issue = () => async (dispatch, getState) => {
 }
 
 const onChangeCertificateImage = (evt) => async (dispatch) => {
-  console.log("onchange image");
   dispatch({
     type: "ON_CHANGE_CERTIFICATE_IMAGE",
     payload: evt.target.files[0],
@@ -68,8 +66,6 @@ const onChangeCertificateImage = (evt) => async (dispatch) => {
 }
 
 const onChangeIssueTo = (evt) => async (dispatch) => {
-  console.log("onchange To");
-  console.log(evt.target.value);
   dispatch({
     type: "ON_CHANGE_ISSUE_TO",
     payload: evt.target.value,
