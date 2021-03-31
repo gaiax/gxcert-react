@@ -164,7 +164,7 @@ class App extends React.Component {
             <Route exact path="/" render={ () => <MyPageComponent address={client.address} isLoading={that.props.state.myPageIsLoading} certificates={that.props.state.certificates} icon={icon} getCertificates={that.props.getCertificates} /> } />
             <Route exact path="/issue" render={ () => <IssueComponent onClickIssueButton={this.props.issue} onChangeCertificateImage={this.props.onChangeCertificateImage} onChangeIssueTo={this.props.onChangeIssueTo} /> } />
             <Route exact path="/user" render={ () => <SettingComponent onClickUpdateButton={this.updateUserSetting.bind(this)} /> } />
-            <Route exact path="/certs/:index" render={ (routeProps) => <CertViewComponent {...routeProps} certificates={that.state.certificates} />} />
+            <Route exact path="/certs/:index" render={ (routeProps) => <CertViewComponent {...routeProps} certificates={that.props.state.certificates} />} />
           </Switch>
         </div>
         <BsModal show={modalIsShow} onClickBackButton={this.closeModal.bind(this)} isLoading={isLoading} message={this.state.message}/>

@@ -42,7 +42,7 @@ class CertViewComponent extends React.Component {
     this.loadImage();
   }
   render() {
-    const certificate = this.state.certificates[this.state.index];
+    const certificate = this.props.certificates[this.state.index];
     return (
       <div className="cert-view">
         <div className="cert-view-top">
