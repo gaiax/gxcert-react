@@ -1,6 +1,5 @@
 import CertClient from "../client"
 import { fileInputToDataURL, createBlobFromImageDataURI, postCertificate, getImageOnIpfs } from "../image-upload";
-import { getGoogleUid } from "../util";
 
 const getMyProfile = () => async (dispatch) => {
   const client = CertClient();
@@ -146,7 +145,6 @@ const updateUserSetting = () => async (dispatch, getState) => {
 }
 
 const exportAccount = (evt) => async (dispatch, getState) => {
-  const state = getState().state;
   const client = CertClient();
   const uid = client.uid;
   const json = JSON.stringify({

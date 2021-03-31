@@ -1,6 +1,5 @@
 import React from "react";
 import "./Setting.css";
-import { fileInputToDataURL, createBlobFromImageDataURI, postCertificate } from "../image-upload";
 
 class SettingComponent extends React.Component {
   constructor(props) {
@@ -8,7 +7,6 @@ class SettingComponent extends React.Component {
     this.onClickUpdateButton = props.onClickUpdateButton;
   }
   render () {
-    const that = this;
     return (
       <div className="setting">
         <div className="setting-wrapper">

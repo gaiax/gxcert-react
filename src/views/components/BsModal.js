@@ -6,11 +6,6 @@ export default class BsModal extends React.Component {
   constructor(props) {
     super(props);
     this.onClickBackButton = props.onClickBackButton;
-    this.state = {
-      show: props.show,
-      isLoading: props.isLoading,
-      message: props.message,
-    }
   }
   static getDerivedStateFromProps(nextProps, prevState) {
     return {
@@ -21,19 +16,19 @@ export default class BsModal extends React.Component {
   }
   render() {
     let modal = null;
-    if (this.state.isLoading) {
+    if (this.props.isLoading) {
       modal = (
-        <Modal show={this.state.show} animation={true} >
+        <Modal show={this.props.show} animation={true} >
           <Modal.Body>
             <CommunicationLoading />
           </Modal.Body>
         </Modal>
       );
-    } else if (this.state.message !== null) {
+    } else if (this.props.message !== null) {
       modal = (
-        <Modal show={this.state.show} animation={true} >
+        <Modal show={this.props.show} animation={true} >
           <Modal.Body>
-            { this.state.message }
+            { this.props.message }
           </Modal.Body>
           <Modal.Footer>
             <Button variant="primary" onClick={this.onClickBackButton} >

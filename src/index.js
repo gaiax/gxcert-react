@@ -4,7 +4,6 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import CertClient from "./client";
 import { exportAccount, getMyProfile, getCertificates, issue, onChangeIssueTo, onChangeCertificateImage, onChangeName, onChangeIcon, updateUserSetting } from "./actions";
 import { connect, Provider } from "react-redux";
 import store from "./store";

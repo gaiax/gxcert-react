@@ -6,16 +6,10 @@ import { CertCellComponent } from "./CertCell";
 
 
 class CertListComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      certificates: props.certificates,
-    }
-  }
   render() {
     return (
       <div className="certificates">
-        { this.state.certificates.map((certificate, index) => {
+        { this.props.certificates.map((certificate, index) => {
           return (
             <Link to={"/certs/" + index}>
               <CertCellComponent certificate={certificate} />
@@ -29,17 +23,6 @@ class CertListComponent extends React.Component {
 
 
 class MyCertListComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    let certificates = [];
-    if (props.certificates) {
-      certificates = props.certificates;
-    }
-    this.state = {
-      isLoading: props.isLoading,
-      certificates: certificates,
-    }
-  }
   static getDerivedStateFromProps(nextProps, prevState) {
     return {
       isLoading: nextProps.isLoading,
@@ -50,7 +33,7 @@ class MyCertListComponent extends React.Component {
     return (
       <div className="mycertificates">
         <h2 className="mycertificates-title">My Certificates</h2>
-        { this.state.isLoading ? <CommunicationLoading /> : <CertListComponent certificates={this.state.certificates} /> }
+        { this.props.isLoading ? <CommunicationLoading /> : <CertListComponent certificates={this.props.certificates} /> }
       </div>
     );
   }

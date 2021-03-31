@@ -9,7 +9,6 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { MyPageComponent } from "./views/MyPage";
 import { CertViewComponent } from "./views/CertView";
 import BsModal from "./views/components/BsModal";
-import { getImageOnIpfs } from "./image-upload";
 
 let client = null;
 function initializeClient() {
@@ -102,9 +101,19 @@ class App extends React.Component {
               getCertificates={that.props.getCertificates} 
               exportAccount={that.props.exportAccount}
             /> } />
-            <Route exact path="/issue" render={ () => <IssueComponent onClickIssueButton={this.props.issue} onChangeCertificateImage={this.props.onChangeCertificateImage} onChangeIssueTo={this.props.onChangeIssueTo} /> } />
-            <Route exact path="/user" render={ () => <SettingComponent onClickUpdateButton={this.props.updateUserSetting} onChangeName={this.props.onChangeName} onChangeIcon={this.props.onChangeIcon} /> } />
-            <Route exact path="/certs/:index" render={ (routeProps) => <CertViewComponent {...routeProps} certificates={that.props.state.certificates} />} />
+            <Route exact path="/issue" render={ () => <IssueComponent 
+              onClickIssueButton={this.props.issue} 
+              onChangeCertificateImage={this.props.onChangeCertificateImage} 
+              onChangeIssueTo={this.props.onChangeIssueTo} 
+            /> } />
+            <Route exact path="/user" render={ () => <SettingComponent 
+              onClickUpdateButton={this.props.updateUserSetting} 
+              onChangeName={this.props.onChangeName} 
+              onChangeIcon={this.props.onChangeIcon} 
+            /> } />
+            <Route exact path="/certs/:index" render={ (routeProps) => <CertViewComponent {...routeProps} 
+              certificates={that.props.state.certificates} 
+            />} />
           </Switch>
         </div>
         <BsModal show={modalIsShow} onClickBackButton={this.closeModal.bind(this)} isLoading={isLoading} message={this.state.message}/>
