@@ -1,6 +1,6 @@
 import { getGoogleUid } from "./Google";
 
-function copyPubkey(text) {
+function copyText(text) {
   const copyFrom = document.createElement("textarea");
   copyFrom.textContent = text;
   const bodyElm = document.getElementsByTagName("body")[0];
@@ -30,7 +30,7 @@ function dateString(date) {
 
 
 export {
-  copyPubkey,
+  copyText,
   getUrlQueries,
   getGoogleUid,
   dateString,

@@ -1,6 +1,7 @@
 import "./MyInfo.css";
 import React from "react";
 import { Link } from "react-router-dom";
+import { copyText } from "../util";
 
 class MyInfoComponent extends React.Component {
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -8,6 +9,9 @@ class MyInfoComponent extends React.Component {
       address: nextProps.address,
       icon: nextProps.icon,
     }
+  }
+  copyId() {
+    copyText(this.props.address);
   }
   render() {
     return (
@@ -18,7 +22,7 @@ class MyInfoComponent extends React.Component {
             { "Your ID: " + this.props.address }
           </div>
           <div className="myinfo-buttons">
-            <Link className="myinfo-register" to="/user">Register your user info</Link> | <a href="javascript:void(0)" className="export-button" onClick={this.props.exportAccount}>Export Account</a>
+            <a href="javascript:void(0)" className="copy-button" onClick={this.copyId.bind(this)}>Copy ID</a> | <Link className="myinfo-register" to="/user">Update your user info</Link> | <a href="javascript:void(0)" className="export-button" onClick={this.props.exportAccount}>Export Account</a>
           </div>
         </div>
       </div>
