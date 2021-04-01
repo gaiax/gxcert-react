@@ -2,6 +2,7 @@ import React from "react";
 import "./Certificate.css";
 import { getCertificateImage } from "../image-upload";
 import { dateString } from "../util";
+import CertClient from "../client"
 
 class CertViewComponent extends React.Component {
   constructor(props) {
@@ -12,12 +13,14 @@ class CertViewComponent extends React.Component {
     this.state = {
       certificates: props.certificates,
       index: index,
+      verified: false,
     }
   }
   back() {
     if (this.state.index > 0) {
       this.setState({
         index: this.state.index - 1,
+        verified: false,
       });
       this.loadImage();
     }
@@ -26,6 +29,7 @@ class CertViewComponent extends React.Component {
     if (this.state.index < this.state.certificates.length - 1) {
       this.setState({
         index: this.state.index + 1,
+        verified: false,
       });
       this.loadImage();
     }
@@ -35,6 +39,14 @@ class CertViewComponent extends React.Component {
     const imageUrl = await getCertificateImage(certificate.ipfs);
     this.setState({
       imageUrl
+    });
+  }
+  async verifyCertificate() {
+    const client = CertClient();
+    const certificate = this.state.certificates[this.state.index];
+    const verified = client.verifyCertificate(certificate, client.address);
+    this.setState({
+      verified: verified,
     });
   }
   componentDidMount() {
@@ -51,7 +63,7 @@ class CertViewComponent extends React.Component {
         </div>
         <div className="cert-view-bottom">
           <p className="cert-view-title">
-            { certificate.title }
+            { this.state.verified ? "✅" : "❌" } { certificate.title }
           </p>
           <p className="cert-view-issueser">
             { !certificate.issueserName ? certificate.by.substr(0, 16) : certificate.issueserName }
@@ -61,6 +73,7 @@ class CertViewComponent extends React.Component {
               dateString(new Date(certificate.time * 1000))
             }
           </p>
+          <button onClick={this.verifyCertificate.bind(this)}>Verify</button>
         </div>
       </div>
     );
