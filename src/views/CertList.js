@@ -32,7 +32,7 @@ class MyCertListComponent extends React.Component {
   render() {
     return (
       <div className="mycertificates">
-        <h2 className="mycertificates-title">My Certificates</h2>
+        <h2 className="mycertificates-title">My Certificates<span onClick={this.props.getCertificates}>🔃</span></h2>
         { this.props.isLoading ? <CommunicationLoading /> : <CertListComponent certificates={this.props.certificates} path={this.props.path} /> }
       </div>
     );

@@ -4,7 +4,9 @@ import { MyCertListComponent } from "./CertList";
 
 class MyPageComponent extends React.Component {
   componentDidMount() {
-    this.props.getCertificates();
+    if (this.props.certificates.length === 0) {
+      this.props.getCertificates();
+    }
   }
   render() {
     return (
@@ -18,6 +20,7 @@ class MyPageComponent extends React.Component {
           certificates={this.props.certificates}
           isLoading={this.props.isLoading} 
           path={this.props.path} 
+          getCertificates={this.props.getCertificates}
         />
       </div>
     );
