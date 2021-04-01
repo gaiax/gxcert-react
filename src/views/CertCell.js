@@ -31,7 +31,7 @@ class CertCellComponent extends React.Component {
             by { !this.props.certificate.issueserName ? this.props.certificate.by.substr(0, 16) : this.props.certificate.issueserName } { !this.props.certificate.to ? "" : "to " + this.props.certificate.to.substr(0, 16) }
           </p>
           <p className="cert-cell-date">
-            {
+            at {
               dateString(new Date(this.props.certificate.time * 1000))
             }
           </p>

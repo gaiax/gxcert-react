@@ -1,8 +1,10 @@
 .myinfo {
-  background-color: #eee;
+  background-color: rgba(19,31,55,.5);
+  border-radius: 6px;
   padding: 30px;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 30px;
   width: 60%;
   min-width: 300px;
   display: flex;
@@ -19,12 +21,32 @@
   text-align: left;
 }
 
+
 .myinfo-address {
-  font-size: 11px;
-  margin-bottom: 5px;
+  font-size: 13px;
+  margin-bottom: 10px;
   word-break: break-all;
+  color: #F8F8F8;
+}
+
+.myinfo-buttons {
+  text-align: center;
+  color: #F8F8F8;
 }
 
 .myinfo-register {
   border-radius: 8px;
+  color: #00e0ca;
+  font-size: 13px;
+}
+
+.export-button {
+  color: #00e0ca;
+  font-size: 13px;
+}
+.myinfo-register:hover {
+  color: #F8F8F8;
+}
+.export-button:hover {
+  color: #F8F8F8;
 }

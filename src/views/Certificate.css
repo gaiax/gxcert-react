@@ -1,18 +1,43 @@
+* {
+  font-family: "Metropolis Regular",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+}
+a:hover {
+  text-decoration: none;
+}
+.mycertificates {
+  background-color: #F8F8F8;
+  padding: 22px;
+}
 
-.certificates {
-  width: 60%;
-  min-width: 300px;
+.mycertificates-title {
+  width: 70%;
+  max-width: 1200px;
+  font-size: 2rem;
+  color: #131F37;
+  text-align: left;
   margin-left: auto;
   margin-right: auto;
-  
+  margin-bottom: 20px;
+}
+.certificates {
+  width: 70%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .cert-cell {
-  border-top: 1px solid #333;
+  background-color: white;
+  border-top: 1px solid #F2F5FB;
   display: flex;
   padding: 10px;
 }
 .cert-cell-info {
   margin-left: 10px;
+}
+
+.cert-cell-info p {
+  margin: 2px;
+  color: #485776;
 }
 .cert-cell-image {
   width: 80px;
