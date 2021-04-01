@@ -89,7 +89,7 @@ class App extends React.Component {
         <header>
         <h2 className="brand-logo">GxCert</h2>
         <Link to="/issue" className="header-issue-button header-button">Issue</Link>
-        <Link to="/" className="header-show-button header-button">Show</Link>
+        <Link to="/" className="header-show-button header-button">{client !== null ? client.address.substr(0, 6) + "..." : "Profile" }</Link>
         </header>
         <div className="main">
           <Switch>

@@ -72,6 +72,11 @@ header {
   font-weight: bold;
 }
 
+.header-show-button {
+  border: 1px solid #F8F8F8;
+  width: 100px;
+}
+
 .header-button:hover {
   text-decoration: none;
   color: #F8F8F8;
