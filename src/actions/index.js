@@ -24,6 +24,18 @@ const getCertificates = () => async (dispatch) => {
     payload: certificates,
   });
 }
+const getCertificatesIIssuesed = () => async (dispatch) => {
+  dispatch({
+    type: "START_GETTING_CERTIFICATES_I_ISSUESED",
+    payload: null,
+  });
+  const client = CertClient();
+  const certificates = await client.getCertificatesIIssuesed();
+  dispatch({
+    type: "GET_CERTIFICATES_I_ISSUESED",
+    payload: certificates,
+  });
+}
 const issue = () => async (dispatch, getState) => {
   dispatch({
     type: "ON_CLICK_ISSUE_BUTTON",
@@ -166,6 +178,7 @@ const exportAccount = (evt) => async (dispatch, getState) => {
 export {
   getMyProfile,
   getCertificates,
+  getCertificatesIIssuesed,
   issue,
   onChangeCertificateImage,
   onChangeIssueTo,

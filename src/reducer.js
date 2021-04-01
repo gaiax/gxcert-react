@@ -6,6 +6,7 @@ const initialState = {
   certificateImage: null,
   issueTo: null,
   certificates: [],
+  certificatesIIssuesed: [],
   myPageIsLoading: false,
   myProfile: null,
   name: "",
@@ -36,6 +37,11 @@ export default function Reducer(state=initialState, action) {
         certificates: action.payload,
         myPageIsLoading: false,
       });
+    case "GET_CERTIFICATES_I_ISSUESED":
+      return Object.assign({}, state, {
+        certificatesIIssuesed: action.payload,
+        myPageIsLoading: false,
+      });
     case "ON_CHANGE_CERTIFICATE_IMAGE":
       return Object.assign({}, state, {
         certificateImage: action.payload,
@@ -49,6 +55,10 @@ export default function Reducer(state=initialState, action) {
         title: action.payload,
       });
     case "START_GETTING_CERTIFICATES":
+      return Object.assign({}, state, {
+        myPageIsLoading: true,
+      });
+    case "START_GETTING_CERTIFICATES_I_ISSUESED":
       return Object.assign({}, state, {
         myPageIsLoading: true,
       });

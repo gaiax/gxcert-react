@@ -112,6 +112,9 @@ class App extends React.Component {
               onChangeName={this.props.onChangeName} 
               onChangeIcon={this.props.onChangeIcon} 
             /> } />
+            <Route exact path="/issuesed/:index" render={ (routeProps) => <CertViewComponent {...routeProps}
+              certificates={that.props.state.certificatesIIssuesed}
+            />} />
             <Route exact path="/certs/:index" render={ (routeProps) => <CertViewComponent {...routeProps} 
               certificates={that.props.state.certificates} 
             />} />
