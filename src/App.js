@@ -105,6 +105,7 @@ class App extends React.Component {
               onClickIssueButton={this.props.issue} 
               onChangeCertificateImage={this.props.onChangeCertificateImage} 
               onChangeIssueTo={this.props.onChangeIssueTo} 
+              onChangeTitle={this.props.onChangeTitle}
             /> } />
             <Route exact path="/user" render={ () => <SettingComponent 
               onClickUpdateButton={this.props.updateUserSetting} 

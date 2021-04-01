@@ -34,7 +34,8 @@ const issue = () => async (dispatch, getState) => {
   const state = getState().state;
   const issueTo = state.issueTo;
   const image = state.certificateImage;
-  if (issueTo === null || image === null) {
+  const title = state.title.trim();
+  if (issueTo === null || image === null || title === "") {
     dispatch({
       type: "ISSUE",
       payload: null,
@@ -55,8 +56,8 @@ const issue = () => async (dispatch, getState) => {
     });
     return;
   }
-  const certificate = client.createCertificateObject(ipfsHash);
   try {
+    const certificate = client.createCertificateObject(title, ipfsHash, issueTo);
     await client.issueCertificate(certificate, issueTo);
   } catch(err) {
     dispatch({
@@ -98,6 +99,12 @@ const onChangeIcon = (evt) => async (dispatch) => {
   dispatch({
     type: "ON_CHANGE_ICON",
     payload: evt.target.files[0],
+  });
+}
+const onChangeTitle = (evt) => async (dispatch) => {
+  dispatch({
+    type: "ON_CHANGE_TITLE",
+    payload: evt.target.value,
   });
 }
 
@@ -166,4 +173,5 @@ export {
   onChangeIcon,
   updateUserSetting,
   exportAccount,
+  onChangeTitle,
 }

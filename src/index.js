@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { exportAccount, getMyProfile, getCertificates, issue, onChangeIssueTo, onChangeCertificateImage, onChangeName, onChangeIcon, updateUserSetting } from "./actions";
+import { exportAccount, getMyProfile, getCertificates, issue, onChangeIssueTo, onChangeCertificateImage, onChangeName, onChangeIcon, updateUserSetting, onChangeTitle } from "./actions";
 import { connect, Provider } from "react-redux";
 import store from "./store";
 
@@ -34,6 +34,9 @@ function mapDispatchToProps(dispatch, props) {
     },
     onChangeIcon: (evt) => {
       dispatch(onChangeIcon(evt));
+    },
+    onChangeTitle: (evt) => {
+      dispatch(onChangeTitle(evt));
     },
     updateUserSetting: () => {
       dispatch(updateUserSetting());
