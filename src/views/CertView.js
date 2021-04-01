@@ -66,7 +66,7 @@ class CertViewComponent extends React.Component {
             { this.state.verified ? "✅" : "❌" } { certificate.title }
           </p>
           <p className="cert-view-issueser">
-            by { !certificate.issueserName ? certificate.by.substr(0, 16) : certificate.issueserName } { !certificate.to ? "" : "to " + certificate.to }
+            by { !certificate.issueserName ? certificate.by.substr(0, 16) : certificate.issueserName } { !certificate.to ? "" : "to " + certificate.to.substr(0, 16) }
           </p>
           <p className="cert-view-date">
             {

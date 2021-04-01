@@ -28,7 +28,7 @@ class CertCellComponent extends React.Component {
             { this.props.certificate.title }
           </p>
           <p className="cert-cell-issueser">
-            by { !this.props.certificate.issueserName ? this.props.certificate.by.substr(0, 16) : this.props.certificate.issueserName } { !this.props.certificate.to ? "" : "to " + this.props.certificate.to }
+            by { !this.props.certificate.issueserName ? this.props.certificate.by.substr(0, 16) : this.props.certificate.issueserName } { !this.props.certificate.to ? "" : "to " + this.props.certificate.to.substr(0, 16) }
           </p>
           <p className="cert-cell-date">
             {
