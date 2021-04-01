@@ -50,6 +50,9 @@ class CertViewComponent extends React.Component {
           <button className="next" onClick={this.next.bind(this)}>＞</button>
         </div>
         <div className="cert-view-bottom">
+          <p className="cert-view-title">
+            { certificate.title }
+          </p>
           <p className="cert-view-issueser">
             { !certificate.issueserName ? certificate.by.substr(0, 16) : certificate.issueserName }
           </p>
