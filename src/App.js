@@ -100,6 +100,7 @@ class App extends React.Component {
               icon={icon} 
               getCertificates={that.props.getCertificates} 
               exportAccount={that.props.exportAccount}
+              path={"certs"}
             /> } />
             <Route exact path="/issue" render={ () => <IssueComponent 
               onClickIssueButton={this.props.issue} 

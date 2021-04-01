@@ -9,8 +9,16 @@ class MyPageComponent extends React.Component {
   render() {
     return (
       <div className="show">
-        <MyInfoComponent address={this.props.address} icon={this.props.icon} exportAccount={this.props.exportAccount} />
-        <MyCertListComponent certificates={this.props.certificates} isLoading={this.props.isLoading} />
+        <MyInfoComponent 
+          address={this.props.address} 
+          icon={this.props.icon} 
+          exportAccount={this.props.exportAccount} 
+        />
+        <MyCertListComponent 
+          certificates={this.props.certificates}
+          isLoading={this.props.isLoading} 
+          path={this.props.path} 
+        />
       </div>
     );
   }

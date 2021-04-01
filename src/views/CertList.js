@@ -11,7 +11,7 @@ class CertListComponent extends React.Component {
       <div className="certificates">
         { this.props.certificates.map((certificate, index) => {
           return (
-            <Link to={"/certs/" + index}>
+            <Link to={"/" + this.props.path + "/" + index}>
               <CertCellComponent certificate={certificate} />
             </Link>
           );
@@ -33,7 +33,7 @@ class MyCertListComponent extends React.Component {
     return (
       <div className="mycertificates">
         <h2 className="mycertificates-title">My Certificates</h2>
-        { this.props.isLoading ? <CommunicationLoading /> : <CertListComponent certificates={this.props.certificates} /> }
+        { this.props.isLoading ? <CommunicationLoading /> : <CertListComponent certificates={this.props.certificates} path={this.props.path} /> }
       </div>
     );
   }
