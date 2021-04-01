@@ -49,6 +49,7 @@ a:hover {
   display: flex;
   justify-content: space-evenly;
   margin-bottom: 40px;
+  height: 400px;
 }
 .cert-view-bottom {
   width: 40%;
@@ -58,13 +59,30 @@ a:hover {
 }
 .cert-view-bottom p{
   text-align: left;
+  color: #FFF;
 }
 .cert-view-image {
   width: 40%;
   min-width: 210px;
+  object-fit: contain;
 }
 .back, .next {
-  height: 240px;
+  margin-top: 120px;
+  height: 160px;
   width: 10%;
   max-width: 80px;
+  color: #FFF;
+}
+.back:hover, .next:hover {
+  background-color: rgba(19,31,55,.5);
+}
+
+.verify-button {
+  width: 280px;
+  height: 40px;
+  background-color: #00e0ca;
+  border-radius: 6px;
+  color: #FFF;
+  font-weight: bold;
+  
 }
