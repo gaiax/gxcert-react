@@ -61,6 +61,10 @@ header {
   font-weight: bold;
   letter-spacing: 0.5px;
 }
+.brand-logo a {
+  color: #F8F8F8;
+  font-size: 26px;
+}
 
 .header-button {
   width: 60px;
