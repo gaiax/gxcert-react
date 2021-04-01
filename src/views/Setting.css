@@ -7,7 +7,7 @@
   padding-top: 40px;
   padding-bottom: 40px;
   border-radius: 10px;
-  background-color: #ccc;
+  background-color: rgba(19,31,55,.5);
 }
 
 .setting-wrapper {
@@ -17,19 +17,33 @@
 }
 
 .setting-title {
-  border-bottom: 1px solid #333;
   margin-bottom: 20px;
   padding-bottom: 10px;
+  color: #F8F8F8;
+  font-size: 2rem;
 }
 .setting-input {
   width: 280px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  background-color: rgba(255,255,255,0.9);
+  color: #485776;
+  height: 34px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 6px;
 }
 .setting-input-title {
   text-align: left;
+  color: #F8F8F8;
+  font-size: 1.25rem;
+  margin: 4px;
 }
 
 .setting-button {
   width: 280px;
   height: 40px;
+  background-color: #00e0ca;
+  border-radius: 6px;
+  color: #FFF;
+  font-weight: bold;
 }
