@@ -12,6 +12,8 @@ const initialState = {
   name: "",
   icon: null,
   title: "",
+  errorMessage: null,
+  message: null,
 }
 
 export default function Reducer(state=initialState, action) {
@@ -28,24 +30,29 @@ export default function Reducer(state=initialState, action) {
       if (action.error) {
         return Object.assign({}, state, {
           isLoading: false,
+          errorMessage: "Failed to update your setting.",
         });
       }
       return Object.assign({}, state, {
         isLoading: false,
+        message: "Successfully updated your setting.",
       }); 
     case "ISSUE":
       if (action.error) {
         return Object.assign({}, state, {
           isLoading: false,
+          errorMessage: "Failed to issue the certificate.",
         });
       }
       return Object.assign({}, state, {
         isLoading: false,
+        message: "Successfully issuesed the certificate.",
       });
     case "GET_CERTIFICATES":
       if (action.error) {
         return Object.assign({}, state, {
           myPageIsLoading: false,
+          errorMessage: "Failed to fetch your certificates.",
         });
       }
       return Object.assign({}, state, {
@@ -56,6 +63,7 @@ export default function Reducer(state=initialState, action) {
       if (action.error) {
         return Object.assign({}, state, {
           myPageIsLoading: false,
+          errorMessage: "Failed to fetch the certificates that you issuesed.",
         });
       }
       return Object.assign({}, state, {
