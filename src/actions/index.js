@@ -5,7 +5,10 @@ const getMyProfile = () => async (dispatch) => {
   const client = CertClient();
   const profile = await client.getProfile(client.address);
   const ipfsHash = profile.icon;
-  const icon = await getImageOnIpfs(ipfsHash);
+  let icon = null;
+  if (ipfsHash) {
+    icon = await getImageOnIpfs(ipfsHash);
+  }
   profile.icon = icon;
   dispatch({
     type: "GET_MYPROFILE",
