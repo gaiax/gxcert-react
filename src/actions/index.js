@@ -3,7 +3,13 @@ import { fileInputToDataURL, createBlobFromImageDataURI, postCertificate, getIma
 
 const getMyProfile = () => async (dispatch) => {
   const client = CertClient();
-  const profile = await client.getProfile(client.address);
+  let profile;
+  try {
+    profile = await client.getProfile(client.address);
+  } catch(err) {
+    console.error(err);
+    return;
+  }
   const ipfsHash = profile.icon;
   let icon = null;
   if (ipfsHash) {
@@ -25,7 +31,18 @@ const getCertificates = () => async (dispatch) => {
     payload: null,
   });
   const client = CertClient();
-  const certificates = await client.getCertificates();
+  let certificates;
+  try {
+    certificates = await client.getCertificates();
+  } catch(err) {
+    console.error(err);
+    dispatch({
+      type: "GET_CERTIFICATES",
+      payload: null,
+      error: err,
+    });
+    return;
+  }
   dispatch({
     type: "GET_CERTIFICATES",
     payload: certificates,
@@ -37,7 +54,18 @@ const getCertificatesIIssuesed = () => async (dispatch) => {
     payload: null,
   });
   const client = CertClient();
-  const certificates = await client.getCertificatesIIssuesed();
+  let certificates;
+  try {
+    certificates = await client.getCertificatesIIssuesed();
+  } catch(err) {
+    console.error(err);
+    dispatch({
+      type: "GET_CERTIFICATES_I_ISSUESED",
+      payload: null,
+      error: err,
+    });
+    return;
+  }
   dispatch({
     type: "GET_CERTIFICATES_I_ISSUESED",
     payload: certificates,

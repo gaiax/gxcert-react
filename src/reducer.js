@@ -25,19 +25,39 @@ export default function Reducer(state=initialState, action) {
         isLoading: true,
       }); 
     case "UPDATE_USER_SETTING":
+      if (action.error) {
+        return Object.assign({}, state, {
+          isLoading: false,
+        });
+      }
       return Object.assign({}, state, {
         isLoading: false,
       }); 
     case "ISSUE":
+      if (action.error) {
+        return Object.assign({}, state, {
+          isLoading: false,
+        });
+      }
       return Object.assign({}, state, {
         isLoading: false,
       });
     case "GET_CERTIFICATES":
+      if (action.error) {
+        return Object.assign({}, state, {
+          myPageIsLoading: false,
+        });
+      }
       return Object.assign({}, state, {
         certificates: action.payload,
         myPageIsLoading: false,
       });
     case "GET_CERTIFICATES_I_ISSUESED":
+      if (action.error) {
+        return Object.assign({}, state, {
+          myPageIsLoading: false,
+        });
+      }
       return Object.assign({}, state, {
         certificatesIIssuesed: action.payload,
         myPageIsLoading: false,
