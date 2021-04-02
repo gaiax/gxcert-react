@@ -7,7 +7,11 @@ const getMyProfile = () => async (dispatch) => {
   const ipfsHash = profile.icon;
   let icon = null;
   if (ipfsHash) {
-    icon = await getImageOnIpfs(ipfsHash);
+    try {
+      icon = await getImageOnIpfs(ipfsHash);
+    } catch(err) {
+      icon = null;
+    }
   }
   profile.icon = icon;
   dispatch({
