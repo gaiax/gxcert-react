@@ -25,7 +25,7 @@ var concatBuffer = function (buffer1, buffer2) {
   return tmp.buffer;
 };
 
-async function getCertificateImage(ipfsHash) {
+async function getImageOnIpfs(ipfsHash) {
   const response = await ipfs.get(ipfsHash);
   for await (const data of response) {
     console.log(data);
@@ -39,6 +39,5 @@ async function getCertificateImage(ipfsHash) {
   return null;
 }
 
-const getImageOnIpfs = getCertificateImage;
 
-export { getCertificateImage, getImageOnIpfs, postCertificate };
+export { getImageOnIpfs, postCertificate };

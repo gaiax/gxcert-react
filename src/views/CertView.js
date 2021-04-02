@@ -1,6 +1,6 @@
 import React from "react";
 import "./Certificate.css";
-import { getCertificateImage } from "../image-upload";
+import { getImageOnIpfs } from "../image-upload";
 import { dateString } from "../util";
 import CertClient from "../client"
 
@@ -36,7 +36,7 @@ class CertViewComponent extends React.Component {
   }
   async loadImage() {
     const certificate = this.state.certificates[this.state.index];
-    const imageUrl = await getCertificateImage(certificate.ipfs);
+    const imageUrl = await getImageOnIpfs(certificate.ipfs);
     this.setState({
       imageUrl
     });

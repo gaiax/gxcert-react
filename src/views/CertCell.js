@@ -1,7 +1,7 @@
 import React from "react";
 import "./Certificate.css";
 import { dateString } from "../util";
-import { getCertificateImage } from "../image-upload";
+import { getImageOnIpfs } from "../image-upload";
 
 class CertCellComponent extends React.Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class CertCellComponent extends React.Component {
   componentWillMount() {
     const that = this;
     (async () => {
-      const imageUrl = await getCertificateImage(that.props.certificate.ipfs);
+      const imageUrl = await getImageOnIpfs(that.props.certificate.ipfs);
       that.setState({
         imageUrl
       });
