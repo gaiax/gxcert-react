@@ -74,7 +74,7 @@ class App extends React.Component {
   render() {
     const that = this;
     console.log(that.props);
-    const modalIsShow = this.props.state.isLoading;
+    const modalIsShow = this.props.state.isLoading || this.props.state.message !== null || this.props.state.errorMessage !== null;
     const isLoading = this.props.state.isLoading;
     const profile = this.props.state.myProfile;
     let icon = "";
@@ -121,7 +121,7 @@ class App extends React.Component {
             />} />
           </Switch>
         </div>
-        <BsModal show={modalIsShow} onClickBackButton={this.closeModal.bind(this)} isLoading={isLoading} message={this.state.message}/>
+        <BsModal show={modalIsShow} closeModal={this.props.closeModal} isLoading={isLoading} message={this.props.state.message} errorMessage={this.props.state.errorMessage}/>
       </div>
     );
     return (

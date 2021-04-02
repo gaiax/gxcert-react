@@ -1,18 +1,11 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
 import CommunicationLoading from "./Loading";
+import "./BsModal.css";
 
 export default class BsModal extends React.Component {
   constructor(props) {
     super(props);
-    this.onClickBackButton = props.onClickBackButton;
-  }
-  static getDerivedStateFromProps(nextProps, prevState) {
-    return {
-      show: nextProps.show !== undefined ? nextProps.show : prevState.show,
-      isLoading: nextProps.isLoading !== undefined ? nextProps.isLoading : prevState.isLoading,
-      message: nextProps.message !== undefined ? nextProps.message : prevState.message,
-    }
   }
   render() {
     let modal = null;
@@ -24,14 +17,15 @@ export default class BsModal extends React.Component {
           </Modal.Body>
         </Modal>
       );
-    } else if (this.props.message !== null) {
+    } else if (this.props.message !== null || this.props.errorMessage !== null) {
       modal = (
         <Modal show={this.props.show} animation={true} >
           <Modal.Body>
-            { this.props.message }
+            <p className="message">{ this.props.message }</p>
+            <p className="error-message">{ this.props.errorMessage }</p>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="primary" onClick={this.onClickBackButton} >
+            <Button variant="primary" onClick={this.props.closeModal} >
               Back
             </Button>
           </Modal.Footer>

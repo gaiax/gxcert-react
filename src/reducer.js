@@ -27,6 +27,12 @@ export default function Reducer(state=initialState, action) {
         isLoading: true,
       }); 
     case "UPDATE_USER_SETTING":
+      if ((!state.name || state.name.trim() === "") && (!state.icon)) {
+        return Object.assign({}, state, {
+          isLoading: false,
+          errorMessage: "The input fields are empty.",
+        });
+      }
       if (action.error) {
         return Object.assign({}, state, {
           isLoading: false,
@@ -38,6 +44,13 @@ export default function Reducer(state=initialState, action) {
         message: "Successfully updated your setting.",
       }); 
     case "ISSUE":
+      if (state.issueTo === null || state.certificateImage === null || state.title.trim() === "") {
+        return Object.assign({}, state, {
+          isLoading: false,
+          errorMessage: "Fill the input fields.",
+        });
+        return;
+      }
       if (action.error) {
         return Object.assign({}, state, {
           isLoading: false,
@@ -101,6 +114,11 @@ export default function Reducer(state=initialState, action) {
     case "ON_CHANGE_ICON":
       return Object.assign({}, state, {
         icon: action.payload,
+      });
+    case "CLOSE_MODAL":
+      return Object.assign({}, state, {
+        message: null,
+        errorMessage: null,
       });
     default:
       return state;

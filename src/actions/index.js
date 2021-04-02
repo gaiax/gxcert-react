@@ -155,6 +155,13 @@ const onChangeTitle = (evt) => async (dispatch) => {
   });
 }
 
+const closeModal = () => async (dispatch) => {
+  dispatch({
+    type: "CLOSE_MODAL",
+    payload: null,
+  });
+}
+
 const updateUserSetting = () => async (dispatch, getState) => {
   dispatch({
     type: "START_UPDATE_USER_SETTING",
@@ -162,6 +169,14 @@ const updateUserSetting = () => async (dispatch, getState) => {
   });
   const client = CertClient();
   const state = getState().state;
+  if ((!state.name || state.name.trim() === "") && (!state.icon)) {
+    dispatch({
+      type: "UPDATE_USER_SETTING",
+      payload: null,
+      error: new Error("The input fields are empty."),
+    });
+    return;
+  }
   if (state.name !== null && state.name.trim() !== "") {
     const name = state.name.trim();
     try {
@@ -222,4 +237,5 @@ export {
   updateUserSetting,
   exportAccount,
   onChangeTitle,
+  closeModal,
 }
