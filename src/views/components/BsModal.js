@@ -4,9 +4,6 @@ import CommunicationLoading from "./Loading";
 import "./BsModal.css";
 
 export default class BsModal extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     let modal = null;
     if (this.props.isLoading) {
