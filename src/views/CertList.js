@@ -9,6 +9,7 @@ class CertListComponent extends React.Component {
   render() {
     return (
       <div className="certificates">
+        { this.props.certificates.length === 0 ? <p className="certificate-not-found">There are no certificates.</p> : "" }
         { this.props.certificates.map((certificate, index) => {
           return (
             <Link to={"/" + this.props.path + "/" + index}>
