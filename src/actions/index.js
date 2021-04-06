@@ -220,6 +220,21 @@ const onCopyId = () => async (dispatch) => {
   });
 }
 
+const changeTabToIssueser = () => async (dispatch) => {
+  console.log("change to issueser");
+  dispatch({
+    type: "CHANGE_TAB_TO_ISSUESER",
+    payload: null,
+  });
+}
+
+const changeTabToMyCertificates = () => async (dispatch) => {
+  dispatch({
+    type: "CHANGE_TAB_TO_MY_CERTIFICATES",
+    payload: null,
+  });
+}
+
 const exportAccount = (evt) => async (dispatch, getState) => {
   const client = CertClient();
   const uid = client.uid;
@@ -246,4 +261,6 @@ export {
   onChangeTitle,
   closeModal,
   onCopyId,
+  changeTabToIssueser,
+  changeTabToMyCertificates,
 }

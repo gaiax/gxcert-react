@@ -97,11 +97,14 @@ class App extends React.Component {
               address={client.address} 
               isLoading={that.props.state.myPageIsLoading} 
               certificates={that.props.state.certificates} 
+              certificatesIIssuesed={that.props.state.certificatesIIssuesed}
               icon={icon} 
               getCertificates={that.props.getCertificates} 
               exportAccount={that.props.exportAccount}
               onCopyId={that.props.onCopyId}
-              path={"certs"}
+              changeTabToIssueser={that.props.changeTabToIssueser}
+              changeTabToMyCertificates={that.props.changeTabToMyCertificates}
+              tab={that.props.state.myPageTab}
             /> } />
             <Route exact path="/issue" render={ () => <IssueComponent 
               onClickIssueButton={this.props.issue} 

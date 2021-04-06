@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { onCopyId, exportAccount, closeModal, getMyProfile, getCertificates, getCertificatesIIssuesed, issue, onChangeIssueTo, onChangeCertificateImage, onChangeName, onChangeIcon, updateUserSetting, onChangeTitle } from "./actions";
+import { changeTabToIssueser, changeTabToMyCertificates, onCopyId, exportAccount, closeModal, getMyProfile, getCertificates, getCertificatesIIssuesed, issue, onChangeIssueTo, onChangeCertificateImage, onChangeName, onChangeIcon, updateUserSetting, onChangeTitle } from "./actions";
 import { connect, Provider } from "react-redux";
 import store from "./store";
 
@@ -52,7 +52,13 @@ function mapDispatchToProps(dispatch, props) {
     },
     onCopyId: () => {
       dispatch(onCopyId());
-    }
+    },
+    changeTabToIssueser: () => {
+      dispatch(getCertificatesIIssuesed());
+    },
+    changeTabToMyCertificates: () => {
+      dispatch(getCertificates());
+    },
   }
 }
 

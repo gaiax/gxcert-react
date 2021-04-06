@@ -14,7 +14,9 @@ const initialState = {
   title: "",
   errorMessage: null,
   message: null,
+  myPageTab: 0,
 }
+
 
 export default function Reducer(state=initialState, action) {
   switch(action.type) {
@@ -98,10 +100,12 @@ export default function Reducer(state=initialState, action) {
     case "START_GETTING_CERTIFICATES":
       return Object.assign({}, state, {
         myPageIsLoading: true,
+        myPageTab: 0,
       });
     case "START_GETTING_CERTIFICATES_I_ISSUESED":
       return Object.assign({}, state, {
         myPageIsLoading: true,
+        myPageTab: 1,
       });
     case "GET_MYPROFILE":
       return Object.assign({}, state, {
@@ -123,6 +127,14 @@ export default function Reducer(state=initialState, action) {
     case "ON_COPY_ID":
       return Object.assign({}, state, {
         message: "Successfully copied your ID",
+      });
+    case "CHANGE_TAB_TO_ISSUESER":
+      return Object.assign({}, state, {
+        myPageTab: 1,
+      });
+    case "CHANGE_TAB_TO_MY_CERTIFICATES":
+      return Object.assign({}, state, {
+        myPageTab: 0,
       });
     default:
       return state;
