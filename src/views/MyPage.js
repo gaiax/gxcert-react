@@ -15,6 +15,7 @@ class MyPageComponent extends React.Component {
           address={this.props.address} 
           icon={this.props.icon} 
           exportAccount={this.props.exportAccount} 
+          onCopyId={this.props.onCopyId}
         />
         <MyCertListComponent 
           certificates={this.props.certificates}

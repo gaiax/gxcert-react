@@ -213,6 +213,13 @@ const updateUserSetting = () => async (dispatch, getState) => {
   });
 }
 
+const onCopyId = () => async (dispatch) => {
+  dispatch({
+    type: "ON_COPY_ID",
+    payload: null,
+  });
+}
+
 const exportAccount = (evt) => async (dispatch, getState) => {
   const client = CertClient();
   const uid = client.uid;
@@ -238,4 +245,5 @@ export {
   exportAccount,
   onChangeTitle,
   closeModal,
+  onCopyId,
 }

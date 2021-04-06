@@ -120,6 +120,10 @@ export default function Reducer(state=initialState, action) {
         message: null,
         errorMessage: null,
       });
+    case "ON_COPY_ID":
+      return Object.assign({}, state, {
+        message: "Successfully copied your ID",
+      });
     default:
       return state;
   }

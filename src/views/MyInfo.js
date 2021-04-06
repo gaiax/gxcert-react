@@ -12,6 +12,7 @@ class MyInfoComponent extends React.Component {
   }
   copyId() {
     copyText(this.props.address);
+    this.props.onCopyId();
   }
   render() {
     return (
