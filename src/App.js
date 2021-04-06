@@ -77,6 +77,10 @@ class App extends React.Component {
     const modalIsShow = this.props.state.isLoading || this.props.state.message !== null || this.props.state.errorMessage !== null;
     const isLoading = this.props.state.isLoading;
     const profile = this.props.state.myProfile;
+    let name = "";
+    if (client.profile !== null) {
+      name = client.profile.name;
+    }
     let icon = "";
     if (profile) {
       icon = profile.icon;
@@ -116,7 +120,7 @@ class App extends React.Component {
               onClickUpdateButton={this.props.updateUserSetting} 
               onChangeName={this.props.onChangeName} 
               onChangeIcon={this.props.onChangeIcon} 
-              name={client.profile.name}
+              name={name}
             /> } />
             <Route exact path="/issuesed/:index" render={ (routeProps) => <CertViewComponent {...routeProps}
               certificates={that.props.state.certificatesIIssuesed}
