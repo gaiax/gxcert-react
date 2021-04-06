@@ -8,6 +8,7 @@ import { SettingComponent } from "./views/Setting";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { MyPageComponent } from "./views/MyPage";
 import { CertViewComponent } from "./views/CertView";
+import UserComponent from "./views/User";
 import BsModal from "./views/components/BsModal";
 
 let client = null;
@@ -78,7 +79,7 @@ class App extends React.Component {
     const isLoading = this.props.state.isLoading;
     const profile = this.props.state.myProfile;
     let name = "";
-    if (client.profile !== null) {
+    if (client !== null && client.profile !== null) {
       name = client.profile.name;
     }
     let icon = "";
@@ -121,6 +122,9 @@ class App extends React.Component {
               onChangeName={this.props.onChangeName} 
               onChangeIcon={this.props.onChangeIcon} 
               name={name}
+            /> } />
+            <Route exact path="/users/:id" render={ (routeProps) => <UserComponent
+              { ...routeProps }
             /> } />
             <Route exact path="/issuesed/:index" render={ (routeProps) => <CertViewComponent {...routeProps}
               certificates={that.props.state.certificatesIIssuesed}
