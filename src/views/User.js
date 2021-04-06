@@ -1,6 +1,7 @@
 import React from "react";
 import CertClient from "../client";
 import { getImageOnIpfs } from "../image-upload";
+import "./User.css";
 
 class UserComponent extends React.Component {
   constructor(props) {
