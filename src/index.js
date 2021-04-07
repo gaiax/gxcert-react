@@ -53,8 +53,8 @@ function mapDispatchToProps(dispatch, props) {
     onCopyId: () => {
       dispatch(onCopyId());
     },
-    getCertificatesInUserPage: () => {
-      dispatch(getCertificatesInUserPage());
+    getCertificatesInUserPage: (address) => {
+      dispatch(getCertificatesInUserPage(address));
     },
     changeTabToIssueser: () => {
       dispatch(getCertificatesIIssuesed());

@@ -11,7 +11,7 @@ class UserComponent extends React.Component {
   componentDidMount() {
     const id = this.props.match.params.id;
     this.props.fetchProfile(id);
-    this.props.getCertificates();
+    this.props.getCertificates(id);
   }
   render() {
     return (
