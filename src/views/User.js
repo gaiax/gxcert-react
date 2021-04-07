@@ -9,11 +9,12 @@ class UserComponent extends React.Component {
     super(props);
   }
   componentDidMount() {
-    const id = this.props.match.params.id;
-    this.props.fetchProfile(id);
-    this.props.getCertificates(id);
+    const address = this.props.match.params.id;
+    this.props.fetchProfile(address);
+    this.props.getCertificates(address);
   }
   render() {
+    const address = this.props.match.params.id;
     return (
       <div className="user">
         <img src={this.props.imageUrl} className="user-icon" />
@@ -25,7 +26,9 @@ class UserComponent extends React.Component {
           certificates={this.props.certificates}
           certificatesIIssuesed={this.props.certificatesIIssuesed}
           getCertificates={this.props.getCertificates}
-          changeTabToIssueser={this.props.changeTabToIssueser}
+          changeTabToIssueser={() => {
+            return this.props.changeTabToIssueser(address);
+          }}
           changeTabToMyCertificates={this.props.changeTabToMyCertificates}
           tab={this.props.tab}
         />

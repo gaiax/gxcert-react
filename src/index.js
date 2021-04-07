@@ -62,14 +62,14 @@ function mapDispatchToProps(dispatch, props) {
     changeTabToMyCertificates: () => {
       dispatch(getCertificates());
     },
-    changeTabInUserPageToIssueser: () => {
-      dispatch(getCertificatesIIssuesedInUserPage());
+    changeTabInUserPageToIssueser: (address) => {
+      dispatch(getCertificatesIIssuesedInUserPage(address));
     },
     changeTabInUserPageToMyCertificates: () => {
       dispatch(changeTabInUserPageToMyCertificates());
     },
-    fetchProfileInUserPage: (id) => {
-      dispatch(fetchProfileInUserPage(id));
+    fetchProfileInUserPage: (address) => {
+      dispatch(fetchProfileInUserPage(address));
     },
   }
 }
