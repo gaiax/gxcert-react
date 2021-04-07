@@ -235,6 +235,34 @@ const changeTabToMyCertificates = () => async (dispatch) => {
   });
 }
 
+const fetchProfileInUserPage = (id) => async (dispatch) => {
+  const client = CertClient();
+  if (!client) {
+    return;
+  }
+  let profile;
+  try {
+    profile = await client.getProfile(id);
+  } catch(err) {
+    console.error(err);
+    return;
+  }
+  dispatch({
+    type: "FETCH_PROFILE_IN_USER_PAGE",
+    payload: profile,
+  });
+  const icon = profile.icon;
+  if (!icon) {
+    return;
+  }
+  const imageUrl = await getImageOnIpfs(icon);
+  dispatch({
+    type: "FETCH_ICON_IN_USER_PAGE",
+    payload: imageUrl,
+  });
+}
+
+
 const exportAccount = (evt) => async (dispatch, getState) => {
   const client = CertClient();
   const uid = client.uid;
@@ -263,4 +291,5 @@ export {
   onCopyId,
   changeTabToIssueser,
   changeTabToMyCertificates,
+  fetchProfileInUserPage,
 }

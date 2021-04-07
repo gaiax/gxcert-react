@@ -15,6 +15,9 @@ const initialState = {
   errorMessage: null,
   message: null,
   myPageTab: 0,
+  iconInUserPage: null,
+  nameInUserPage: null,
+  profileInUserPage: null,
 }
 
 
@@ -135,6 +138,15 @@ export default function Reducer(state=initialState, action) {
     case "CHANGE_TAB_TO_MY_CERTIFICATES":
       return Object.assign({}, state, {
         myPageTab: 0,
+      });
+    case "FETCH_PROFILE_IN_USER_PAGE":
+      return Object.assign({}, state, {
+        profileInUserPage: action.payload,
+        nameInUserPage: action.payload.name,
+      });
+    case "FETCH_ICON_IN_USER_PAGE":
+      return Object.assign({}, state, {
+        iconInUserPage: action.payload,
       });
     default:
       return state;
