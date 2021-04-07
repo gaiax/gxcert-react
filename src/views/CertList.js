@@ -25,7 +25,6 @@ class CertListComponent extends React.Component {
 
 class MyCertListComponent extends React.Component {
   render() {
-    console.log(this.props);
     return (
       <div className="mycertificates">
         <h2 className="mycertificates-title"><a href="javascript:void(0)" onClick={this.props.changeTabToMyCertificates}> My Certificates</a><span onClick={this.props.getCertificates}>🔃</span> <a href="javascript:void(0)" onClick={this.props.changeTabToIssueser} >Certificates I issuesed</a></h2>

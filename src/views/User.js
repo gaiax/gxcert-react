@@ -25,7 +25,7 @@ class UserComponent extends React.Component {
         <MyCertListComponent
           isLoading={this.props.isLoading}
           certificates={this.props.certificates}
-          certificatesIIssuesed={this.props.state.certificatesIIssuesed}
+          certificatesIIssuesed={this.props.certificatesIIssuesed}
           getCertificates={this.props.getCertificates}
           changeTabToIssueser={this.props.changeTabToIssueser}
           changeTabToMyCertificates={this.props.changeTabToMyCertificates}

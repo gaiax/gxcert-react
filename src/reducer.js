@@ -92,6 +92,16 @@ export default function Reducer(state=initialState, action) {
         certificatesIIssuesed: action.payload,
         myPageIsLoading: false,
       });
+    case "GET_CERTIFICATES_IN_USER_PAGE":
+      return Object.assign({}, state, {
+        certificatesInUserPage: action.payload,
+        userPageIsLoading: false,
+      });
+    case "GET_CERTIFICATES_I_ISSUESED_IN_USER_PAGE":
+      return Object.assign({}, state, {
+        certificatesIIssuesedInUserPage: action.payload,
+        userPageIsLoading: false,
+      });
     case "ON_CHANGE_CERTIFICATE_IMAGE":
       return Object.assign({}, state, {
         certificateImage: action.payload,
@@ -113,6 +123,16 @@ export default function Reducer(state=initialState, action) {
       return Object.assign({}, state, {
         myPageIsLoading: true,
         myPageTab: 1,
+      });
+    case "START_GETTING_CERTIFICATES_IN_USER_PAGE":
+      return Object.assign({}, state, {
+        userPageIsLoading: true,
+        tabInUserPage: 0,
+      });
+    case "START_GETTING_CERTIFICATES_I_ISSUESED_IN_USER_PAGE":
+      return Object.assign({}, state, {
+        userPageIsLoading: true,
+        tabInUserPage: 1,
       });
     case "GET_MYPROFILE":
       return Object.assign({}, state, {

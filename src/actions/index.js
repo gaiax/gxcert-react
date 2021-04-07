@@ -48,6 +48,30 @@ const getCertificates = () => async (dispatch) => {
     payload: certificates,
   });
 }
+
+const getCertificatesInUserPage = (address) => async (dispatch) => {
+  dispatch({
+    type: "START_GETTING_CERTIFICATES_IN_USER_PAGE",
+    payload: null,
+  });
+  const client = CertClient();
+  let certificates;
+  try {
+    certificates = await client.getCertificates(address);
+  } catch(err) {
+    console.error(err);
+    dispatch({
+      type: "GET_CERTIFICATES_IN_USER_PAGE",
+      payload: null,
+      error: err,
+    });
+    return;
+  }
+  dispatch({
+    type: "GET_CERTIFICATES_IN_USER_PAGE",
+    payload: certificates,
+  });
+}
 const getCertificatesIIssuesed = () => async (dispatch) => {
   dispatch({
     type: "START_GETTING_CERTIFICATES_I_ISSUESED",
@@ -68,6 +92,29 @@ const getCertificatesIIssuesed = () => async (dispatch) => {
   }
   dispatch({
     type: "GET_CERTIFICATES_I_ISSUESED",
+    payload: certificates,
+  });
+}
+const getCertificatesIIssuesedInUserPage = (address) => async (dispatch) => {
+  dispatch({
+    type: "START_GETTING_CERTIFICATES_I_ISSUESED_IN_USER_PAGE",
+    payload: null,
+  });
+  const client = CertClient();
+  let certificates;
+  try {
+    certificates = await client.getCertificatesIIssuesed(address);
+  } catch(err) {
+    console.error(err);
+    dispatch({
+      type: "GET_CERTIFICATES_I_ISSUESED_IN_USER_PAGE",
+      payload: null,
+      error: err,
+    });
+    return;
+  }
+  dispatch({
+    type: "GET_CERTIFICATES_I_ISSUESED_IN_USER_PAGE",
     payload: certificates,
   });
 }
@@ -262,6 +309,18 @@ const fetchProfileInUserPage = (id) => async (dispatch) => {
   });
 }
 
+const changeTabInUserPageToIssueser = () => async (dispatch) => {
+  dispatch({
+    type: "CHANGE_TAB_IN_USER_PAGE_TO_ISSUESER",
+    payload: null,
+  });
+}
+const changeTabInUserPageToMyCertificates = () => async (dispatch) => {
+  dispatch({
+    type: "CHANGE_TAB_IN_USER_PAGE_TO_MY_CERTIFICATES",
+    payload: null,
+  });
+}
 
 const exportAccount = (evt) => async (dispatch, getState) => {
   const client = CertClient();
@@ -278,7 +337,9 @@ const exportAccount = (evt) => async (dispatch, getState) => {
 export {
   getMyProfile,
   getCertificates,
+  getCertificatesInUserPage,
   getCertificatesIIssuesed,
+  getCertificatesIIssuesedInUserPage,
   issue,
   onChangeCertificateImage,
   onChangeIssueTo,
@@ -292,4 +353,6 @@ export {
   changeTabToIssueser,
   changeTabToMyCertificates,
   fetchProfileInUserPage,
+  changeTabInUserPageToIssueser,
+  changeTabInUserPageToMyCertificates,
 }
