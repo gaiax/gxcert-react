@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { changeTabInUserPageToIssueser, changeTabInUserPageToMyCertificates, fetchProfileInUserPage, changeTabToIssueser, changeTabToMyCertificates, onCopyId, exportAccount, closeModal, getMyProfile, getCertificates, getCertificatesIIssuesed, issue, onChangeIssueTo, onChangeCertificateImage, onChangeName, onChangeIcon, updateUserSetting, onChangeTitle } from "./actions";
+import { getCertificatesInUserPage, getCertificatesIIssuesedInUserPage, changeTabInUserPageToIssueser, changeTabInUserPageToMyCertificates, fetchProfileInUserPage, changeTabToIssueser, changeTabToMyCertificates, onCopyId, exportAccount, closeModal, getMyProfile, getCertificates, getCertificatesIIssuesed, issue, onChangeIssueTo, onChangeCertificateImage, onChangeName, onChangeIcon, updateUserSetting, onChangeTitle } from "./actions";
 import { connect, Provider } from "react-redux";
 import store from "./store";
 
@@ -53,6 +53,9 @@ function mapDispatchToProps(dispatch, props) {
     onCopyId: () => {
       dispatch(onCopyId());
     },
+    getCertificatesInUserPage: () => {
+      dispatch(getCertificatesInUserPage());
+    },
     changeTabToIssueser: () => {
       dispatch(getCertificatesIIssuesed());
     },
@@ -60,7 +63,7 @@ function mapDispatchToProps(dispatch, props) {
       dispatch(getCertificates());
     },
     changeTabInUserPageToIssueser: () => {
-      dispatch(changeTabInUserPageToIssueser());
+      dispatch(getCertificatesIIssuesedInUserPage());
     },
     changeTabInUserPageToMyCertificates: () => {
       dispatch(changeTabInUserPageToMyCertificates());
