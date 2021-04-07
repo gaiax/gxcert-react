@@ -125,9 +125,17 @@ class App extends React.Component {
             /> } />
             <Route exact path="/users/:id" render={ (routeProps) => <UserComponent
               { ...routeProps }
+              profile={that.props.state.profileInUserPage}
               fetchProfile={that.props.fetchProfileInUserPage}
               imageUrl={that.props.state.iconInUserPage}
               name={that.props.state.nameInUserPage}
+              isLoading={that.props.state.userPageIsLoading}
+              certificates={that.props.state.certificatesInUserPage}
+              certificatesIIssuesed={that.props.state.certificatesIIssuesedInUserPage}
+              getCertificates={that.props.getCertificatesInUserPage}
+              changeTabToIssueser={that.props.changeTabInUserPageToIssueser}
+              changeTabToMyCertificates={that.props.changeTabInUserPageToMyCertificates}
+              tab={that.props.state.tabInUserPage}
             /> } />
             <Route exact path="/issuesed/:index" render={ (routeProps) => <CertViewComponent {...routeProps}
               certificates={that.props.state.certificatesIIssuesed}

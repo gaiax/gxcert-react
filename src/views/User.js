@@ -2,6 +2,7 @@ import React from "react";
 import CertClient from "../client";
 import { getImageOnIpfs } from "../image-upload";
 import "./User.css";
+import { MyCertListComponent } from "./CertList";
 
 class UserComponent extends React.Component {
   constructor(props) {
@@ -21,6 +22,15 @@ class UserComponent extends React.Component {
         <h2 className="user-name">
           { this.props.name }
         </h2>
+        <MyCertListComponent
+          isLoading={this.props.isLoading}
+          certificates={this.props.certificates}
+          certificatesIIssuesed={this.props.state.certificatesIIssuesed}
+          getCertificates={this.props.getCertificates}
+          changeTabToIssueser={this.props.changeTabToIssueser}
+          changeTabToMyCertificates={this.props.changeTabToMyCertificates}
+          tab={this.props.tab}
+        />
       </div>
     );
   }

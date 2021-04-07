@@ -21,7 +21,6 @@ class MyPageComponent extends React.Component {
           certificates={this.props.certificates}
           certificatesIIssuesed={this.props.certificatesIIssuesed}
           isLoading={this.props.isLoading} 
-          path={this.props.path} 
           getCertificates={this.props.getCertificates}
           changeTabToIssueser={this.props.changeTabToIssueser}
           changeTabToMyCertificates={this.props.changeTabToMyCertificates}
