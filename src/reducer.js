@@ -18,6 +18,10 @@ const initialState = {
   iconInUserPage: null,
   nameInUserPage: null,
   profileInUserPage: null,
+  userPageIsLoading: false,
+  certificatesInUserPage: [],
+  certificatesIIssuesedInUserPage: [],
+  tabInUserPage: 0,
 }
 
 
