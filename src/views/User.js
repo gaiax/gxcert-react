@@ -25,6 +25,8 @@ class UserComponent extends React.Component {
           isLoading={this.props.isLoading}
           certificates={this.props.certificates}
           certificatesIIssuesed={this.props.certificatesIIssuesed}
+          getImages={this.props.getImages}
+          getImagesIIssuesed={this.props.getImagesIIssuesed}
           getCertificates={this.props.getCertificates}
           changeTabToIssueser={() => {
             return this.props.changeTabToIssueser(address);

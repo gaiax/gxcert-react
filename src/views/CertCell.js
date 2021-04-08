@@ -6,23 +6,13 @@ import { getImageOnIpfs } from "../image-upload";
 class CertCellComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      imageUrl: "",
-    }
   }
   componentWillMount() {
-    const that = this;
-    (async () => {
-      const imageUrl = await getImageOnIpfs(that.props.certificate.ipfs);
-      that.setState({
-        imageUrl
-      });
-    })();
   }
   render() {
     return (
       <div className="cert-cell">
-        <img src={this.state.imageUrl} className="cert-cell-image" alt="certificate" />
+        <img src={!this.props.certificate.imageUrl ? "" : this.props.certificate.imageUrl} className="cert-cell-image" alt="certificate" />
         <div className="cert-cell-info">
           <p className="cert-cell-title">
             { this.props.certificate.title }

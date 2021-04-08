@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { getCertificatesInUserPage, getCertificatesIIssuesedInUserPage, changeTabInUserPageToIssueser, changeTabInUserPageToMyCertificates, fetchProfileInUserPage, changeTabToIssueser, changeTabToMyCertificates, onCopyId, exportAccount, closeModal, getMyProfile, getCertificates, getCertificatesIIssuesed, issue, onChangeIssueTo, onChangeCertificateImage, onChangeName, onChangeIcon, updateUserSetting, onChangeTitle } from "./actions";
+import { getImagesIIssuesed, getImagesIIssuesedInUserPage, getImages, getImagesInUserPage, getCertificatesInUserPage, getCertificatesIIssuesedInUserPage, changeTabInUserPageToIssueser, changeTabInUserPageToMyCertificates, fetchProfileInUserPage, changeTabToIssueser, changeTabToMyCertificates, onCopyId, exportAccount, closeModal, getMyProfile, getCertificates, getCertificatesIIssuesed, issue, onChangeIssueTo, onChangeCertificateImage, onChangeName, onChangeIcon, updateUserSetting, onChangeTitle } from "./actions";
 import { connect, Provider } from "react-redux";
 import store from "./store";
 
@@ -70,6 +70,18 @@ function mapDispatchToProps(dispatch, props) {
     },
     fetchProfileInUserPage: (address) => {
       dispatch(fetchProfileInUserPage(address));
+    },
+    getImages: () => {
+      dispatch(getImages());
+    },
+    getImagesIIssuesed: () => {
+      dispatch(getImagesIIssuesed());
+    },
+    getImagesIIssuesedInUserPage: () => {
+      dispatch(getImagesIIssuesedInUserPage());
+    },
+    getImagesInUserPage: () => {
+      dispatch(getImagesInUserPage());
     },
   }
 }

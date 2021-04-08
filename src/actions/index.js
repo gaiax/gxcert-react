@@ -322,6 +322,70 @@ const changeTabInUserPageToMyCertificates = () => async (dispatch) => {
   });
 }
 
+const getImages = () => async (dispatch, getState) => {
+  const state = getState().state;
+  const certificates = state.certificates;
+  for (const certificate of certificates) {
+    if (!certificate.imageUrl) {
+      getImageOnIpfs(certificate.ipfs).then(imageUrl => {
+        certificate.imageUrl = imageUrl;
+        dispatch({
+          type: "GET_CERTIFICATES",
+          payload: certificates,
+        });
+      });
+    }
+  }
+}
+
+const getImagesIIssuesed = () => async (dispatch, getState) => {
+  const state = getState().state;
+  const certificates = state.certificatesIIssuesed;
+  for (const certificate of certificates) {
+    if (!certificate.imageUrl) {
+      getImageOnIpfs(certificate.ipfs).then(imageUrl => {
+        certificate.imageUrl = imageUrl;
+        dispatch({
+          type: "GET_CERTIFICATES_I_ISSUESED",
+          payload: certificates,
+        });
+      });
+    }
+  }
+}
+
+const getImagesInUserPage = () => async (dispatch, getState) => {
+  const state = getState().state;
+  const certificates = state.certificatesInUserPage;
+  for (const certificate of certificates) {
+    if (!certificate.imageUrl) {
+      getImageOnIpfs(certificate.ipfs).then(imageUrl => {
+        certificate.imageUrl = imageUrl;
+        dispatch({
+          type: "GET_CERTIFICATES_IN_USER_PAGE",
+          payload: certificates,
+        });
+      });
+    }
+  }
+}
+
+const getImagesIIssuesedInUserPage = () => async (dispatch, getState) => {
+  const state = getState().state;
+  const certificates = state.certificatesIIssuesedInUserPage;
+  for (const certificate of certificates) {
+    if (!certificate.imageUrl) {
+      getImageOnIpfs(certificate.ipfs).then(imageUrl => {
+        certificate.imageUrl = imageUrl;
+        dispatch({
+          type: "GET_CERTIFICATES_I_ISSUESED_IN_USER_PAGE",
+          payload: certificates,
+        });
+      });
+    }
+  }
+}
+
 const exportAccount = (evt) => async (dispatch, getState) => {
   const client = CertClient();
   const uid = client.uid;
@@ -355,4 +419,8 @@ export {
   fetchProfileInUserPage,
   changeTabInUserPageToIssueser,
   changeTabInUserPageToMyCertificates,
+  getImages,
+  getImagesInUserPage,
+  getImagesIIssuesed,
+  getImagesIIssuesedInUserPage,
 }

@@ -107,6 +107,8 @@ class App extends React.Component {
               getCertificates={that.props.getCertificates} 
               exportAccount={that.props.exportAccount}
               onCopyId={that.props.onCopyId}
+              getImages={that.props.getImages}
+              getImagesIIssuesed={that.props.getImagesIIssuesed}
               changeTabToIssueser={that.props.changeTabToIssueser}
               changeTabToMyCertificates={that.props.changeTabToMyCertificates}
               tab={that.props.state.tabInMyPage}
@@ -133,6 +135,8 @@ class App extends React.Component {
               certificates={that.props.state.certificatesInUserPage}
               certificatesIIssuesed={that.props.state.certificatesIIssuesedInUserPage}
               getCertificates={that.props.getCertificatesInUserPage}
+              getImages={that.props.getImagesInUserPage}
+              getImagesIIssuesed={that.props.getImagesIIssuesedInUserPage}
               changeTabToIssueser={that.props.changeTabInUserPageToIssueser}
               changeTabToMyCertificates={that.props.changeTabInUserPageToMyCertificates}
               tab={that.props.state.tabInUserPage}
