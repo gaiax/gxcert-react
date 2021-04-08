@@ -14,7 +14,7 @@ const initialState = {
   title: "",
   errorMessage: null,
   message: null,
-  myPageTab: 0,
+  tabInMyPage: 0,
   iconInUserPage: null,
   nameInUserPage: null,
   profileInUserPage: null,
@@ -117,12 +117,12 @@ export default function Reducer(state=initialState, action) {
     case "START_GETTING_CERTIFICATES":
       return Object.assign({}, state, {
         myPageIsLoading: true,
-        myPageTab: 0,
+        tabInMyPage: 0,
       });
     case "START_GETTING_CERTIFICATES_I_ISSUESED":
       return Object.assign({}, state, {
         myPageIsLoading: true,
-        myPageTab: 1,
+        tabInMyPage: 1,
       });
     case "START_GETTING_CERTIFICATES_IN_USER_PAGE":
       return Object.assign({}, state, {
@@ -157,11 +157,11 @@ export default function Reducer(state=initialState, action) {
       });
     case "CHANGE_TAB_TO_ISSUESER":
       return Object.assign({}, state, {
-        myPageTab: 1,
+        tabInMyPage: 1,
       });
     case "CHANGE_TAB_TO_MY_CERTIFICATES":
       return Object.assign({}, state, {
-        myPageTab: 0,
+        tabInMyPage: 0,
       });
     case "FETCH_PROFILE_IN_USER_PAGE":
       return Object.assign({}, state, {

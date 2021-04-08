@@ -109,7 +109,7 @@ class App extends React.Component {
               onCopyId={that.props.onCopyId}
               changeTabToIssueser={that.props.changeTabToIssueser}
               changeTabToMyCertificates={that.props.changeTabToMyCertificates}
-              tab={that.props.state.myPageTab}
+              tab={that.props.state.tabInMyPage}
             /> } />
             <Route exact path="/issue" render={ () => <IssueComponent 
               onClickIssueButton={this.props.issue} 
