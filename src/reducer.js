@@ -30,21 +30,25 @@ export default function Reducer(state=initialState, action) {
     case "ON_CLICK_ISSUE_BUTTON":
       return Object.assign({}, state, {
         isLoading: true,
+        message: "Issuesing the certificate...",
       }); 
     case "START_UPDATE_USER_SETTING":
       return Object.assign({}, state, {
         isLoading: true,
+        message: "Updating your setting...",
       }); 
     case "UPDATE_USER_SETTING":
       if ((!state.name || state.name.trim() === "") && (!state.icon)) {
         return Object.assign({}, state, {
           isLoading: false,
+          message: null,
           errorMessage: "The input fields are empty.",
         });
       }
       if (action.error) {
         return Object.assign({}, state, {
           isLoading: false,
+          message: null,
           errorMessage: "Failed to update your setting.",
         });
       }
@@ -56,6 +60,7 @@ export default function Reducer(state=initialState, action) {
       if (state.issueTo === null || state.certificateImage === null || state.title.trim() === "") {
         return Object.assign({}, state, {
           isLoading: false,
+          message: null,
           errorMessage: "Fill the input fields.",
         });
         return;
@@ -63,6 +68,7 @@ export default function Reducer(state=initialState, action) {
       if (action.error) {
         return Object.assign({}, state, {
           isLoading: false,
+          message: null,
           errorMessage: "Failed to issue the certificate.",
         });
       }

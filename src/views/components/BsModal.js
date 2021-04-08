@@ -10,6 +10,7 @@ export default class BsModal extends React.Component {
       modal = (
         <Modal show={this.props.show} animation={true} >
           <Modal.Body>
+            { this.props.message !== null ? (<p className="message">{ this.props.message }</p>) : "" }
             <CommunicationLoading />
           </Modal.Body>
         </Modal>
