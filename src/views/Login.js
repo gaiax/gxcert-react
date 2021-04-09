@@ -6,7 +6,7 @@ class Login extends React.Component {
     return (
       <div className="login-page">
         <button className="login-google" onClick={this.props.onClick}>
-          Login Google
+          Login with Google
         </button>
       </div>
     );
