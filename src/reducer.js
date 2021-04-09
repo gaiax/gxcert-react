@@ -156,7 +156,7 @@ export default function Reducer(state=initialState, action) {
         iconInUserPage: action.payload,
       });
     case "LOGOUT":
-      return Object.assign({}, state, initialState);
+      return initialState;
     case "INITIALIZE_CLIENT":
       return Object.assign({}, state, {
         client: action.payload,

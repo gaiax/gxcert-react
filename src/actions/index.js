@@ -388,8 +388,6 @@ const getImagesIIssuesedInUserPage = () => async (dispatch, getState) => {
 }
 
 const logout = () => async (dispatch) => {
-  sessionStorage.setItem("uid", null);
-  sessionStorage.setItem("address", null);
   dispatch({
     type: "LOGOUT",
     payload: null,
@@ -416,10 +414,6 @@ const loginWithGoogle = () => async (dispatch) => {
     payload: null,
   });
   await client.init();
-  if (uid) {
-    sessionStorage.setItem("uid", uid);
-    sessionStorage.setItem("address", client.address);
-  }
   console.log(client.address); 
   dispatch({
     type: "INITIALIZE_CLIENT",
