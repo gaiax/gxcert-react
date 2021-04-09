@@ -11,15 +11,6 @@ import { CertViewComponent } from "./views/CertView";
 import UserComponent from "./views/User";
 import BsModal from "./views/components/BsModal";
 
-let client = null;
-function initializeClient() {
-  let uid = sessionStorage.getItem("uid");
-  if (uid !== null) {
-    client = new CertClient(uid);
-    client.address = sessionStorage.getItem("address");
-    console.log(client.address);
-  }
-}
 
 const UI = {
   byId: function(id) {
@@ -48,21 +39,8 @@ class App extends React.Component {
     sessionStorage.setItem("uid", uid);
     sessionStorage.setItem("address", address);
   }
-  async init() {
-    const uid = await getGoogleUid();
-    client = new CertClient(uid);
-    await client.init();
-    if (uid) {
-      this.saveToSessionStorage(uid, client.address);
-    }
-    console.log(client.address); 
-    this.forceUpdate();
-  }
   componentDidMount() {
     this.props.initializeClient();
-    if (client !== null) {
-      this.props.getMyProfile();
-    }
   }
   closeModal() {
     this.setState({
@@ -76,6 +54,7 @@ class App extends React.Component {
     const modalIsShow = this.props.state.isLoading || this.props.state.message !== null || this.props.state.errorMessage !== null;
     const isLoading = this.props.state.isLoading;
     const profile = this.props.state.myProfile;
+    const client = this.props.state.client;
     let name = "";
     if (client !== null && client.profile !== null) {
       name = client.profile.name;
@@ -85,7 +64,7 @@ class App extends React.Component {
       icon = profile.icon;
     }
     const login = (
-      <Login onClick={this.init.bind(this)} />
+      <Login onClick={this.props.loginWithGoogle} />
     );
     const main = (
       <div className="main">

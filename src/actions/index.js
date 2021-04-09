@@ -1,5 +1,6 @@
 import CertClient from "../client"
 import { fileInputToDataURL, createBlobFromImageDataURI, postCertificate, getImageOnIpfs } from "../image-upload";
+import { getGoogleUid } from "../util";
 
 const initializeClient = () => async (dispatch) => {
   let uid = sessionStorage.getItem("uid");
@@ -420,6 +421,21 @@ const exportAccount = (evt) => async (dispatch, getState) => {
   a.href = window.URL.createObjectURL(blob);
 }
 
+const loginWithGoogle = () => async (dispatch) => {
+  const uid = await getGoogleUid();
+  const client = new CertClient(uid);
+  await client.init();
+  if (uid) {
+    sessionStorage.setItem("uid", uid);
+    sessionStorage.setItem("address", client.address);
+  }
+  console.log(client.address); 
+  dispatch({
+    type: "INITIALIZE_CLIENT",
+    payload: client,
+  });
+}
+
 export {
   getMyProfile,
   getCertificates,
@@ -447,4 +463,5 @@ export {
   getImagesIIssuesedInUserPage,
   logout,
   initializeClient,
+  loginWithGoogle,
 }
