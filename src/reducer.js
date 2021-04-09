@@ -160,6 +160,11 @@ export default function Reducer(state=initialState, action) {
     case "INITIALIZE_CLIENT":
       return Object.assign({}, state, {
         client: action.payload,
+        isLoading: false,
+      });
+    case "LOADING":
+      return Object.assign({}, state, {
+        isLoading: true,
       });
     default:
       return state;

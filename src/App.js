@@ -35,12 +35,6 @@ class App extends React.Component {
       message: null,
     }
   }
-  saveToSessionStorage(uid, address) {
-    sessionStorage.setItem("uid", uid);
-    sessionStorage.setItem("address", address);
-  }
-  componentDidMount() {
-  }
   closeModal() {
     this.setState({
       issuePageIsLoading: false,
@@ -133,6 +127,7 @@ class App extends React.Component {
       <Router>
         <div className="App">
           { client === null ? login : main }
+          <BsModal show={modalIsShow} closeModal={this.props.closeModal} isLoading={isLoading} message={this.props.state.message} errorMessage={this.props.state.errorMessage}/>
         </div>
       </Router>
     );

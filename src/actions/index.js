@@ -411,6 +411,10 @@ const exportAccount = (evt) => async (dispatch, getState) => {
 const loginWithGoogle = () => async (dispatch) => {
   const uid = await getGoogleUid();
   const client = CertClient(uid);
+  dispatch({
+    type: "LOADING",
+    payload: null,
+  });
   await client.init();
   if (uid) {
     sessionStorage.setItem("uid", uid);
