@@ -386,6 +386,15 @@ const getImagesIIssuesedInUserPage = () => async (dispatch, getState) => {
   }
 }
 
+const logout = () => async (dispatch) => {
+  sessionStorage.setItem("uid", null);
+  sessionStorage.setItem("address", null);
+  dispatch({
+    type: "LOGOUT",
+    payload: null,
+  });
+}
+
 const exportAccount = (evt) => async (dispatch, getState) => {
   const client = CertClient();
   const uid = client.uid;
@@ -423,4 +432,5 @@ export {
   getImagesInUserPage,
   getImagesIIssuesed,
   getImagesIIssuesedInUserPage,
+  logout,
 }

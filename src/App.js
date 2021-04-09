@@ -112,6 +112,7 @@ class App extends React.Component {
               changeTabToIssueser={that.props.changeTabToIssueser}
               changeTabToMyCertificates={that.props.changeTabToMyCertificates}
               tab={that.props.state.tabInMyPage}
+              logout={that.props.logout}
             /> } />
             <Route exact path="/issue" render={ () => <IssueComponent 
               onClickIssueButton={this.props.issue} 

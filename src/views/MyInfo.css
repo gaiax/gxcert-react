@@ -49,12 +49,20 @@
   color: #00e0ca;
   font-size: 13px;
 }
+.copy-button:hover {
+  color: #F8F8F8;
+}
 .myinfo-register:hover {
   color: #F8F8F8;
 }
 .export-button:hover {
   color: #F8F8F8;
 }
-.copy-button:hover {
+
+.logout-button {
+  color: #00e0ca;
+  font-size: 13px;
+}
+.logout-button:hover {
   color: #F8F8F8;
 }

@@ -23,7 +23,7 @@ class MyInfoComponent extends React.Component {
             { "Your ID: " + this.props.address }
           </div>
           <div className="myinfo-buttons">
-            <a href="javascript:void(0)" className="copy-button" onClick={this.copyId.bind(this)}>Copy ID</a> | <Link className="myinfo-register" to="/user">Update your user info</Link> | <a href="javascript:void(0)" className="export-button" onClick={this.props.exportAccount}>Export Account</a>
+            <a href="javascript:void(0)" className="copy-button" onClick={this.copyId.bind(this)}>Copy ID</a> | <Link className="myinfo-register" to="/user">Update your user info</Link> | <a href="javascript:void(0)" className="export-button" onClick={this.props.exportAccount}>Export Account</a> | <a href="javascript:void(0)" className="logout-button" onClick={this.props.logout}>Logout</a>
           </div>
         </div>
       </div>

@@ -1,28 +1,5 @@
 
-
-const initialState = {
-  uid: null,
-  isLoading: false,
-  certificateImage: null,
-  issueTo: null,
-  certificates: [],
-  certificatesIIssuesed: [],
-  myPageIsLoading: false,
-  myProfile: null,
-  name: "",
-  icon: null,
-  title: "",
-  errorMessage: null,
-  message: null,
-  tabInMyPage: 0,
-  iconInUserPage: null,
-  nameInUserPage: null,
-  profileInUserPage: null,
-  userPageIsLoading: false,
-  certificatesInUserPage: [],
-  certificatesIIssuesedInUserPage: [],
-  tabInUserPage: 0,
-}
+import initialState from "./initialState";
 
 
 export default function Reducer(state=initialState, action) {
@@ -178,6 +155,8 @@ export default function Reducer(state=initialState, action) {
       return Object.assign({}, state, {
         iconInUserPage: action.payload,
       });
+    case "LOGOUT":
+      return Object.assign({}, state, initialState);
     default:
       return state;
   }
