@@ -2,21 +2,8 @@ import CertClient from "../client"
 import { fileInputToDataURL, createBlobFromImageDataURI, postCertificate, getImageOnIpfs } from "../image-upload";
 import { getGoogleUid } from "../util";
 
-const initializeClient = () => async (dispatch) => {
-  let uid = sessionStorage.getItem("uid");
-  let client = null;
-  if (uid !== null) {
-    client = new CertClient(uid);
-    client.address = sessionStorage.getItem("address");
-    console.log(client.address);
-  }
-  dispatch({
-    type: "INITIALIZE_CLIENT",
-    payload: client,
-  });
-}
-const getMyProfile = () => async (dispatch) => {
-  const client = CertClient();
+const getMyProfile = () => async (dispatch, getState) => {
+  const client = getState().state.client;
   let profile;
   try {
     profile = await client.getProfile(client.address);
@@ -39,12 +26,12 @@ const getMyProfile = () => async (dispatch) => {
     payload: profile,
   });
 }
-const getCertificates = () => async (dispatch) => {
+const getCertificates = () => async (dispatch, getState) => {
   dispatch({
     type: "START_GETTING_CERTIFICATES",
     payload: null,
   });
-  const client = CertClient();
+  const client = getState().state.client;
   let certificates;
   try {
     certificates = await client.getCertificates();
@@ -63,12 +50,12 @@ const getCertificates = () => async (dispatch) => {
   });
 }
 
-const getCertificatesInUserPage = (address) => async (dispatch) => {
+const getCertificatesInUserPage = (address) => async (dispatch, getState) => {
   dispatch({
     type: "START_GETTING_CERTIFICATES_IN_USER_PAGE",
     payload: null,
   });
-  const client = CertClient();
+  const client = getState().state.client;
   let certificates;
   try {
     certificates = await client.getCertificates(address);
@@ -86,12 +73,12 @@ const getCertificatesInUserPage = (address) => async (dispatch) => {
     payload: certificates,
   });
 }
-const getCertificatesIIssuesed = () => async (dispatch) => {
+const getCertificatesIIssuesed = () => async (dispatch, getState) => {
   dispatch({
     type: "START_GETTING_CERTIFICATES_I_ISSUESED",
     payload: null,
   });
-  const client = CertClient();
+  const client = getState().state.client;
   let certificates;
   try {
     certificates = await client.getCertificatesIIssuesed();
@@ -109,12 +96,12 @@ const getCertificatesIIssuesed = () => async (dispatch) => {
     payload: certificates,
   });
 }
-const getCertificatesIIssuesedInUserPage = (address) => async (dispatch) => {
+const getCertificatesIIssuesedInUserPage = (address) => async (dispatch, getState) => {
   dispatch({
     type: "START_GETTING_CERTIFICATES_I_ISSUESED_IN_USER_PAGE",
     payload: null,
   });
-  const client = CertClient();
+  const client = getState().state.client;
   let certificates;
   try {
     certificates = await client.getCertificatesIIssuesed(address);
@@ -138,7 +125,7 @@ const issue = () => async (dispatch, getState) => {
     payload: null,
     error: null,
   });
-  const client = CertClient();
+  const client = getState().state.client;
   const state = getState().state;
   const issueTo = state.issueTo;
   const image = state.certificateImage;
@@ -228,7 +215,7 @@ const updateUserSetting = () => async (dispatch, getState) => {
     type: "START_UPDATE_USER_SETTING",
     payload: null,
   });
-  const client = CertClient();
+  const client = getState().state.client;
   const state = getState().state;
   if ((!state.name || state.name.trim() === "") && (!state.icon)) {
     dispatch({
@@ -296,8 +283,8 @@ const changeTabToMyCertificates = () => async (dispatch) => {
   });
 }
 
-const fetchProfileInUserPage = (id) => async (dispatch) => {
-  const client = CertClient();
+const fetchProfileInUserPage = (id) => async (dispatch, getState) => {
+  const client = getState().state.client;
   if (!client) {
     return;
   }
@@ -410,7 +397,7 @@ const logout = () => async (dispatch) => {
 }
 
 const exportAccount = (evt) => async (dispatch, getState) => {
-  const client = CertClient();
+  const client = getState().state.client;
   const uid = client.uid;
   const json = JSON.stringify({
     uid,
@@ -423,7 +410,7 @@ const exportAccount = (evt) => async (dispatch, getState) => {
 
 const loginWithGoogle = () => async (dispatch) => {
   const uid = await getGoogleUid();
-  const client = new CertClient(uid);
+  const client = CertClient(uid);
   await client.init();
   if (uid) {
     sessionStorage.setItem("uid", uid);
@@ -462,6 +449,5 @@ export {
   getImagesIIssuesed,
   getImagesIIssuesedInUserPage,
   logout,
-  initializeClient,
   loginWithGoogle,
 }

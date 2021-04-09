@@ -2,7 +2,6 @@ import React from "react";
 import "./Certificate.css";
 import { getImageOnIpfs } from "../image-upload";
 import { dateString } from "../util";
-import CertClient from "../client"
 import { Link } from "react-router-dom";
 
 class CertViewComponent extends React.Component {
@@ -43,7 +42,7 @@ class CertViewComponent extends React.Component {
     });
   }
   async verifyCertificate() {
-    const client = CertClient();
+    const client = this.props.client;
     const certificate = this.state.certificates[this.state.index];
     const verified = client.verifyCertificate(certificate, client.address);
     this.setState({

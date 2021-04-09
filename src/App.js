@@ -40,7 +40,6 @@ class App extends React.Component {
     sessionStorage.setItem("address", address);
   }
   componentDidMount() {
-    this.props.initializeClient();
   }
   closeModal() {
     this.setState({

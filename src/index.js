@@ -4,9 +4,10 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { loginWithGoogle, initializeClient, logout, getImagesIIssuesed, getImagesIIssuesedInUserPage, getImages, getImagesInUserPage, getCertificatesInUserPage, getCertificatesIIssuesedInUserPage, changeTabInUserPageToIssueser, changeTabInUserPageToMyCertificates, fetchProfileInUserPage, changeTabToIssueser, changeTabToMyCertificates, onCopyId, exportAccount, closeModal, getMyProfile, getCertificates, getCertificatesIIssuesed, issue, onChangeIssueTo, onChangeCertificateImage, onChangeName, onChangeIcon, updateUserSetting, onChangeTitle } from "./actions";
+import { PersistGate } from 'redux-persist/integration/react'
+import { loginWithGoogle, logout, getImagesIIssuesed, getImagesIIssuesedInUserPage, getImages, getImagesInUserPage, getCertificatesInUserPage, getCertificatesIIssuesedInUserPage, changeTabInUserPageToIssueser, changeTabInUserPageToMyCertificates, fetchProfileInUserPage, changeTabToIssueser, changeTabToMyCertificates, onCopyId, exportAccount, closeModal, getMyProfile, getCertificates, getCertificatesIIssuesed, issue, onChangeIssueTo, onChangeCertificateImage, onChangeName, onChangeIcon, updateUserSetting, onChangeTitle } from "./actions";
 import { connect, Provider } from "react-redux";
-import store from "./store";
+import store, { persistor } from "./store";
 
 function mapStateToProps(state, props) {
   return state;
@@ -14,9 +15,6 @@ function mapStateToProps(state, props) {
 
 function mapDispatchToProps(dispatch, props) {
   return {
-    initializeClient: () => {
-      dispatch(initializeClient());
-    },
     getCertificates: () => {
       dispatch(getCertificates());
     },
@@ -99,7 +97,9 @@ const RxApp = connect(mapStateToProps, mapDispatchToProps)(App);
 
 ReactDOM.render(
   <Provider store={store}>
-    <RxApp />
+    <PersistGate loading={null} persistor={persistor}>
+      <RxApp />
+    </PersistGate>
   </Provider>,
   document.getElementById("root")
 );
