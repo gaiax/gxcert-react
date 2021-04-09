@@ -24,7 +24,6 @@ const initialState = {
   tabInUserPage: 0,
   client: null,
   address: null,
-  clientWithoutAccount: CertClient(),
 }
 
 export default initialState;
