@@ -3,6 +3,7 @@ import Reducer from "./reducer";
 import thunk from "redux-thunk";
 import { persistReducer, persistStore } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
+import initialState from "./initialState";
 
 const persistConfig = {
   key: "root",
@@ -17,6 +18,7 @@ const store = createStore(
   combineReducers({
     state: persistedReducer,
   }),
+  initialState,
   storeEnhancers(applyMiddleware(thunk))
 );
 

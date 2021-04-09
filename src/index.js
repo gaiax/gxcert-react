@@ -8,6 +8,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { loginWithGoogle, logout, getImagesIIssuesed, getImagesIIssuesedInUserPage, getImages, getImagesInUserPage, getCertificatesInUserPage, getCertificatesIIssuesedInUserPage, changeTabInUserPageToIssueser, changeTabInUserPageToMyCertificates, fetchProfileInUserPage, changeTabToIssueser, changeTabToMyCertificates, onCopyId, exportAccount, closeModal, getMyProfile, getCertificates, getCertificatesIIssuesed, issue, onChangeIssueTo, onChangeCertificateImage, onChangeName, onChangeIcon, updateUserSetting, onChangeTitle } from "./actions";
 import { connect, Provider } from "react-redux";
 import store, { persistor } from "./store";
+import { withRouter, BrowserRouter as Router } from "react-router-dom";
 
 function mapStateToProps(state, props) {
   return state;
@@ -93,12 +94,14 @@ function mapDispatchToProps(dispatch, props) {
   }
 }
 
-const RxApp = connect(mapStateToProps, mapDispatchToProps)(App);
+const RxApp = connect(mapStateToProps, mapDispatchToProps)(withRouter(App));
 
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <RxApp />
+      <Router>
+        <RxApp />
+      </Router>
     </PersistGate>
   </Provider>,
   document.getElementById("root")

@@ -13,6 +13,7 @@ class UserComponent extends React.Component {
     this.props.getCertificates(address);
   }
   render() {
+    console.log(this.props);
     const address = this.props.match.params.id;
     return (
       <div className="user">

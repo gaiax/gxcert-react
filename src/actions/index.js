@@ -1,4 +1,4 @@
-import CertClient from "../client"
+import CertClient, { clientWithoutAccount } from "../client"
 import { fileInputToDataURL, createBlobFromImageDataURI, postCertificate, getImageOnIpfs } from "../image-upload";
 import { getGoogleUid } from "../util";
 
@@ -55,7 +55,7 @@ const getCertificatesInUserPage = (address) => async (dispatch, getState) => {
     type: "START_GETTING_CERTIFICATES_IN_USER_PAGE",
     payload: null,
   });
-  const client = getState().state.client;
+  const client = clientWithoutAccount;
   let certificates;
   try {
     certificates = await client.getCertificates(address);
@@ -63,7 +63,7 @@ const getCertificatesInUserPage = (address) => async (dispatch, getState) => {
     console.error(err);
     dispatch({
       type: "GET_CERTIFICATES_IN_USER_PAGE",
-      payload: null,
+      payload: [],
       error: err,
     });
     return;
@@ -101,7 +101,7 @@ const getCertificatesIIssuesedInUserPage = (address) => async (dispatch, getStat
     type: "START_GETTING_CERTIFICATES_I_ISSUESED_IN_USER_PAGE",
     payload: null,
   });
-  const client = getState().state.client;
+  const client = clientWithoutAccount;
   let certificates;
   try {
     certificates = await client.getCertificatesIIssuesed(address);
@@ -109,7 +109,7 @@ const getCertificatesIIssuesedInUserPage = (address) => async (dispatch, getStat
     console.error(err);
     dispatch({
       type: "GET_CERTIFICATES_I_ISSUESED_IN_USER_PAGE",
-      payload: null,
+      payload: [],
       error: err,
     });
     return;
@@ -284,7 +284,7 @@ const changeTabToMyCertificates = () => async (dispatch) => {
 }
 
 const fetchProfileInUserPage = (id) => async (dispatch, getState) => {
-  const client = getState().state.client;
+  const client = clientWithoutAccount;
   if (!client) {
     return;
   }

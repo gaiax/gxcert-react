@@ -76,11 +76,23 @@ export default function Reducer(state=initialState, action) {
         myPageIsLoading: false,
       });
     case "GET_CERTIFICATES_IN_USER_PAGE":
+      if (action.error) {
+        return Object.assign({}, state, {
+          certificatesInUserPage: [],
+          userPageIsLoading: false,
+        });
+      }
       return Object.assign({}, state, {
         certificatesInUserPage: action.payload,
         userPageIsLoading: false,
       });
     case "GET_CERTIFICATES_I_ISSUESED_IN_USER_PAGE":
+      if (action.error) {
+        return Object.assign({}, state, {
+          certificatesIIssuesedInUserPage: [],
+          userPageIsLoading: false,
+        });
+      }
       return Object.assign({}, state, {
         certificatesIIssuesedInUserPage: action.payload,
         userPageIsLoading: false,
