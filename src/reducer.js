@@ -157,6 +157,10 @@ export default function Reducer(state=initialState, action) {
       });
     case "LOGOUT":
       return Object.assign({}, state, initialState);
+    case "INITIALIZE_CLIENT":
+      return Object.assign({}, state, {
+        client: action.payload,
+      });
     default:
       return state;
   }

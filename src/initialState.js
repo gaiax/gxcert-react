@@ -21,6 +21,7 @@ const initialState = {
   certificatesInUserPage: [],
   certificatesIIssuesedInUserPage: [],
   tabInUserPage: 0,
+  client: null,
 }
 
 export default initialState;

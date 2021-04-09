@@ -44,9 +44,6 @@ class App extends React.Component {
       message: null,
     }
   }
-  showPubkey() {
-    UI.byId("my-pubkey").innerText = "Your ID is " + client.address.substr(0, 8) + "...   ";
-  }
   saveToSessionStorage(uid, address) {
     sessionStorage.setItem("uid", uid);
     sessionStorage.setItem("address", address);
@@ -62,6 +59,7 @@ class App extends React.Component {
     this.forceUpdate();
   }
   componentDidMount() {
+    this.props.initializeClient();
     if (client !== null) {
       this.props.getMyProfile();
     }
@@ -163,5 +161,4 @@ class App extends React.Component {
   }
 }
 
-initializeClient();
 export default App;

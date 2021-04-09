@@ -1,6 +1,19 @@
 import CertClient from "../client"
 import { fileInputToDataURL, createBlobFromImageDataURI, postCertificate, getImageOnIpfs } from "../image-upload";
 
+const initializeClient = () => async (dispatch) => {
+  let uid = sessionStorage.getItem("uid");
+  let client = null;
+  if (uid !== null) {
+    client = new CertClient(uid);
+    client.address = sessionStorage.getItem("address");
+    console.log(client.address);
+  }
+  dispatch({
+    type: "INITIALIZE_CLIENT",
+    payload: client,
+  });
+}
 const getMyProfile = () => async (dispatch) => {
   const client = CertClient();
   let profile;
@@ -433,4 +446,5 @@ export {
   getImagesIIssuesed,
   getImagesIIssuesedInUserPage,
   logout,
+  initializeClient,
 }
