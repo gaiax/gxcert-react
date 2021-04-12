@@ -13,14 +13,14 @@ class CertViewComponent extends React.Component {
     this.state = {
       certificates: props.certificates,
       index: index,
-      verified: false,
+      verified: null,
     }
   }
   back() {
     if (this.state.index > 0) {
       this.setState({
         index: this.state.index - 1,
-        verified: false,
+        verified: null,
       });
       this.loadImage();
     }
@@ -29,7 +29,7 @@ class CertViewComponent extends React.Component {
     if (this.state.index < this.state.certificates.length - 1) {
       this.setState({
         index: this.state.index + 1,
-        verified: false,
+        verified: null,
       });
       this.loadImage();
     }

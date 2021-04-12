@@ -1,7 +1,7 @@
 import "./App.css";
 import React from "react";
 import { getGoogleUid } from "./util";
-import CertClient from "./client";
+import CertClient, {clientWithoutAccount} from "./client";
 import Login from "./views/Login";
 import { IssueComponent } from "./views/Issue";
 import { SettingComponent } from "./views/Setting";
@@ -117,7 +117,7 @@ class App extends React.Component {
               />} />
               <Route exact path="/certs/:index" render={ (routeProps) => <CertViewComponent {...routeProps} 
                 certificates={that.props.state.certificates} 
-                client={this.props.state.client}
+                client={clientWithoutAccount}
               />} />
             </Switch>
           </div>
