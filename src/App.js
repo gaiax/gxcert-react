@@ -117,6 +117,7 @@ class App extends React.Component {
               />} />
               <Route exact path="/certs/:index" render={ (routeProps) => <CertViewComponent {...routeProps} 
                 certificates={that.props.state.certificates} 
+                client={this.props.state.client}
               />} />
             </Switch>
           </div>
