@@ -14,6 +14,8 @@ class CertViewComponent extends React.Component {
       certificates: props.certificates,
       index: index,
       verified: null,
+      title: "",
+      imageUrl: "",
     }
   }
   back() {
@@ -41,6 +43,13 @@ class CertViewComponent extends React.Component {
       imageUrl
     });
   }
+  async loadTitle() {
+    const certificate = this.state.certificates[this.state.index];
+    const title = await getTextOnIpfs(certificate.title);
+    this.setState({
+      title
+    });
+  }
   async verifyCertificate() {
     const client = this.props.client;
     const certificate = this.state.certificates[this.state.index];
@@ -51,6 +60,7 @@ class CertViewComponent extends React.Component {
   }
   componentDidMount() {
     this.loadImage();
+    this.loadTitle();
   }
   render() {
     const certificate = this.props.certificates[this.state.index];
@@ -64,7 +74,7 @@ class CertViewComponent extends React.Component {
         <div className="cert-view-bottom">
           <p className="cert-view-title">
             { this.state.verified ? "✅ This certificate is valid." : "❌ This certificate is invalid." }<br/>
-            { certificate.title } by <Link to={"/users/" + certificate.by }>{ !certificate.issueserName ? certificate.by.substr(0, 16) : certificate.issueserName }</Link> { !certificate.to ? "" : "to " + certificate.to.substr(0, 16) } at {
+            { this.state.title } by <Link to={"/users/" + certificate.by }>{ !certificate.issueserName ? certificate.by.substr(0, 16) : certificate.issueserName }</Link> { !certificate.to ? "" : "to " + certificate.to.substr(0, 16) } at {
               dateString(new Date(certificate.time * 1000))
             }
           </p>

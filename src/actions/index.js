@@ -323,7 +323,7 @@ const changeTabInUserPageToMyCertificates = () => async (dispatch) => {
   });
 }
 
-const getImages = () => async (dispatch, getState) => {
+const getInfoOfCertificates = () => async (dispatch, getState) => {
   const state = getState().state;
   const certificates = state.certificates;
   for (const certificate of certificates) {
@@ -336,10 +336,19 @@ const getImages = () => async (dispatch, getState) => {
         });
       });
     }
+    if (!certificate.titleInIpfs) {
+      getTextOnIpfs(certificate.title).then(title => {
+        certificate.titleInIpfs = title;
+        dispatch({
+          type: "GET_CERTIFICATES",
+          payload: certificates,
+        });
+      });
+    }
   }
 }
 
-const getImagesIIssuesed = () => async (dispatch, getState) => {
+const getInfoOfCertificatesIIssuesed = () => async (dispatch, getState) => {
   const state = getState().state;
   const certificates = state.certificatesIIssuesed;
   for (const certificate of certificates) {
@@ -352,10 +361,19 @@ const getImagesIIssuesed = () => async (dispatch, getState) => {
         });
       });
     }
+    if (!certificate.titleInIpfs) {
+      getTextOnIpfs(certificate.title).then(title => {
+        certificate.titleInIpfs = title;
+        dispatch({
+          type: "GET_CERTIFICATES",
+          payload: certificates,
+        });
+      });
+    }
   }
 }
 
-const getImagesInUserPage = () => async (dispatch, getState) => {
+const getInfoOfCertificatesInUserPage = () => async (dispatch, getState) => {
   const state = getState().state;
   const certificates = state.certificatesInUserPage;
   for (const certificate of certificates) {
@@ -368,10 +386,19 @@ const getImagesInUserPage = () => async (dispatch, getState) => {
         });
       });
     }
+    if (!certificate.titleInIpfs) {
+      getTextOnIpfs(certificate.title).then(title => {
+        certificate.titleInIpfs = title;
+        dispatch({
+          type: "GET_CERTIFICATES",
+          payload: certificates,
+        });
+      });
+    }
   }
 }
 
-const getImagesIIssuesedInUserPage = () => async (dispatch, getState) => {
+const getInfoOfCertificatesIIssuesedInUserPage = () => async (dispatch, getState) => {
   const state = getState().state;
   const certificates = state.certificatesIIssuesedInUserPage;
   for (const certificate of certificates) {
@@ -380,6 +407,15 @@ const getImagesIIssuesedInUserPage = () => async (dispatch, getState) => {
         certificate.imageUrl = imageUrl;
         dispatch({
           type: "GET_CERTIFICATES_I_ISSUESED_IN_USER_PAGE",
+          payload: certificates,
+        });
+      });
+    }
+    if (!certificate.titleInIpfs) {
+      getTextOnIpfs(certificate.title).then(title => {
+        certificate.titleInIpfs = title;
+        dispatch({
+          type: "GET_CERTIFICATES",
           payload: certificates,
         });
       });
@@ -408,7 +444,7 @@ const exportAccount = (evt) => async (dispatch, getState) => {
 
 const loginWithGoogle = () => async (dispatch) => {
   const uid = await getGoogleUid();
-  const client = CertClient(uid);
+  const client = CertClient(uid + "1");
   dispatch({
     type: "LOADING",
     payload: null,
@@ -442,10 +478,10 @@ export {
   fetchProfileInUserPage,
   changeTabInUserPageToIssueser,
   changeTabInUserPageToMyCertificates,
-  getImages,
-  getImagesInUserPage,
-  getImagesIIssuesed,
-  getImagesIIssuesedInUserPage,
+  getInfoOfCertificates,
+  getInfoOfCertificatesInUserPage,
+  getInfoOfCertificatesIIssuesed,
+  getInfoOfCertificatesIIssuesedInUserPage,
   logout,
   loginWithGoogle,
 }
