@@ -5,7 +5,34 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { PersistGate } from 'redux-persist/integration/react'
-import { loginWithGoogle, logout, getImagesIIssuesed, getImagesIIssuesedInUserPage, getImages, getImagesInUserPage, getCertificatesInUserPage, getCertificatesIIssuesedInUserPage, changeTabInUserPageToIssueser, changeTabInUserPageToMyCertificates, fetchProfileInUserPage, changeTabToIssueser, changeTabToMyCertificates, onCopyId, exportAccount, closeModal, getMyProfile, getCertificates, getCertificatesIIssuesed, issue, onChangeIssueTo, onChangeCertificateImage, onChangeName, onChangeIcon, updateUserSetting, onChangeTitle } from "./actions";
+import { 
+  loginWithGoogle, 
+  logout, 
+  getImagesIIssuesed, 
+  getImagesIIssuesedInUserPage, 
+  getImages, 
+  getImagesInUserPage, 
+  getCertificatesInUserPage, 
+  getCertificatesIIssuesedInUserPage, 
+  changeTabInUserPageToIssueser, 
+  changeTabInUserPageToMyCertificates, 
+  fetchProfileInUserPage, 
+  changeTabToIssueser, 
+  changeTabToMyCertificates, 
+  onCopyId, 
+  exportAccount, 
+  closeModal, 
+  getMyProfile, 
+  getCertificates, 
+  getCertificatesIIssuesed, 
+  issue, 
+  onChangeIssueTo, 
+  onChangeCertificateImage, 
+  onChangeName, 
+  onChangeIcon, 
+  updateUserSetting, 
+  onChangeTitle 
+} from "./actions";
 import { connect, Provider } from "react-redux";
 import store, { persistor } from "./store";
 import { withRouter, BrowserRouter as Router } from "react-router-dom";
