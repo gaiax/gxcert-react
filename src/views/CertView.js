@@ -47,7 +47,14 @@ class CertViewComponent extends React.Component {
     const certificate = this.state.certificates[this.state.index];
     const title = await getTextOnIpfs(certificate.title);
     this.setState({
-      title
+      titleInIpfs: title,
+    });
+  }
+  async loadDescription() {
+    const certificate = this.state.certificates[this.state.index];
+    const description = await getTextOnIpfs(certificate.description);
+    this.setState({
+      descriptionInIpfs: description,
     });
   }
   async verifyCertificate() {
@@ -61,6 +68,7 @@ class CertViewComponent extends React.Component {
   componentDidMount() {
     this.loadImage();
     this.loadTitle();
+    this.loadDescription();
   }
   render() {
     const certificate = this.props.certificates[this.state.index];
@@ -72,13 +80,16 @@ class CertViewComponent extends React.Component {
           <button className="next" onClick={this.next.bind(this)}>＞</button>
         </div>
         <div className="cert-view-bottom">
+          <button onClick={this.verifyCertificate.bind(this)} className="verify-button">Verify</button>
           <p className="cert-view-title">
             { this.state.verified ? "✅ This certificate is valid." : "❌ This certificate is invalid." }<br/>
-            { this.state.title } by <Link to={"/users/" + certificate.by }>{ !certificate.issueserName ? certificate.by.substr(0, 16) : certificate.issueserName }</Link> { !certificate.to ? "" : "to " + certificate.to.substr(0, 16) } at {
+            { this.state.titleInIpfs } by <Link to={"/users/" + certificate.by }>{ !certificate.issueserName ? certificate.by.substr(0, 16) : certificate.issueserName }</Link> { !certificate.to ? "" : "to " + certificate.to.substr(0, 16) } at {
               dateString(new Date(certificate.time * 1000))
             }
           </p>
-          <button onClick={this.verifyCertificate.bind(this)} className="verify-button">Verify</button>
+          <p className="cert-view-description">
+            { this.state.descriptionInIpfs }
+          </p>
         </div>
       </div>
     );

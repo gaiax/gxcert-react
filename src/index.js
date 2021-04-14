@@ -30,6 +30,7 @@ import {
   onChangeCertificateImage, 
   onChangeName, 
   onChangeIcon, 
+  onChangeDescription,
   updateUserSetting, 
   onChangeTitle 
 } from "./actions";
@@ -70,6 +71,9 @@ function mapDispatchToProps(dispatch, props) {
     },
     onChangeTitle: (evt) => {
       dispatch(onChangeTitle(evt));
+    },
+    onChangeDescription: (evt) => {
+      dispatch(onChangeDescription(evt));
     },
     updateUserSetting: () => {
       dispatch(updateUserSetting());

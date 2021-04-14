@@ -47,3 +47,10 @@
   color: #FFF;
   font-weight: bold;
 }
+
+.issue-description {
+  background-color: white;
+  width: 280px;
+  height: 100px;
+  border-radius: 6px;
+}

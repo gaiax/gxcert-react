@@ -130,6 +130,7 @@ const issue = () => async (dispatch, getState) => {
   const issueTo = state.issueTo;
   const image = state.certificateImage;
   const title = state.title.trim();
+  const description = state.description.trim();
   if (issueTo === null || image === null || title === "") {
     dispatch({
       type: "ISSUE",
@@ -164,8 +165,20 @@ const issue = () => async (dispatch, getState) => {
     });
     return;
   }
+  let ipfsHashOfDescription = null;
   try {
-    const certificate = client.createCertificateObject(ipfsHashOfTitle, ipfsHashOfImage, issueTo);
+    ipfsHashOfDescription = await postText(description);
+  } catch(err) {
+    console.error(err);
+    dispatch({
+      type: "ISSUE",
+      payload: null,
+      error: err,
+    });
+    return;
+  }
+  try {
+    const certificate = client.createCertificateObject(ipfsHashOfTitle, ipfsHashOfDescription, ipfsHashOfImage, issueTo);
     await client.issueCertificate(certificate, issueTo);
   } catch(err) {
     console.log(err);
@@ -193,6 +206,13 @@ const onChangeCertificateImage = (evt) => async (dispatch) => {
 const onChangeIssueTo = (evt) => async (dispatch) => {
   dispatch({
     type: "ON_CHANGE_ISSUE_TO",
+    payload: evt.target.value,
+  });
+}
+
+const onChangeDescription = (evt) => async (dispatch) => {
+  dispatch({
+    type: "ON_CHANGE_DESCRIPTION",
     payload: evt.target.value,
   });
 }
@@ -350,9 +370,18 @@ const getInfoOfCertificates = () => async (dispatch, getState) => {
         });
       });
     }
-    if (!certificate.titleInIpfs) {
+    if (!certificate.titleInIpfs && certificate.title) {
       getTextOnIpfs(certificate.title).then(title => {
         certificate.titleInIpfs = title;
+        dispatch({
+          type: "GET_CERTIFICATES",
+          payload: certificates,
+        });
+      });
+    }
+    if (!certificate.descriptionInIpfs && certificate.description) {
+      getTextOnIpfs(certificate.description).then(description => {
+        certificate.descriptionInIpfs = description;
         dispatch({
           type: "GET_CERTIFICATES",
           payload: certificates,
@@ -375,9 +404,18 @@ const getInfoOfCertificatesIIssuesed = () => async (dispatch, getState) => {
         });
       });
     }
-    if (!certificate.titleInIpfs) {
+    if (!certificate.titleInIpfs && certificate.title) {
       getTextOnIpfs(certificate.title).then(title => {
         certificate.titleInIpfs = title;
+        dispatch({
+          type: "GET_CERTIFICATES",
+          payload: certificates,
+        });
+      });
+    }
+    if (!certificate.descriptionInIpfs && certificate.description) {
+      getTextOnIpfs(certificate.description).then(description => {
+        certificate.descriptionInIpfs = description;
         dispatch({
           type: "GET_CERTIFICATES",
           payload: certificates,
@@ -482,6 +520,7 @@ export {
   onChangeIssueTo,
   onChangeName,
   onChangeIcon,
+  onChangeDescription,
   updateUserSetting,
   exportAccount,
   onChangeTitle,
