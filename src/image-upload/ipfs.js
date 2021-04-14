@@ -9,7 +9,14 @@ async function postCertificate(blob) {
   if (response) {
     return response.path;
   }
-  throw new Error("couldn't post certificate to IPFS network.");
+  throw new Error("couldn't post the certificate to IPFS network.");
+}
+async function postText(text) {
+  const response = await ipfs.add(text);
+  if (response) {
+    return response.path;
+  }
+  throw new Error("couldn't post the text to IPFS network.");
 }
 
 function createImageUrlFromUint8Array(arr) {
@@ -39,5 +46,18 @@ async function getImageOnIpfs(ipfsHash) {
   return null;
 }
 
+async function getTextOnIpfs(ipfsHash) {
+  const response = await ipfs.get(ipfsHash);
+  for await (const data of response) {
+    console.log(data);
+    let content = new ArrayBuffer(0);
+    for await (const chunk of data.content) {
+      content = concatBuffer(content, chunk);
+    }
+    return String.fromCharCode.apply(null, content);
+  }
+  return null;
+}
 
-export { getImageOnIpfs, postCertificate };
+
+export { getImageOnIpfs, getTextOnIpfs, postCertificate, postText };
