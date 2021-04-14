@@ -1,4 +1,4 @@
-import CertClient, { clientWithoutAccount } from "../client"
+import CertClient, { getClientFromState, clientWithoutAccount } from "../client"
 import { getTextOnIpfs, postText, fileInputToDataURL, createBlobFromImageDataURI, postCertificate, getImageOnIpfs } from "../image-upload";
 import { getGoogleUid } from "../util";
 
@@ -31,7 +31,7 @@ const getCertificates = () => async (dispatch, getState) => {
     type: "START_GETTING_CERTIFICATES",
     payload: null,
   });
-  const client = getState().state.client;
+  const client = getClientFromState(getState().state.client);
   let certificates;
   try {
     certificates = await client.getCertificates();
@@ -78,7 +78,7 @@ const getCertificatesIIssuesed = () => async (dispatch, getState) => {
     type: "START_GETTING_CERTIFICATES_I_ISSUESED",
     payload: null,
   });
-  const client = getState().state.client;
+  const client = getClientFromState(getState().state.client);
   let certificates;
   try {
     certificates = await client.getCertificatesIIssuesed();
@@ -125,7 +125,7 @@ const issue = () => async (dispatch, getState) => {
     payload: null,
     error: null,
   });
-  const client = getState().state.client;
+  const client = getClientFromState(getState().state.client);
   const state = getState().state;
   const issueTo = state.issueTo;
   const image = state.certificateImage;
@@ -229,7 +229,7 @@ const updateUserSetting = () => async (dispatch, getState) => {
     type: "START_UPDATE_USER_SETTING",
     payload: null,
   });
-  const client = getState().state.client;
+  const client = getClientFromState(getState().state.client);
   const state = getState().state;
   if ((!state.name || state.name.trim() === "") && (!state.icon)) {
     dispatch({
@@ -445,7 +445,7 @@ const logout = () => async (dispatch) => {
 }
 
 const exportAccount = (evt) => async (dispatch, getState) => {
-  const client = getState().state.client;
+  const client = getClientFromState(getState().state.client);
   const uid = client.uid;
   const json = JSON.stringify({
     uid,

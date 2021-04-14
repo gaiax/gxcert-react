@@ -36,6 +36,7 @@ import {
 import { connect, Provider } from "react-redux";
 import store, { persistor } from "./store";
 import { withRouter, BrowserRouter as Router } from "react-router-dom";
+import CertClient from "./client"
 
 function mapStateToProps(state, props) {
   return state;
