@@ -7,7 +7,7 @@ import { CertCellComponent } from "./CertCell";
 
 class CertListComponent extends React.Component {
   componentDidMount() {
-    this.props.getImages();
+    this.props.getInfoOfCertificates();
   }
   render() {
     return (
@@ -35,11 +35,11 @@ class MyCertListComponent extends React.Component {
         { !this.props.isLoading && this.props.tab === 0 ? <CertListComponent
           certificates={this.props.certificates}
           path={"certs"}
-          getImages={this.props.getImages}
+          getInfoOfCertificates={this.props.getInfoOfCertificates}
         /> : "" }
         { !this.props.isLoading && this.props.tab === 1 ? <CertListComponent
           certificates={this.props.certificatesIIssuesed}
-          getImages={this.props.getImagesIIssuesed}
+          getInfoOfCertificates={this.props.getInfoOfCertificates}
           path={"issuesed"}
         /> : "" }
       </div>

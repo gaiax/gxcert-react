@@ -26,8 +26,8 @@ class MyPageComponent extends React.Component {
           changeTabToIssueser={this.props.changeTabToIssueser}
           changeTabToMyCertificates={this.props.changeTabToMyCertificates}
           tab={this.props.tab}
-          getImages={this.props.getImages}
-          getImagesIIssuesed={this.props.getImagesIIssuesed}
+          getInfoOfCertificates={this.props.getInfoOfCertificates}
+          getInfoOfCertificatesIIssuesed={this.props.getInfoOfCertificatesIIssuesed}
         />
       </div>
     );

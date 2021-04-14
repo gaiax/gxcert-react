@@ -8,10 +8,10 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { 
   loginWithGoogle, 
   logout, 
-  getImagesIIssuesed, 
-  getImagesIIssuesedInUserPage, 
-  getImages, 
-  getImagesInUserPage, 
+  getInfoOfCertificatesIIssuesed, 
+  getInfoOfCertificatesIIssuesedInUserPage, 
+  getInfoOfCertificates, 
+  getInfoOfCertificatesInUserPage, 
   getCertificatesInUserPage, 
   getCertificatesIIssuesedInUserPage, 
   changeTabInUserPageToIssueser, 
@@ -100,17 +100,17 @@ function mapDispatchToProps(dispatch, props) {
     fetchProfileInUserPage: (address) => {
       dispatch(fetchProfileInUserPage(address));
     },
-    getImages: () => {
-      dispatch(getImages());
+    getInfoOfCertificates: () => {
+      dispatch(getInfoOfCertificates());
     },
-    getImagesIIssuesed: () => {
-      dispatch(getImagesIIssuesed());
+    getInfoOfCertificatesIIssuesed: () => {
+      dispatch(getInfoOfCertificatesIIssuesed());
     },
-    getImagesIIssuesedInUserPage: () => {
-      dispatch(getImagesIIssuesedInUserPage());
+    getInfoOfCertificatesIIssuesedInUserPage: () => {
+      dispatch(getInfoOfCertificatesIIssuesedInUserPage());
     },
-    getImagesInUserPage: () => {
-      dispatch(getImagesInUserPage());
+    getInfoOfCertificatesInUserPage: () => {
+      dispatch(getInfoOfCertificatesInUserPage());
     },
     logout: () => {
       dispatch(logout());
