@@ -1,5 +1,5 @@
 import CertClient, { clientWithoutAccount } from "../client"
-import { fileInputToDataURL, createBlobFromImageDataURI, postCertificate, getImageOnIpfs } from "../image-upload";
+import { getTextOnIpfs, postText, fileInputToDataURL, createBlobFromImageDataURI, postCertificate, getImageOnIpfs } from "../image-upload";
 import { getGoogleUid } from "../util";
 
 const getMyProfile = () => async (dispatch, getState) => {
@@ -11,11 +11,11 @@ const getMyProfile = () => async (dispatch, getState) => {
     console.error(err);
     return;
   }
-  const ipfsHash = profile.icon;
+  const ipfsHashOfImage = profile.icon;
   let icon = null;
-  if (ipfsHash) {
+  if (ipfsHashOfImage) {
     try {
-      icon = await getImageOnIpfs(ipfsHash);
+      icon = await getImageOnIpfs(ipfsHashOfImage);
     } catch(err) {
       icon = null;
     }
@@ -138,12 +138,25 @@ const issue = () => async (dispatch, getState) => {
     });
     return;
   }
-  let ipfsHash = null;
+  let ipfsHashOfImage = null;
   try {
     const imageData = await fileInputToDataURL(image);
     const blob = createBlobFromImageDataURI(imageData);
-    ipfsHash = await postCertificate(blob);
+    ipfsHashOfImage = await postCertificate(blob);
   } catch(err) {
+    console.error(err);
+    dispatch({
+      type: "ISSUE",
+      payload: null,
+      error: err,
+    });
+    return;
+  }
+  let ipfsHashOfTitle = null;
+  try {
+    ipfsHashOfTitle = await postText(title);
+  } catch(err) {
+    console.error(err);
     dispatch({
       type: "ISSUE",
       payload: null,
@@ -152,9 +165,10 @@ const issue = () => async (dispatch, getState) => {
     return;
   }
   try {
-    const certificate = client.createCertificateObject(title, ipfsHash, issueTo);
+    const certificate = client.createCertificateObject(ipfsHashOfTitle, ipfsHashOfImage, issueTo);
     await client.issueCertificate(certificate, issueTo);
   } catch(err) {
+    console.log(err);
     dispatch({
       type: "ISSUE",
       payload: null,
@@ -239,12 +253,12 @@ const updateUserSetting = () => async (dispatch, getState) => {
     }
   }
   if (state.icon !== null) {
-    let ipfsHash = null;
+    let ipfsHashOfImage = null;
     try {
       const imageData = await fileInputToDataURL(state.icon);
       const blob = createBlobFromImageDataURI(imageData);
-      ipfsHash = await postCertificate(blob);
-      await client.registerIcon(ipfsHash);
+      ipfsHashOfImage = await postCertificate(blob);
+      await client.registerIcon(ipfsHashOfImage);
     } catch(err) {
       dispatch({
         type: "UPDATE_USER_SETTING",

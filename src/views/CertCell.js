@@ -15,7 +15,7 @@ class CertCellComponent extends React.Component {
         <img src={!this.props.certificate.imageUrl ? "" : this.props.certificate.imageUrl} className="cert-cell-image" alt="certificate" />
         <div className="cert-cell-info">
           <p className="cert-cell-title">
-            { this.props.certificate.title }
+            { this.props.certificate.titleInIpfs }
           </p>
           <p className="cert-cell-issueser">
             by { !this.props.certificate.issueserName ? this.props.certificate.by.substr(0, 16) : this.props.certificate.issueserName } { !this.props.certificate.to ? "" : "to " + this.props.certificate.to.substr(0, 16) }

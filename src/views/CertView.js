@@ -1,6 +1,6 @@
 import React from "react";
 import "./Certificate.css";
-import { getImageOnIpfs } from "../image-upload";
+import { getTextOnIpfs, getImageOnIpfs } from "../image-upload";
 import { dateString } from "../util";
 import { Link } from "react-router-dom";
 
