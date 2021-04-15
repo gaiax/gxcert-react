@@ -39,7 +39,7 @@ class MyCertListComponent extends React.Component {
         /> : "" }
         { !this.props.isLoading && this.props.tab === 1 ? <CertListComponent
           certificates={this.props.certificatesIIssuesed}
-          getInfoOfCertificates={this.props.getInfoOfCertificates}
+          getInfoOfCertificates={this.props.getInfoOfCertificatesIIssuesed}
           path={"issuesed"}
         /> : "" }
       </div>
