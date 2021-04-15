@@ -1,10 +1,19 @@
 import * as Client from "gxcert-iota";
+import cryptico from "cryptico";
 
 const clientWithoutAccount = new Client("https://nodes.devnet.iota.org");
+function getKeyPair(uid) {
+  const privKey = cryptico.generateRSAKey(uid, 1024);
+  const pubKey = cryptico.publicKeyString(privKey);
+  return {
+    privKey,
+    pubKey,
+  }
+}
 function getClientFromState (client) {
   const result = new Client("https://nodes.devnet.iota.org");
   result.address = client.address;
-  result.rsaKeyPair = client.rsaKeyPair;
+  result.rsaKeyPair = getKeyPair(client.uid);
   result.profile = client.profile;
   result.cache = client.cache;
   result.uid = client.uid;
