@@ -137,6 +137,10 @@ export default function Reducer(state=initialState, action) {
       return Object.assign({}, state, {
         name: action.payload,
       });
+    case "ON_CHANGE_DESCRIPTION":
+      return Object.assign({}, state, {
+        description: action.payload,
+      });
     case "ON_CHANGE_ICON":
       return Object.assign({}, state, {
         icon: action.payload,

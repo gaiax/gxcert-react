@@ -39,6 +39,7 @@ a:hover {
 .cert-cell-info p {
   margin: 2px;
   color: #485776;
+  word-break: break-all;
 }
 .cert-cell-image {
   width: 80px;
@@ -60,6 +61,7 @@ a:hover {
 }
 .cert-view-bottom p{
   text-align: left;
+  word-break: break-all;
   color: #FFF;
 }
 .cert-view-image {

@@ -54,7 +54,7 @@ async function getTextOnIpfs(ipfsHash) {
     for await (const chunk of data.content) {
       content = concatBuffer(content, chunk);
     }
-    return String.fromCharCode.apply(null, content);
+    return String.fromCharCode.apply(null, new Uint8Array(content));
   }
   return null;
 }

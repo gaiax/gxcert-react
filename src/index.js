@@ -8,10 +8,10 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { 
   loginWithGoogle, 
   logout, 
-  getImagesIIssuesed, 
-  getImagesIIssuesedInUserPage, 
-  getImages, 
-  getImagesInUserPage, 
+  getInfoOfCertificatesIIssuesed, 
+  getInfoOfCertificatesIIssuesedInUserPage, 
+  getInfoOfCertificates, 
+  getInfoOfCertificatesInUserPage, 
   getCertificatesInUserPage, 
   getCertificatesIIssuesedInUserPage, 
   changeTabInUserPageToIssueser, 
@@ -30,12 +30,14 @@ import {
   onChangeCertificateImage, 
   onChangeName, 
   onChangeIcon, 
+  onChangeDescription,
   updateUserSetting, 
   onChangeTitle 
 } from "./actions";
 import { connect, Provider } from "react-redux";
 import store, { persistor } from "./store";
 import { withRouter, BrowserRouter as Router } from "react-router-dom";
+import CertClient from "./client"
 
 function mapStateToProps(state, props) {
   return state;
@@ -70,6 +72,9 @@ function mapDispatchToProps(dispatch, props) {
     onChangeTitle: (evt) => {
       dispatch(onChangeTitle(evt));
     },
+    onChangeDescription: (evt) => {
+      dispatch(onChangeDescription(evt));
+    },
     updateUserSetting: () => {
       dispatch(updateUserSetting());
     },
@@ -100,17 +105,17 @@ function mapDispatchToProps(dispatch, props) {
     fetchProfileInUserPage: (address) => {
       dispatch(fetchProfileInUserPage(address));
     },
-    getImages: () => {
-      dispatch(getImages());
+    getInfoOfCertificates: () => {
+      dispatch(getInfoOfCertificates());
     },
-    getImagesIIssuesed: () => {
-      dispatch(getImagesIIssuesed());
+    getInfoOfCertificatesIIssuesed: () => {
+      dispatch(getInfoOfCertificatesIIssuesed());
     },
-    getImagesIIssuesedInUserPage: () => {
-      dispatch(getImagesIIssuesedInUserPage());
+    getInfoOfCertificatesIIssuesedInUserPage: () => {
+      dispatch(getInfoOfCertificatesIIssuesedInUserPage());
     },
-    getImagesInUserPage: () => {
-      dispatch(getImagesInUserPage());
+    getInfoOfCertificatesInUserPage: () => {
+      dispatch(getInfoOfCertificatesInUserPage());
     },
     logout: () => {
       dispatch(logout());

@@ -1,9 +1,9 @@
 
-import { getText, getImageOnIpfs, postCertificate, postText } from "./ipfs";
+import { getTextOnIpfs, getImageOnIpfs, postCertificate, postText } from "./ipfs";
 import { fileInputToDataURL, createBlobFromImageDataURI, getHashFromImage } from "./image";
 
 export {
-  getText,
+  getTextOnIpfs,
   getImageOnIpfs,
   postText,
   postCertificate,

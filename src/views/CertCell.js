@@ -3,6 +3,15 @@ import "./Certificate.css";
 import { dateString } from "../util";
 import { getImageOnIpfs } from "../image-upload";
 
+function displayedTitle(title) {
+  if (!title) {
+    return "";
+  }
+  if (title.length > 16) {
+    return title.substr(0, 16) + "...";
+  }
+  return title;
+}
 class CertCellComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -15,7 +24,7 @@ class CertCellComponent extends React.Component {
         <img src={!this.props.certificate.imageUrl ? "" : this.props.certificate.imageUrl} className="cert-cell-image" alt="certificate" />
         <div className="cert-cell-info">
           <p className="cert-cell-title">
-            { this.props.certificate.title }
+            { displayedTitle(this.props.certificate.titleInIpfs) }
           </p>
           <p className="cert-cell-issueser">
             by { !this.props.certificate.issueserName ? this.props.certificate.by.substr(0, 16) : this.props.certificate.issueserName } { !this.props.certificate.to ? "" : "to " + this.props.certificate.to.substr(0, 16) }

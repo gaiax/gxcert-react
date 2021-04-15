@@ -24,6 +24,7 @@ const initialState = {
   tabInUserPage: 0,
   client: null,
   address: null,
+  description: "",
 }
 
 export default initialState;
