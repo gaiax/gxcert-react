@@ -43,6 +43,12 @@ class CertViewComponent extends React.Component {
   }
   async loadImage() {
     const certificate = this.state.certificates[this.state.index];
+    if (certificate.imageUrl) {
+      this.setState({
+        imageUrl: certificate.imageUrl
+      });
+      return;
+    }
     let imageUrl;
     try {
       imageUrl = await getImageOnIpfs(certificate.ipfs);
@@ -56,6 +62,12 @@ class CertViewComponent extends React.Component {
   }
   async loadTitle() {
     const certificate = this.state.certificates[this.state.index];
+    if (certificate.titleInIpfs) {
+      this.setState({
+        titleInIpfs: certificate.titleInIpfs
+      });
+      return;
+    }
     let title;
     try {
       title = await getTextOnIpfs(certificate.title);
@@ -72,6 +84,12 @@ class CertViewComponent extends React.Component {
   }
   async loadDescription() {
     const certificate = this.state.certificates[this.state.index];
+    if (certificate.descriptionInIpfs) {
+      this.setState({
+        descriptionInIpfs: certificate.descriptionInIpfs,
+      });
+      return;
+    }
     let description;
     try {
       description = await getTextOnIpfs(certificate.description);
