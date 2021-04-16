@@ -112,6 +112,7 @@ class App extends React.Component {
                 changeTabToIssueser={that.props.changeTabInUserPageToIssueser}
                 changeTabToMyCertificates={that.props.changeTabInUserPageToMyCertificates}
                 tab={that.props.state.tabInUserPage}
+                isNotFound={that.props.state.userIsNotFound}
               /> } />
               <Route exact path="/issuesed/:index" render={ (routeProps) => <CertViewComponent {...routeProps}
                 certificates={that.props.state.certificatesIIssuesed}

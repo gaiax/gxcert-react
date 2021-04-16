@@ -163,9 +163,17 @@ export default function Reducer(state=initialState, action) {
         tabInMyPage: 0,
       });
     case "FETCH_PROFILE_IN_USER_PAGE":
+      if (action.error) {
+        return Object.assign({}, state, {
+          profileInUserPage: null,
+          nameInUserPage: null,
+          userIsNotFound: true,
+        });
+      }
       return Object.assign({}, state, {
         profileInUserPage: action.payload,
         nameInUserPage: action.payload.name,
+        userIsNotFound: false,
       });
     case "FETCH_ICON_IN_USER_PAGE":
       return Object.assign({}, state, {

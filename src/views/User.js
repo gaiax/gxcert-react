@@ -2,6 +2,7 @@ import React from "react";
 import { getImageOnIpfs } from "../image-upload";
 import "./User.css";
 import { MyCertListComponent } from "./CertList";
+import NotFoundComponent from "./404";
 
 class UserComponent extends React.Component {
   constructor(props) {
@@ -10,9 +11,14 @@ class UserComponent extends React.Component {
   componentDidMount() {
     const address = this.props.match.params.id;
     this.props.fetchProfile(address);
-    //this.props.getCertificates(address);
+    this.props.getCertificates(address);
   }
   render() {
+    if (this.props.isNotFound) {
+      return (
+        <NotFoundComponent />
+      );
+    }
     console.log(this.props);
     const address = this.props.match.params.id;
     return (

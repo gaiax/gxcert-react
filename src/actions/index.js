@@ -327,6 +327,11 @@ const fetchProfileInUserPage = (id) => async (dispatch, getState) => {
     profile = await client.getProfile(id);
   } catch(err) {
     console.error(err);
+    dispatch({
+      type: "FETCH_PROFILE_IN_USER_PAGE",
+      payload: null,
+      error: err,
+    });
     return;
   }
   dispatch({

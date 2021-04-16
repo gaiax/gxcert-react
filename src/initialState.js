@@ -25,6 +25,7 @@ const initialState = {
   client: null,
   address: null,
   description: "",
+  userIsNotFound: false,
 }
 
 export default initialState;
