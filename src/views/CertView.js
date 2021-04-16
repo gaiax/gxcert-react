@@ -24,7 +24,7 @@ class CertViewComponent extends React.Component {
         index: this.state.index - 1,
         verified: null,
       });
-      this.loadImage();
+      this.loadDetail();
     }
   }
   next() {
@@ -33,26 +33,55 @@ class CertViewComponent extends React.Component {
         index: this.state.index + 1,
         verified: null,
       });
-      this.loadImage();
+      this.loadDetail();
     }
+  }
+  loadDetail() {
+    this.loadImage();
+    this.loadTitle();
+    this.loadDescription();
   }
   async loadImage() {
     const certificate = this.state.certificates[this.state.index];
-    const imageUrl = await getImageOnIpfs(certificate.ipfs);
+    let imageUrl;
+    try {
+      imageUrl = await getImageOnIpfs(certificate.ipfs);
+    } catch(err) {
+      console.error(err);
+      return;
+    }
     this.setState({
       imageUrl
     });
   }
   async loadTitle() {
     const certificate = this.state.certificates[this.state.index];
-    const title = await getTextOnIpfs(certificate.title);
+    let title;
+    try {
+      title = await getTextOnIpfs(certificate.title);
+    } catch(err) {
+      console.error(err);
+      this.setState({
+        titleInIpfs: "",
+      });
+      return;
+    }
     this.setState({
       titleInIpfs: title,
     });
   }
   async loadDescription() {
     const certificate = this.state.certificates[this.state.index];
-    const description = await getTextOnIpfs(certificate.description);
+    let description;
+    try {
+      description = await getTextOnIpfs(certificate.description);
+    } catch(err) {
+      console.error(err);
+      this.setState({
+        descriptionInIpfs: "",
+      });
+      return;
+    }
     this.setState({
       descriptionInIpfs: description,
     });
@@ -66,9 +95,7 @@ class CertViewComponent extends React.Component {
     });
   }
   componentDidMount() {
-    this.loadImage();
-    this.loadTitle();
-    this.loadDescription();
+    this.loadDetail();
   }
   render() {
     const certificate = this.props.certificates[this.state.index];
