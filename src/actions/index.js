@@ -408,7 +408,7 @@ const getInfoOfCertificatesIIssuesed = () => async (dispatch, getState) => {
       getTextOnIpfs(certificate.title).then(title => {
         certificate.titleInIpfs = title;
         dispatch({
-          type: "GET_CERTIFICATES",
+          type: "GET_CERTIFICATES_I_ISSUESED",
           payload: certificates,
         });
       });
@@ -417,7 +417,7 @@ const getInfoOfCertificatesIIssuesed = () => async (dispatch, getState) => {
       getTextOnIpfs(certificate.description).then(description => {
         certificate.descriptionInIpfs = description;
         dispatch({
-          type: "GET_CERTIFICATES",
+          type: "GET_CERTIFICATES_I_ISSUESED",
           payload: certificates,
         });
       });
@@ -442,7 +442,7 @@ const getInfoOfCertificatesInUserPage = () => async (dispatch, getState) => {
       getTextOnIpfs(certificate.title).then(title => {
         certificate.titleInIpfs = title;
         dispatch({
-          type: "GET_CERTIFICATES",
+          type: "GET_CERTIFICATES_IN_USER_PAGE",
           payload: certificates,
         });
       });
@@ -467,7 +467,16 @@ const getInfoOfCertificatesIIssuesedInUserPage = () => async (dispatch, getState
       getTextOnIpfs(certificate.title).then(title => {
         certificate.titleInIpfs = title;
         dispatch({
-          type: "GET_CERTIFICATES",
+          type: "GET_CERTIFICATES_I_ISSUESED_IN_USER_PAGE",
+          payload: certificates,
+        });
+      });
+    }
+    if (!certificate.descriptionInIpfs) {
+      getTextOnIpfs(certificate.description).then(description => {
+        certificate.descriptionInIpfs = description;
+        dispatch({
+          type: "GET_CERTIFICATES_I_ISSUESED_IN_USER_PAGE",
           payload: certificates,
         });
       });
