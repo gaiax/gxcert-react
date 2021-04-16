@@ -10,7 +10,7 @@ class UserComponent extends React.Component {
   componentDidMount() {
     const address = this.props.match.params.id;
     this.props.fetchProfile(address);
-    this.props.getCertificates(address);
+    //this.props.getCertificates(address);
   }
   render() {
     console.log(this.props);

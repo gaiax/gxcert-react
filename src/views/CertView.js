@@ -3,6 +3,7 @@ import "./Certificate.css";
 import { getTextOnIpfs, getImageOnIpfs } from "../image-upload";
 import { dateString } from "../util";
 import { Link } from "react-router-dom";
+import NotFoundComponent from "./404";
 
 class CertViewComponent extends React.Component {
   constructor(props) {
@@ -42,6 +43,9 @@ class CertViewComponent extends React.Component {
     this.loadDescription();
   }
   async loadImage() {
+    if (this.state.index < 0 || this.props.certificates.length <= this.state.index) {
+      return;
+    }
     const certificate = this.state.certificates[this.state.index];
     if (certificate.imageUrl) {
       this.setState({
@@ -61,6 +65,9 @@ class CertViewComponent extends React.Component {
     });
   }
   async loadTitle() {
+    if (this.state.index < 0 || this.props.certificates.length <= this.state.index) {
+      return;
+    }
     const certificate = this.state.certificates[this.state.index];
     if (certificate.titleInIpfs) {
       this.setState({
@@ -83,6 +90,9 @@ class CertViewComponent extends React.Component {
     });
   }
   async loadDescription() {
+    if (this.state.index < 0 || this.props.certificates.length <= this.state.index) {
+      return;
+    }
     const certificate = this.state.certificates[this.state.index];
     if (certificate.descriptionInIpfs) {
       this.setState({
@@ -116,6 +126,11 @@ class CertViewComponent extends React.Component {
     this.loadDetail();
   }
   render() {
+    if (this.state.index < 0 || this.props.certificates.length <= this.state.index) {
+      return (
+        <NotFoundComponent />
+      );
+    }
     const certificate = this.props.certificates[this.state.index];
     return (
       <div className="cert-view">

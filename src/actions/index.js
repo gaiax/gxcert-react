@@ -447,6 +447,15 @@ const getInfoOfCertificatesInUserPage = () => async (dispatch, getState) => {
         });
       });
     }
+    if (!certificate.descriptionInIpfs) {
+      getTextOnIpfs(certificate.description).then(description => {
+        certificate.descriptionInIpfs = description;
+        dispatch({
+          type: "GET_CERTIFICATES_IN_USER_PAGE",
+          payload: certificates,
+        });
+      });
+    }
   }
 }
 
