@@ -7,7 +7,7 @@ import { CertCellComponent } from "./CertCell";
 
 class CertListComponent extends React.Component {
   componentDidMount() {
-    //this.props.getInfoOfCertificates();
+    this.props.getInfoOfCertificates();
   }
   render() {
     return (

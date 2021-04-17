@@ -20,7 +20,7 @@ async function postText(text) {
 }
 
 function createImageUrlFromUint8Array(arr) {
-  const blob = new Blob([arr], { type: "image/png" });
+  const blob = new Blob([arr]);
   const urlCreator = window.URL || window.webkitURL;
   const imageUrl = urlCreator.createObjectURL(blob);
   return imageUrl;
