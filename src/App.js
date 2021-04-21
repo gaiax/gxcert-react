@@ -75,6 +75,7 @@ class App extends React.Component {
                 certificatesIIssuesed={that.props.state.certificatesIIssuesed}
                 icon={icon} 
                 getCertificates={that.props.getCertificates} 
+                getCertificatesIIssuesed={that.props.getCertificatesIIssuesed} 
                 exportAccount={that.props.exportAccount}
                 onCopyId={that.props.onCopyId}
                 getInfoOfCertificates={that.props.getInfoOfCertificates}

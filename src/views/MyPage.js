@@ -23,6 +23,7 @@ class MyPageComponent extends React.Component {
           certificatesIIssuesed={this.props.certificatesIIssuesed}
           isLoading={this.props.isLoading} 
           getCertificates={this.props.getCertificates}
+          getCertificatesIIssuesed={this.props.getCertificatesIIssuesed}
           changeTabToIssueser={this.props.changeTabToIssueser}
           changeTabToMyCertificates={this.props.changeTabToMyCertificates}
           tab={this.props.tab}
