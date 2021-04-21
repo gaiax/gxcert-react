@@ -54,6 +54,28 @@ const getCertificates = () => async (dispatch, getState) => {
     });
     return;
   }
+  for (const certificate of certificates) {
+    client.getProfile(certificate.by).then(profile => {
+      certificate.byProfile = profile;
+      dispatch({
+        type: "GET_CERTIFICATES",
+        payload: certificates,
+      });
+    }).catch(err => {
+      console.error(err);
+    });
+    if (certificate.to) {
+      client.getProfile(certificate.to).then(profile => {
+        certificate.toProfile = profile;
+        dispatch({
+          type: "GET_CERTIFICATES",
+          payload: certificates,
+        });
+      }).catch(err => {
+        console.error(err);
+      });
+    }
+  }
   dispatch({
     type: "GET_CERTIFICATES",
     payload: certificates,
@@ -78,6 +100,28 @@ const getCertificatesInUserPage = (address) => async (dispatch, getState) => {
     });
     return;
   }
+  for (const certificate of certificates) {
+    client.getProfile(certificate.by).then(profile => {
+      certificate.byProfile = profile;
+      dispatch({
+        type: "GET_CERTIFICATES_IN_USER_PAGE",
+        payload: certificates,
+      });
+    }).catch(err => {
+      console.error(err);
+    });
+    if (certificate.to) {
+      client.getProfile(certificate.to).then(profile => {
+        certificate.toProfile = profile;
+        dispatch({
+          type: "GET_CERTIFICATES_IN_USER_PAGE",
+          payload: certificates,
+        });
+      }).catch(err => {
+        console.error(err);
+      });
+    }
+  }
   dispatch({
     type: "GET_CERTIFICATES_IN_USER_PAGE",
     payload: certificates,
@@ -101,6 +145,28 @@ const getCertificatesIIssuesed = () => async (dispatch, getState) => {
     });
     return;
   }
+  for (const certificate of certificates) {
+    client.getProfile(certificate.by).then(profile => {
+      certificate.byProfile = profile;
+      dispatch({
+        type: "GET_CERTIFICATES_I_ISSUESED",
+        payload: certificates,
+      });
+    }).catch(err => {
+      console.error(err);
+    });
+    if (certificate.to) {
+      client.getProfile(certificate.to).then(profile => {
+        certificate.toProfile = profile;
+        dispatch({
+          type: "GET_CERTIFICATES_I_ISSUESED",
+          payload: certificates,
+        });
+      }).catch(err => {
+        console.error(err);
+      });
+    }
+  }
   dispatch({
     type: "GET_CERTIFICATES_I_ISSUESED",
     payload: certificates,
@@ -123,6 +189,28 @@ const getCertificatesIIssuesedInUserPage = (address) => async (dispatch, getStat
       error: err,
     });
     return;
+  }
+  for (const certificate of certificates) {
+    client.getProfile(certificate.by).then(profile => {
+      certificate.byProfile = profile;
+      dispatch({
+        type: "GET_CERTIFICATES_I_ISSUESED_IN_USER_PAGE",
+        payload: certificates,
+      });
+    }).catch(err => {
+      console.error(err);
+    });
+    if (certificate.to) {
+      client.getProfile(certificate.to).then(profile => {
+        certificate.toProfile = profile;
+        dispatch({
+          type: "GET_CERTIFICATES_I_ISSUESED_IN_USER_PAGE",
+          payload: certificates,
+        });
+      }).catch(err => {
+        console.error(err);
+      });
+    }
   }
   dispatch({
     type: "GET_CERTIFICATES_I_ISSUESED_IN_USER_PAGE",
