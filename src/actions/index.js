@@ -1,6 +1,7 @@
 import CertClient, { getClientFromState, clientWithoutAccount } from "../client"
 import { getTextOnIpfs, postText, fileInputToDataURL, createBlobFromImageDataURI, postCertificate, getImageOnIpfs } from "../image-upload";
 import { getGoogleUid } from "../util";
+import { getCertificates as getCertificatesWithIpfs, getCertificatesIIssuesed as getCertificatesIIssuesedWithIpfs } from "../util/ClientWithIpfs";
 
 const getMyProfile = () => async (dispatch, getState) => {
   const client = getState().state.client;
@@ -42,43 +43,17 @@ const getCertificates = () => async (dispatch, getState) => {
     payload: null,
   });
   const client = getClientFromState(getState().state.client);
-  let certificates;
-  try {
-    certificates = await client.getCertificates();
-  } catch(err) {
-    console.error(err);
+  getCertificatesWithIpfs(client, client.address, (payload) => {
+    dispatch({
+      type: "GET_CERTIFICATES",
+      payload,
+    });
+  }, (err) => {
     dispatch({
       type: "GET_CERTIFICATES",
       payload: null,
       error: err,
     });
-    return;
-  }
-  for (const certificate of certificates) {
-    client.getProfile(certificate.by).then(profile => {
-      certificate.byProfile = profile;
-      dispatch({
-        type: "GET_CERTIFICATES",
-        payload: certificates,
-      });
-    }).catch(err => {
-      console.error(err);
-    });
-    if (certificate.to) {
-      client.getProfile(certificate.to).then(profile => {
-        certificate.toProfile = profile;
-        dispatch({
-          type: "GET_CERTIFICATES",
-          payload: certificates,
-        });
-      }).catch(err => {
-        console.error(err);
-      });
-    }
-  }
-  dispatch({
-    type: "GET_CERTIFICATES",
-    payload: certificates,
   });
 }
 
@@ -88,43 +63,17 @@ const getCertificatesInUserPage = (address) => async (dispatch, getState) => {
     payload: null,
   });
   const client = clientWithoutAccount;
-  let certificates;
-  try {
-    certificates = await client.getCertificates(address);
-  } catch(err) {
-    console.error(err);
+  getCertificatesWithIpfs(client, address, (payload) => {
+    dispatch({
+      type: "GET_CERTIFICATES_IN_USER_PAGE",
+      payload,
+    });
+  }, (err) => {
     dispatch({
       type: "GET_CERTIFICATES_IN_USER_PAGE",
       payload: [],
       error: err,
     });
-    return;
-  }
-  for (const certificate of certificates) {
-    client.getProfile(certificate.by).then(profile => {
-      certificate.byProfile = profile;
-      dispatch({
-        type: "GET_CERTIFICATES_IN_USER_PAGE",
-        payload: certificates,
-      });
-    }).catch(err => {
-      console.error(err);
-    });
-    if (certificate.to) {
-      client.getProfile(certificate.to).then(profile => {
-        certificate.toProfile = profile;
-        dispatch({
-          type: "GET_CERTIFICATES_IN_USER_PAGE",
-          payload: certificates,
-        });
-      }).catch(err => {
-        console.error(err);
-      });
-    }
-  }
-  dispatch({
-    type: "GET_CERTIFICATES_IN_USER_PAGE",
-    payload: certificates,
   });
 }
 const getCertificatesIIssuesed = () => async (dispatch, getState) => {
@@ -133,43 +82,17 @@ const getCertificatesIIssuesed = () => async (dispatch, getState) => {
     payload: null,
   });
   const client = getClientFromState(getState().state.client);
-  let certificates;
-  try {
-    certificates = await client.getCertificatesIIssuesed();
-  } catch(err) {
-    console.error(err);
+  getCertificatesIIssuesedWithIpfs(client, client.address, (payload) => {
+    dispatch({
+      type: "GET_CERTIFICATES_I_ISSUESED",
+      payload,
+    });
+  }, (err) => {
     dispatch({
       type: "GET_CERTIFICATES_I_ISSUESED",
       payload: null,
       error: err,
     });
-    return;
-  }
-  for (const certificate of certificates) {
-    client.getProfile(certificate.by).then(profile => {
-      certificate.byProfile = profile;
-      dispatch({
-        type: "GET_CERTIFICATES_I_ISSUESED",
-        payload: certificates,
-      });
-    }).catch(err => {
-      console.error(err);
-    });
-    if (certificate.to) {
-      client.getProfile(certificate.to).then(profile => {
-        certificate.toProfile = profile;
-        dispatch({
-          type: "GET_CERTIFICATES_I_ISSUESED",
-          payload: certificates,
-        });
-      }).catch(err => {
-        console.error(err);
-      });
-    }
-  }
-  dispatch({
-    type: "GET_CERTIFICATES_I_ISSUESED",
-    payload: certificates,
   });
 }
 const getCertificatesIIssuesedInUserPage = (address) => async (dispatch, getState) => {
@@ -178,43 +101,17 @@ const getCertificatesIIssuesedInUserPage = (address) => async (dispatch, getStat
     payload: null,
   });
   const client = clientWithoutAccount;
-  let certificates;
-  try {
-    certificates = await client.getCertificatesIIssuesed(address);
-  } catch(err) {
-    console.error(err);
+  getCertificatesIIssuesedWithIpfs(client, address, (payload) => {
+    dispatch({
+      type: "GET_CERTIFICATES_I_ISSUESED_IN_USER_PAGE",
+      payload: payload,
+    });
+  }, (err) => {
     dispatch({
       type: "GET_CERTIFICATES_I_ISSUESED_IN_USER_PAGE",
       payload: [],
       error: err,
     });
-    return;
-  }
-  for (const certificate of certificates) {
-    client.getProfile(certificate.by).then(profile => {
-      certificate.byProfile = profile;
-      dispatch({
-        type: "GET_CERTIFICATES_I_ISSUESED_IN_USER_PAGE",
-        payload: certificates,
-      });
-    }).catch(err => {
-      console.error(err);
-    });
-    if (certificate.to) {
-      client.getProfile(certificate.to).then(profile => {
-        certificate.toProfile = profile;
-        dispatch({
-          type: "GET_CERTIFICATES_I_ISSUESED_IN_USER_PAGE",
-          payload: certificates,
-        });
-      }).catch(err => {
-        console.error(err);
-      });
-    }
-  }
-  dispatch({
-    type: "GET_CERTIFICATES_I_ISSUESED_IN_USER_PAGE",
-    payload: certificates,
   });
 }
 const issue = () => async (dispatch, getState) => {

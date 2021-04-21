@@ -1,6 +1,12 @@
 import { getTextOnIpfs, getImageOnIpfs } from "../image-upload";
-async function getCertificates(client, address, update) {
-  const certificates = await client.getCertificates(address);
+async function getCertificates(client, address, update, fail) {
+  let certificates;
+  try {
+    certificates = await client.getCertificates(address);
+  } catch(err) {
+    fail(err);
+    return;
+  }
   update(certificates);
   for (const certificate of certificates) {
     getImageOnIpfs(certificate.ipfs).then(imageUrl => {
@@ -29,8 +35,14 @@ async function getCertificates(client, address, update) {
     }
   }
 }
-async function getCertificatesIIssuesed(client, address, update) {
-  const certificates = await client.getCertificatesIIssuesed(address);
+async function getCertificatesIIssuesed(client, address, update, fail) {
+  let certificates;
+  try {
+    certificates = await client.getCertificatesIIssuesed(address);
+  } catch(err) {
+    fail(err);
+    return;
+  }
   update(certificates);
   for (const certificate of certificates) {
     getImageOnIpfs(certificate.ipfs).then(imageUrl => {
