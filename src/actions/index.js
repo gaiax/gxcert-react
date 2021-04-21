@@ -21,6 +21,16 @@ const getMyProfile = () => async (dispatch, getState) => {
     }
   }
   profile.icon = icon;
+  const ipfsHashOfName = profile.name;
+  let name = null;
+  if (ipfsHashOfName) {
+    try {
+      name = await getTextOnIpfs(ipfsHashOfName);
+    } catch(err) {
+      name = null;
+    }
+  }
+  profile.nameInIpfs = name;
   dispatch({
     type: "GET_MYPROFILE",
     payload: profile,
@@ -260,7 +270,17 @@ const updateUserSetting = () => async (dispatch, getState) => {
     return;
   }
   if (state.name !== null && state.name.trim() !== "") {
-    const name = state.name.trim();
+    let name = state.name.trim();
+    try {
+      name = await postText(name);
+    } catch(err) {
+      dispatch({
+        type: "UPDATE_USER_SETTING",
+        payload: null,
+        error: err,
+      });
+      return;
+    }
     try {
       await client.registerName(name);
     } catch(err) {
@@ -334,6 +354,16 @@ const fetchProfileInUserPage = (id) => async (dispatch, getState) => {
     });
     return;
   }
+  const ipfsHashOfName = profile.name;
+  let name = null;
+  if (ipfsHashOfName) {
+    try {
+      name = await getTextOnIpfs(ipfsHashOfName);
+    } catch(err) {
+      name = null;
+    }
+  }
+  profile.nameInIpfs = name;
   dispatch({
     type: "FETCH_PROFILE_IN_USER_PAGE",
     payload: profile,
