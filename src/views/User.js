@@ -34,6 +34,7 @@ class UserComponent extends React.Component {
           getInfoOfCertificates={this.props.getInfoOfCertificates}
           getInfoOfCertificatesIIssuesed={this.props.getInfoOfCertificatesIIssuesed}
           getCertificates={this.props.getCertificates}
+          getCertificatesIIssuesed={this.props.getCertificatesIIssuesed}
           changeTabToIssueser={() => {
             return this.props.changeTabToIssueser(address);
           }}

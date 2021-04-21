@@ -373,6 +373,8 @@ const getInfoOfCertificates = () => async (dispatch, getState) => {
           type: "GET_CERTIFICATES",
           payload: certificates,
         });
+      }).catch(err => {
+        console.error(err);
       });
     }
     if (!certificate.titleInIpfs && certificate.title) {
@@ -382,6 +384,8 @@ const getInfoOfCertificates = () => async (dispatch, getState) => {
           type: "GET_CERTIFICATES",
           payload: certificates,
         });
+      }).catch(err => {
+        console.error(err);
       });
     }
     if (!certificate.descriptionInIpfs && certificate.description) {
@@ -391,6 +395,8 @@ const getInfoOfCertificates = () => async (dispatch, getState) => {
           type: "GET_CERTIFICATES",
           payload: certificates,
         });
+      }).catch(err => {
+        console.error(err);
       });
     }
   }
@@ -407,6 +413,8 @@ const getInfoOfCertificatesIIssuesed = () => async (dispatch, getState) => {
           type: "GET_CERTIFICATES_I_ISSUESED",
           payload: certificates,
         });
+      }).catch(err => {
+        console.error(err);
       });
     }
     if (!certificate.titleInIpfs && certificate.title) {
@@ -416,6 +424,8 @@ const getInfoOfCertificatesIIssuesed = () => async (dispatch, getState) => {
           type: "GET_CERTIFICATES_I_ISSUESED",
           payload: certificates,
         });
+      }).catch(err => {
+        console.error(err);
       });
     }
     if (!certificate.descriptionInIpfs && certificate.description) {
@@ -425,6 +435,8 @@ const getInfoOfCertificatesIIssuesed = () => async (dispatch, getState) => {
           type: "GET_CERTIFICATES_I_ISSUESED",
           payload: certificates,
         });
+      }).catch(err => {
+        console.error(err);
       });
     }
   }
@@ -441,6 +453,8 @@ const getInfoOfCertificatesInUserPage = () => async (dispatch, getState) => {
           type: "GET_CERTIFICATES_IN_USER_PAGE",
           payload: certificates,
         });
+      }).catch(err => {
+        console.error(err);
       });
     }
     if (!certificate.titleInIpfs) {
@@ -450,6 +464,8 @@ const getInfoOfCertificatesInUserPage = () => async (dispatch, getState) => {
           type: "GET_CERTIFICATES_IN_USER_PAGE",
           payload: certificates,
         });
+      }).catch(err => {
+        console.error(err);
       });
     }
     if (!certificate.descriptionInIpfs) {
@@ -459,6 +475,8 @@ const getInfoOfCertificatesInUserPage = () => async (dispatch, getState) => {
           type: "GET_CERTIFICATES_IN_USER_PAGE",
           payload: certificates,
         });
+      }).catch(err => {
+        console.error(err);
       });
     }
   }
@@ -484,6 +502,8 @@ const getInfoOfCertificatesIIssuesedInUserPage = () => async (dispatch, getState
           type: "GET_CERTIFICATES_I_ISSUESED_IN_USER_PAGE",
           payload: certificates,
         });
+      }).catch(err => {
+        console.error(err);
       });
     }
     if (!certificate.descriptionInIpfs) {
@@ -493,6 +513,8 @@ const getInfoOfCertificatesIIssuesedInUserPage = () => async (dispatch, getState
           type: "GET_CERTIFICATES_I_ISSUESED_IN_USER_PAGE",
           payload: certificates,
         });
+      }).catch(err => {
+        console.error(err);
       });
     }
   }

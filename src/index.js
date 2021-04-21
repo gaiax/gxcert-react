@@ -90,6 +90,9 @@ function mapDispatchToProps(dispatch, props) {
     getCertificatesInUserPage: (address) => {
       dispatch(getCertificatesInUserPage(address));
     },
+    getCertificatesIIssuesedInUserPage: (address) => {
+      dispatch(getCertificatesIIssuesedInUserPage(address));
+    },
     changeTabToIssueser: () => {
       dispatch(getCertificatesIIssuesed());
     },

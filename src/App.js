@@ -108,6 +108,7 @@ class App extends React.Component {
                 certificates={that.props.state.certificatesInUserPage}
                 certificatesIIssuesed={that.props.state.certificatesIIssuesedInUserPage}
                 getCertificates={that.props.getCertificatesInUserPage}
+                getCertificatesIIssuesed={that.props.getCertificatesIIssuesedInUserPage}
                 getInfoOfCertificates={that.props.getInfoOfCertificatesInUserPage}
                 getInfoOfCertificatesIIssuesed={that.props.getInfoOfCertificatesIIssuesedInUserPage}
                 changeTabToIssueser={that.props.changeTabInUserPageToIssueser}
