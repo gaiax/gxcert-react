@@ -70,6 +70,7 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/" render={ () => <MyPageComponent 
                 address={client.address} 
+                profile={client.profile}
                 isLoading={that.props.state.myPageIsLoading} 
                 certificates={that.props.state.certificates} 
                 certificatesIIssuesed={that.props.state.certificatesIIssuesed}

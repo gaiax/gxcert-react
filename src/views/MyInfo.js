@@ -15,10 +15,17 @@ class MyInfoComponent extends React.Component {
     this.props.onCopyId();
   }
   render() {
+    let name = "";
+    if (this.props.profile && this.props.profile.name) {
+      name = this.props.profile.name;
+    }
     return (
       <div className="myinfo">
         <img className="myinfo-image" alt="GxCert icon" src={this.props.icon} />
         <div className="myinfo-right">
+          <div className="myinfo-name">
+            { name }
+          </div>
           <div className="myinfo-address">
             { "Your ID: " + this.props.address }
           </div>

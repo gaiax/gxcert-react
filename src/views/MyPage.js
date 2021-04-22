@@ -13,6 +13,7 @@ class MyPageComponent extends React.Component {
       <div className="show">
         <MyInfoComponent 
           address={this.props.address} 
+          profile={this.props.profile}
           icon={this.props.icon} 
           exportAccount={this.props.exportAccount} 
           onCopyId={this.props.onCopyId}
