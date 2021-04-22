@@ -43,12 +43,16 @@ const getCertificates = () => async (dispatch, getState) => {
     payload: null,
   });
   const client = getClientFromState(getState().state.client);
-  getCertificatesWithIpfs(client, client.address, (payload) => {
+  client.getCertificates(client.address, (certificates) => {
+    console.log(certificates);
     dispatch({
       type: "GET_CERTIFICATES",
-      payload,
+      payload: certificates,
     });
-  }, (err) => {
+  }).then(certificates => {
+    
+  }).catch(err => {
+    console.error(err);
     dispatch({
       type: "GET_CERTIFICATES",
       payload: null,
@@ -63,15 +67,18 @@ const getCertificatesInUserPage = (address) => async (dispatch, getState) => {
     payload: null,
   });
   const client = clientWithoutAccount;
-  getCertificatesWithIpfs(client, address, (payload) => {
+  client.getCertificates(address, (certificates) => {
     dispatch({
       type: "GET_CERTIFICATES_IN_USER_PAGE",
-      payload,
+      payload: certificates,
     });
-  }, (err) => {
+  }).then(certificates => {
+    
+  }).catch(err => {
+    console.error(err);
     dispatch({
       type: "GET_CERTIFICATES_IN_USER_PAGE",
-      payload: [],
+      payload: null,
       error: err,
     });
   });
@@ -82,12 +89,15 @@ const getCertificatesIIssuesed = () => async (dispatch, getState) => {
     payload: null,
   });
   const client = getClientFromState(getState().state.client);
-  getCertificatesIIssuesedWithIpfs(client, client.address, (payload) => {
+  client.getCertificatesIIssuesed(client.address, (certificates) => {
     dispatch({
       type: "GET_CERTIFICATES_I_ISSUESED",
-      payload,
+      payload: certificates,
     });
-  }, (err) => {
+  }).then(certificates => {
+
+  }).catch(err => {
+    console.error(err);
     dispatch({
       type: "GET_CERTIFICATES_I_ISSUESED",
       payload: null,
@@ -101,15 +111,18 @@ const getCertificatesIIssuesedInUserPage = (address) => async (dispatch, getStat
     payload: null,
   });
   const client = clientWithoutAccount;
-  getCertificatesIIssuesedWithIpfs(client, address, (payload) => {
+  client.getCertificatesIIssuesed(address, (certificates) => {
     dispatch({
       type: "GET_CERTIFICATES_I_ISSUESED_IN_USER_PAGE",
-      payload: payload,
+      payload: certificates,
     });
-  }, (err) => {
+  }).then(certificates => {
+
+  }).catch(err => {
+    console.error(err);
     dispatch({
       type: "GET_CERTIFICATES_I_ISSUESED_IN_USER_PAGE",
-      payload: [],
+      payload: null,
       error: err,
     });
   });
