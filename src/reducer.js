@@ -194,6 +194,10 @@ export default function Reducer(state=initialState, action) {
       return Object.assign({}, state, {
         exportModalIsShown: true,
       });
+    case "CLOSE_EXPORT_MODAL":
+      return Object.assign({}, state, {
+        exportModalIsShown: false,
+      });
     default:
       return state;
   }

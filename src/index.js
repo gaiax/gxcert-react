@@ -34,6 +34,7 @@ import {
   updateUserSetting, 
   onChangeTitle,
   openExportModal,
+  closeExportModal,
 } from "./actions";
 import { connect, Provider } from "react-redux";
 import store, { persistor } from "./store";
@@ -130,6 +131,9 @@ function mapDispatchToProps(dispatch, props) {
     loginWithGoogle: () => {
       dispatch(loginWithGoogle());
     },
+    closeExportModal: () => {
+      dispatch(closeExportModal());
+    }
   }
 }
 

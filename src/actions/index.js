@@ -573,6 +573,12 @@ const openExportModal = () => async (dispatch, getState) => {
     payload: null,
   });
 }
+const closeExportModal = () => async (dispatch, getState) => {
+  dispatch({
+    type: "CLOSE_EXPORT_MODAL",
+    payload: null,
+  });
+}
 
 const loginWithGoogle = () => async (dispatch) => {
   const uid = await getGoogleUid();
@@ -618,4 +624,5 @@ export {
   logout,
   loginWithGoogle,
   openExportModal,
+  closeExportModal,
 }
