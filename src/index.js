@@ -35,6 +35,7 @@ import {
   onChangeTitle,
   openExportModal,
   closeExportModal,
+  copyAccount,
 } from "./actions";
 import { connect, Provider } from "react-redux";
 import store, { persistor } from "./store";
@@ -133,6 +134,9 @@ function mapDispatchToProps(dispatch, props) {
     },
     closeExportModal: () => {
       dispatch(closeExportModal());
+    },
+    copyAccount: () => {
+      dispatch(copyAccount());
     }
   }
 }

@@ -1,6 +1,6 @@
 import CertClient, { getClientFromState, clientWithoutAccount } from "../client"
 import { getTextOnIpfs, postText, fileInputToDataURL, createBlobFromImageDataURI, postCertificate, getImageOnIpfs } from "../image-upload";
-import { getGoogleUid } from "../util";
+import { copyText, getGoogleUid } from "../util";
 import { getCertificates as getCertificatesWithIpfs, getCertificatesIIssuesed as getCertificatesIIssuesedWithIpfs } from "../util/ClientWithIpfs";
 
 const getMyProfile = () => async (dispatch, getState) => {
@@ -579,6 +579,11 @@ const closeExportModal = () => async (dispatch, getState) => {
     payload: null,
   });
 }
+const copyAccount = () => async (dispatch, getState) => {
+  const client = getClientFromState(getState().state.client);
+  const uid = client.uid;
+  copyText(uid);
+}
 
 const loginWithGoogle = () => async (dispatch) => {
   const uid = await getGoogleUid();
@@ -625,4 +630,5 @@ export {
   loginWithGoogle,
   openExportModal,
   closeExportModal,
+  copyAccount,
 }
