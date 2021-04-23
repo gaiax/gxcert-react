@@ -555,7 +555,7 @@ const logout = () => async (dispatch) => {
   });
 }
 
-const exportAccount = (evt) => async (dispatch, getState) => {
+const exportFile = (evt) => async (dispatch, getState) => {
   const client = getClientFromState(getState().state.client);
   const uid = client.uid;
   const json = JSON.stringify({
@@ -565,6 +565,13 @@ const exportAccount = (evt) => async (dispatch, getState) => {
   const a = evt.target;
   a.download = "account.json";
   a.href = window.URL.createObjectURL(blob);
+}
+
+const openExportModal = () => async (dispatch, getState) => {
+  dispatch({
+    type: "OPEN_EXPORT_MODAL",
+    payload: null,
+  });
 }
 
 const loginWithGoogle = () => async (dispatch) => {
@@ -595,7 +602,7 @@ export {
   onChangeIcon,
   onChangeDescription,
   updateUserSetting,
-  exportAccount,
+  exportFile,
   onChangeTitle,
   closeModal,
   onCopyId,
@@ -610,4 +617,5 @@ export {
   getInfoOfCertificatesIIssuesedInUserPage,
   logout,
   loginWithGoogle,
+  openExportModal,
 }

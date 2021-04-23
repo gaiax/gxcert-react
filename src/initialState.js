@@ -26,6 +26,7 @@ const initialState = {
   address: null,
   description: "",
   userIsNotFound: false,
+  exportModalIsShown: false,
 }
 
 export default initialState;

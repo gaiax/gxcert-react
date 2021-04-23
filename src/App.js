@@ -10,6 +10,7 @@ import { MyPageComponent } from "./views/MyPage";
 import { CertViewComponent } from "./views/CertView";
 import UserComponent from "./views/User";
 import BsModal from "./views/components/BsModal";
+import BsExportModal from "./views/components/BsExportModal";
 
 
 const UI = {
@@ -59,6 +60,16 @@ class App extends React.Component {
     const login = (
       <Login onClick={this.props.loginWithGoogle} />
     );
+    let exportModal = "";
+    if (this.props.state.exportModalIsShown) {
+      exportModal = (
+        <BsExportModal
+          exportFile={this.props.exportFile} 
+          copyAccount={this.props.copyAccount}
+          closeExportModal={this.props.closeExportModal}
+        />
+      );
+    }
     const main = (
         <div className="main">
           <header>
@@ -77,7 +88,7 @@ class App extends React.Component {
                 icon={icon} 
                 getCertificates={that.props.getCertificates} 
                 getCertificatesIIssuesed={that.props.getCertificatesIIssuesed} 
-                exportAccount={that.props.exportAccount}
+                openExportModal={that.props.openExportModal}
                 onCopyId={that.props.onCopyId}
                 getInfoOfCertificates={that.props.getInfoOfCertificates}
                 getInfoOfCertificatesIIssuesed={that.props.getInfoOfCertificatesIIssuesed}
@@ -128,6 +139,7 @@ class App extends React.Component {
             </Switch>
           </div>
           <BsModal show={modalIsShow} closeModal={this.props.closeModal} isLoading={isLoading} message={this.props.state.message} errorMessage={this.props.state.errorMessage}/>
+          { exportModal }
         </div>
     );
     return (

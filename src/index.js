@@ -20,7 +20,7 @@ import {
   changeTabToIssueser, 
   changeTabToMyCertificates, 
   onCopyId, 
-  exportAccount, 
+  exportFile, 
   closeModal, 
   getMyProfile, 
   getCertificates, 
@@ -32,7 +32,8 @@ import {
   onChangeIcon, 
   onChangeDescription,
   updateUserSetting, 
-  onChangeTitle 
+  onChangeTitle,
+  openExportModal,
 } from "./actions";
 import { connect, Provider } from "react-redux";
 import store, { persistor } from "./store";
@@ -78,8 +79,11 @@ function mapDispatchToProps(dispatch, props) {
     updateUserSetting: () => {
       dispatch(updateUserSetting());
     },
-    exportAccount: (evt) => {
-      dispatch(exportAccount(evt));
+    exportFile: (evt) => {
+      dispatch(exportFile(evt));
+    },
+    openExportModal: () => {
+      dispatch(openExportModal());
     },
     closeModal: () => {
       dispatch(closeModal());

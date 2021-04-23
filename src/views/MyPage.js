@@ -18,6 +18,7 @@ class MyPageComponent extends React.Component {
           exportAccount={this.props.exportAccount} 
           onCopyId={this.props.onCopyId}
           logout={this.props.logout}
+          openExportModal={this.props.openExportModal}
         />
         <MyCertListComponent 
           certificates={this.props.certificates}
