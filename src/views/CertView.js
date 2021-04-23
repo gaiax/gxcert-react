@@ -25,7 +25,6 @@ class CertViewComponent extends React.Component {
         index: this.state.index - 1,
         verified: null,
       });
-      this.loadDetail();
     }
   }
   next() {
@@ -34,7 +33,6 @@ class CertViewComponent extends React.Component {
         index: this.state.index + 1,
         verified: null,
       });
-      this.loadDetail();
     }
   }
   loadDetail() {
@@ -136,7 +134,7 @@ class CertViewComponent extends React.Component {
       <div className="cert-view">
         <div className="cert-view-top">
           <button className="back" onClick={this.back.bind(this)}>＜</button>
-          <img src={this.state.imageUrl} className="cert-view-image" alt="GxCert" />
+          <img src={certificate.imageUrl} className="cert-view-image" alt="GxCert" />
           <button className="next" onClick={this.next.bind(this)}>＞</button>
         </div>
         <div className="cert-view-bottom">
@@ -144,13 +142,13 @@ class CertViewComponent extends React.Component {
           <p className="cert-view-title">
             { this.state.verified ? "✅ This certificate is valid." : "" }
             { !this.state.verified && this.state.verified !== null ? "❌ This certificate is invalid." : "" }<br/>
-            { this.state.titleInIpfs }<br/>
+            { certificate.titleInIpfs }<br/>
             by <Link to={"/users/" + certificate.by }>{ !certificate.issueserName ? certificate.by.substr(0, 16) : certificate.issueserName }</Link> { !certificate.to ? "" : "to " + certificate.to.substr(0, 16) } at {
               dateString(new Date(certificate.time * 1000))
             }
           </p>
           <p className="cert-view-description">
-            { this.state.descriptionInIpfs }
+            { certificate.descriptionInIpfs }
           </p>
         </div>
       </div>
