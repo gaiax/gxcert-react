@@ -12,9 +12,9 @@ export default class BsExportModal extends React.Component {
             <p className="message">Choose way to export account.</p>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="primary" onClick={this.props.exportFile} >
-              Export as a file
-            </Button>
+            <a href="javascript:void(0)" onClick={this.props.exportFile} className="export-file-button">
+                Export as a file
+            </a>
             <Button variant="primary" onClick={this.props.copyAccount} >
               Copy to the clipboard
             </Button>
