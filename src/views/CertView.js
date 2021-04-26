@@ -10,8 +10,13 @@ class CertViewComponent extends React.Component {
     super(props);
     this.client = props.client;
     const index = parseInt(props.match.params.index);
+    let address = this.client.address;
+    if (props.fromUserPage) {
+      address = props.match.params.address;
+    }
     this.index = index;
     this.state = {
+      address,
       certificates: props.certificates,
       index: index,
       verified: null,
@@ -33,6 +38,16 @@ class CertViewComponent extends React.Component {
         index: this.state.index + 1,
         verified: null,
       });
+    }
+  }
+  componentDidMount() {
+    if (this.props.fromUserPage) {
+      if (this.props.getCertificates) {
+        this.props.getCertificates(this.state.address);
+      }
+      if (this.props.getCertificatesIIssuesed) {
+        this.props.getCertificatesIIssuesed(this.state.address);
+      }
     }
   }
   loadDetail() {
@@ -115,7 +130,12 @@ class CertViewComponent extends React.Component {
   async verifyCertificate() {
     const client = this.props.client;
     const certificate = this.state.certificates[this.state.index];
-    const verified = client.verifyCertificate(certificate, client.address);
+    let verified;
+    if (this.props.fromUserPage) {
+      verified = client.verifyCertificate(certificate, client.address);
+    } else {
+      verified = client.verifyCertificate(certificate, this.state.address);
+    }
     this.setState({
       verified: verified,
     });
