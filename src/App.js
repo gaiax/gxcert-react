@@ -128,6 +128,16 @@ class App extends React.Component {
                 tab={that.props.state.tabInUserPage}
                 isNotFound={that.props.state.userIsNotFound}
               /> } />
+              <Route exact path="/users/:id/issuesed/:index" render={ (routeProps) => <CertViewComponent {...routeProps} 
+                certificates={that.props.state.certificatesIIssuesedInUserPage}
+                client={clientWithoutAccount}
+                getCertificates={that.props.getCertificatesInUserPage}
+              /> } />
+              <Route exact path="/users/:id/certs/:index" render={ (routeProps) => <CertViewComponent {...routeProps} 
+                certificates={that.props.state.certificatesInUserPage}
+                client={clientWithoutAccount}
+                getCertificatesIIssuesed={that.props.getCertificatesIIssuesedInUserPage}
+              /> } />
               <Route exact path="/issuesed/:index" render={ (routeProps) => <CertViewComponent {...routeProps}
                 certificates={that.props.state.certificatesIIssuesed}
                 client={clientWithoutAccount}
