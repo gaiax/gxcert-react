@@ -40,6 +40,7 @@ class UserComponent extends React.Component {
           }}
           changeTabToMyCertificates={this.props.changeTabToMyCertificates}
           tab={this.props.tab}
+          path={address + "/"}
         />
       </div>
     );
