@@ -39,7 +39,7 @@ import {
 } from "./actions";
 import { connect, Provider } from "react-redux";
 import store, { persistor } from "./store";
-import { withRouter, BrowserRouter as Router } from "react-router-dom";
+import { withRouter, HashRouter as Router } from "react-router-dom";
 import CertClient from "./client"
 
 function mapStateToProps(state, props) {
