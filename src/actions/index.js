@@ -1,7 +1,6 @@
 import CertClient, { getClientFromState, clientWithoutAccount } from "../client"
 import { getTextOnIpfs, postText, fileInputToDataURL, createBlobFromImageDataURI, postCertificate, getImageOnIpfs } from "../image-upload";
 import { copyText, getGoogleUid } from "../util";
-import { getCertificates as getCertificatesWithIpfs, getCertificatesIIssuesed as getCertificatesIIssuesedWithIpfs } from "../util/ClientWithIpfs";
 
 const getMyProfile = () => async (dispatch, getState) => {
   const client = getState().state.client;
