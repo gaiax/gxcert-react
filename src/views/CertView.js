@@ -10,9 +10,13 @@ class CertViewComponent extends React.Component {
     super(props);
     this.client = props.client;
     const index = parseInt(props.match.params.index);
+    let address = this.client.address;
+    if (props.fromUserPage) {
+      address = props.match.params.address;
+    }
     this.index = index;
     this.state = {
-      certificates: props.certificates,
+      address,
       index: index,
       verified: null,
       title: "",
@@ -28,11 +32,21 @@ class CertViewComponent extends React.Component {
     }
   }
   next() {
-    if (this.state.index < this.state.certificates.length - 1) {
+    if (this.state.index < this.props.certificates.length - 1) {
       this.setState({
         index: this.state.index + 1,
         verified: null,
       });
+    }
+  }
+  componentDidMount() {
+    if (this.props.fromUserPage) {
+      if (this.props.getCertificates) {
+        this.props.getCertificates(this.state.address);
+      }
+      if (this.props.getCertificatesIIssuesed) {
+        this.props.getCertificatesIIssuesed(this.state.address);
+      }
     }
   }
   loadDetail() {
@@ -44,7 +58,7 @@ class CertViewComponent extends React.Component {
     if (this.state.index < 0 || this.props.certificates.length <= this.state.index) {
       return;
     }
-    const certificate = this.state.certificates[this.state.index];
+    const certificate = this.props.certificates[this.state.index];
     if (certificate.imageUrl) {
       this.setState({
         imageUrl: certificate.imageUrl
@@ -66,7 +80,7 @@ class CertViewComponent extends React.Component {
     if (this.state.index < 0 || this.props.certificates.length <= this.state.index) {
       return;
     }
-    const certificate = this.state.certificates[this.state.index];
+    const certificate = this.props.certificates[this.state.index];
     if (certificate.titleInIpfs) {
       this.setState({
         titleInIpfs: certificate.titleInIpfs
@@ -91,7 +105,7 @@ class CertViewComponent extends React.Component {
     if (this.state.index < 0 || this.props.certificates.length <= this.state.index) {
       return;
     }
-    const certificate = this.state.certificates[this.state.index];
+    const certificate = this.props.certificates[this.state.index];
     if (certificate.descriptionInIpfs) {
       this.setState({
         descriptionInIpfs: certificate.descriptionInIpfs,
@@ -114,8 +128,13 @@ class CertViewComponent extends React.Component {
   }
   async verifyCertificate() {
     const client = this.props.client;
-    const certificate = this.state.certificates[this.state.index];
-    const verified = client.verifyCertificate(certificate, client.address);
+    const certificate = this.props.certificates[this.state.index];
+    let verified;
+    if (this.props.fromUserPage) {
+      verified = client.verifyCertificate(certificate, client.address);
+    } else {
+      verified = client.verifyCertificate(certificate, this.state.address);
+    }
     this.setState({
       verified: verified,
     });
