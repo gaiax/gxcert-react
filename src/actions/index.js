@@ -322,7 +322,12 @@ const fetchProfileInUserPage = (id) => async (dispatch, getState) => {
   }
   let profile;
   try {
-    profile = await client.getProfile(id);
+    profile = await client.getProfile(id, profile => {
+      dispatch({
+        type: "FETCH_PROFILE_IN_USER_PAGE",
+        payload: profile,
+      });
+    });
   } catch(err) {
     console.error(err);
     dispatch({
@@ -332,29 +337,6 @@ const fetchProfileInUserPage = (id) => async (dispatch, getState) => {
     });
     return;
   }
-  const ipfsHashOfName = profile.name;
-  let name = null;
-  if (ipfsHashOfName) {
-    try {
-      name = await getTextOnIpfs(ipfsHashOfName);
-    } catch(err) {
-      name = null;
-    }
-  }
-  profile.nameInIpfs = name;
-  dispatch({
-    type: "FETCH_PROFILE_IN_USER_PAGE",
-    payload: profile,
-  });
-  const icon = profile.icon;
-  if (!icon) {
-    return;
-  }
-  const imageUrl = await getImageOnIpfs(icon);
-  dispatch({
-    type: "FETCH_ICON_IN_USER_PAGE",
-    payload: imageUrl,
-  });
 }
 
 const changeTabInUserPageToIssueser = () => async (dispatch) => {

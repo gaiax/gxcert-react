@@ -172,7 +172,7 @@ export default function Reducer(state=initialState, action) {
       }
       return Object.assign({}, state, {
         profileInUserPage: action.payload,
-        nameInUserPage: action.payload.name,
+        nameInUserPage: action.payload.nameInIpfs,
         userIsNotFound: false,
       });
     case "FETCH_ICON_IN_USER_PAGE":
