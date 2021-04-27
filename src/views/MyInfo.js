@@ -16,8 +16,8 @@ class MyInfoComponent extends React.Component {
   }
   render() {
     let name = "";
-    if (this.props.profile && this.props.profile.name) {
-      name = this.props.profile.name;
+    if (this.props.profile && this.props.profile.nameInIpfs) {
+      name = this.props.profile.nameInIpfs;
     }
     return (
       <div className="myinfo">

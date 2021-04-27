@@ -51,7 +51,7 @@ class App extends React.Component {
     const client = this.props.state.client;
     let name = "";
     if (client !== null && client.profile !== null) {
-      name = client.profile.name;
+      name = client.profile.nameInIpfs;
     }
     let icon = "";
     if (profile) {

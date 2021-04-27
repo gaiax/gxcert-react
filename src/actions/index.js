@@ -6,35 +6,16 @@ const getMyProfile = () => async (dispatch, getState) => {
   const client = getState().state.client;
   let profile;
   try {
-    profile = await client.getProfile(client.address);
+    await client.getProfile(client.address, profile => {
+      dispatch({
+        type: "GET_MYPROFILE",
+        payload: profile,
+      });
+    });
   } catch(err) {
     console.error(err);
     return;
   }
-  const ipfsHashOfImage = profile.icon;
-  let icon = null;
-  if (ipfsHashOfImage) {
-    try {
-      icon = await getImageOnIpfs(ipfsHashOfImage);
-    } catch(err) {
-      icon = null;
-    }
-  }
-  profile.icon = icon;
-  const ipfsHashOfName = profile.name;
-  let name = null;
-  if (ipfsHashOfName) {
-    try {
-      name = await getTextOnIpfs(ipfsHashOfName);
-    } catch(err) {
-      name = null;
-    }
-  }
-  profile.nameInIpfs = name;
-  dispatch({
-    type: "GET_MYPROFILE",
-    payload: profile,
-  });
 }
 const getCertificates = () => async (dispatch, getState) => {
   dispatch({
