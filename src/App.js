@@ -85,7 +85,6 @@ class App extends React.Component {
                 isLoading={that.props.state.myPageIsLoading} 
                 certificates={that.props.state.certificates} 
                 certificatesIIssuesed={that.props.state.certificatesIIssuesed}
-                icon={icon} 
                 getCertificates={that.props.getCertificates} 
                 getCertificatesIIssuesed={that.props.getCertificatesIIssuesed} 
                 openExportModal={that.props.openExportModal}

@@ -4,12 +4,6 @@ import { Link } from "react-router-dom";
 import { copyText } from "../util";
 
 class MyInfoComponent extends React.Component {
-  static getDerivedStateFromProps(nextProps, prevState) {
-    return {
-      address: nextProps.address,
-      icon: nextProps.icon,
-    }
-  }
   copyId() {
     copyText(this.props.address);
     this.props.onCopyId();
@@ -21,7 +15,7 @@ class MyInfoComponent extends React.Component {
     }
     return (
       <div className="myinfo">
-        <img className="myinfo-image" alt="GxCert icon" src={this.props.icon} />
+        <img className="myinfo-image" alt="GxCert icon" src={this.props.profile.imageUrl} />
         <div className="myinfo-right">
           <div className="myinfo-name">
             { name }

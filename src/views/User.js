@@ -21,9 +21,13 @@ class UserComponent extends React.Component {
     }
     console.log(this.props);
     const address = this.props.match.params.id;
+    let imageUrl = null;
+    if (this.props.profile) {
+      imageUrl = this.props.profile.imageUrl;
+    }
     return (
       <div className="user">
-        <img src={this.props.imageUrl} className="user-icon" />
+        <img src={imageUrl} className="user-icon" />
         <h2 className="user-name">
           { this.props.name }
         </h2>
