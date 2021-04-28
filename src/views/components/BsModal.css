@@ -94,3 +94,36 @@
   text-align: right;
   cursor:pointer;
 }
+
+.issue-modal-message {
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+
+}
+.issued-image {
+  width: 100px;
+  height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.issued-image-wrapper {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.issued-button-wrapper {
+  text-align: center;
+}
+.issue-modal-close {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #00868F;
+  color: white;
+  height: 40px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+.modal-content {
+  border-radius: 10px;
+}

@@ -11,6 +11,7 @@ import { CertViewComponent } from "./views/CertView";
 import UserComponent from "./views/User";
 import BsModal from "./views/components/BsModal";
 import BsExportModal from "./views/components/BsExportModal";
+import BsIssueModal from "./views/components/BsIssueModal";
 
 
 const UI = {
