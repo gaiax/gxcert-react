@@ -161,12 +161,14 @@ class CertViewComponent extends React.Component {
           <p className="cert-view-title">
             { this.state.verified ? "✅ This certificate is valid." : "" }
             { !this.state.verified && this.state.verified !== null ? "❌ This certificate is invalid." : "" }<br/>
-            { certificate.titleInIpfs }<br/>
-            by <Link to={"/users/" + certificate.by }>{ !certificate.issueserName ? certificate.by.substr(0, 16) : certificate.issueserName }</Link> { !certificate.to ? "" : "to " + certificate.to.substr(0, 16) } at {
+            title: { certificate.titleInIpfs }<br/>
+            Issuer: <Link to={"/users/" + certificate.by } className="issuer">{ !certificate.issueserName ? certificate.by.substr(0, 16) : certificate.issueserName }</Link> <br/>
+            Holder: { !certificate.to ? "" : "to " + certificate.to.substr(0, 16) } at {
               dateString(new Date(certificate.time * 1000))
             }
           </p>
           <p className="cert-view-description">
+            description: <br/>
             { certificate.descriptionInIpfs }
           </p>
         </div>
