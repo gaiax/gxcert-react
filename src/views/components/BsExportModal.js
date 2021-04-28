@@ -9,7 +9,7 @@ export default class BsExportModal extends React.Component {
       <div className="modal">
         <Modal show={true} animation={true} >
           <Modal.Body>
-            <span className="close-button" onClick={this.props.closeExportModal}>x</span>
+            <span className="close-button" onClick={this.props.closeModal}>x</span>
             <p className="modal-title-text">Seed Phrase</p>
             <p className="modal-body-text">You need the seed phrase in order to access your account when you change a browser or a laptop.<br/>Please save the seed phrase in safe place.</p>
             <div className="modal-warning">

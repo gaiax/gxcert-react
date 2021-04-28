@@ -11,6 +11,8 @@ import { CertViewComponent } from "./views/CertView";
 import UserComponent from "./views/User";
 import BsModal from "./views/components/BsModal";
 import BsExportModal from "./views/components/BsExportModal";
+import BsIssueModal from "./views/components/BsIssueModal";
+import ModalType from "./modalType";
 
 
 const UI = {
@@ -45,8 +47,7 @@ class App extends React.Component {
   render() {
     const that = this;
     console.log(that.props);
-    const modalIsShow = this.props.state.isLoading || this.props.state.message !== null || this.props.state.errorMessage !== null;
-    const isLoading = this.props.state.isLoading;
+    let normalModal = "";
     const profile = this.props.state.myProfile;
     const client = this.props.state.client;
     let name = "";
@@ -60,15 +61,23 @@ class App extends React.Component {
     const login = (
       <Login onClick={this.props.loginWithGoogle} />
     );
-    let exportModal = "";
-    if (this.props.state.exportModalIsShown) {
-      exportModal = (
+    let modal = "";
+    if (this.props.state.modal === ModalType.EXPORT) {
+      modal = (
         <BsExportModal
           seed={this.props.state.client.uid}
           exportFile={this.props.exportFile} 
           copyAccount={this.props.copyAccount}
-          closeExportModal={this.props.closeExportModal}
+          closeModal={this.props.closeModal}
         />
+      );
+    } else if (this.props.state.modal === ModalType.NORMAL) {
+      modal = (
+        <BsModal show={true} closeModal={this.props.closeModal} isLoading={this.props.state.isLoading} message={this.props.state.message} errorMessage={this.props.state.errorMessage}/>
+      );
+    } else if (this.props.state.modal === ModalType.ISSUE) {
+      modal = (
+        <BsIssueModal show={true} closeModal={this.props.closeModal} isLoading={this.props.state.isIssuing} error={this.props.state.issueError}/>
       );
     }
     const main = (
@@ -150,14 +159,13 @@ class App extends React.Component {
               />} />
             </Switch>
           </div>
-          <BsModal show={modalIsShow} closeModal={this.props.closeModal} isLoading={isLoading} message={this.props.state.message} errorMessage={this.props.state.errorMessage}/>
-          { exportModal }
+          { modal }
         </div>
     );
     return (
         <div className="App">
           { !this.props.location.pathname.startsWith("/users/") && client === null ? login : main }
-          <BsModal show={modalIsShow} closeModal={this.props.closeModal} isLoading={isLoading} message={this.props.state.message} errorMessage={this.props.state.errorMessage}/>
+          <BsModal show={true} closeModal={this.props.closeModal} isLoading={this.props.state.isLoading} message={this.props.state.message} errorMessage={this.props.state.errorMessage}/>
         </div>
     );
   }
