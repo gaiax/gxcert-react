@@ -17,6 +17,22 @@ export default class BsIssueModal extends React.Component {
           </Modal.Body>
         </Modal>
       );
+    } else if (this.props.error) {
+      modal = (
+        <Modal show={this.props.show} animation={true} >
+          <Modal.Body>
+            <span className="close-button" onClick={this.props.closeModal}>x</span>
+            <br/>
+            <div className="issued-image-wrapper">
+              <img className="issued-image" />
+            </div>
+            <p className="issue-modal-message">Failed to issue certificate.</p>
+            <div className="issued-button-wrapper">
+              <button className="issue-modal-close" onClick={this.props.closeModal}>Close</button>
+            </div>
+          </Modal.Body>
+        </Modal>
+      )
     } else {
       modal = (
         <Modal show={this.props.show} animation={true} >

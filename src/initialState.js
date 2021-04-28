@@ -27,6 +27,8 @@ const initialState = {
   description: "",
   userIsNotFound: false,
   modal: 0,
+  isIssuing: false,
+  issueError: false,
 }
 
 export default initialState;

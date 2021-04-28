@@ -6,9 +6,8 @@ export default function Reducer(state=initialState, action) {
   switch(action.type) {
     case "ON_CLICK_ISSUE_BUTTON":
       return Object.assign({}, state, {
-        modal: ModalType.NORMAL,
-        isLoading: true,
-        message: "Issuesing the certificate...",
+        modal: ModalType.ISSUE,
+        isIssuing: true,
       }); 
     case "START_UPDATE_USER_SETTING":
       return Object.assign({}, state, {
@@ -41,25 +40,23 @@ export default function Reducer(state=initialState, action) {
     case "ISSUE":
       if (state.issueTo === null || state.certificateImage === null || state.title.trim() === "") {
         return Object.assign({}, state, {
-          modal: ModalType.NORMAL,
-          isLoading: false,
-          message: null,
-          errorMessage: "Fill the input fields.",
+          modal: ModalType.ISSUE,
+          isIssuing: false,
+          issueError: true,
         });
         return;
       }
       if (action.error) {
         return Object.assign({}, state, {
-          modal: ModalType.NORMAL,
-          isLoading: false,
-          message: null,
-          errorMessage: "Failed to issue the certificate.",
+          modal: ModalType.ISSUE,
+          isIssuing: false,
+          issueError: true,
         });
       }
       return Object.assign({}, state, {
-        modal: ModalType.NORMAL,
-        isLoading: false,
-        message: "Successfully issuesed the certificate.",
+        modal: ModalType.ISSUE,
+        isIssuing: false,
+        issueError: false,
       });
     case "GET_CERTIFICATES":
       if (action.error) {

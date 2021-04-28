@@ -68,7 +68,7 @@ class App extends React.Component {
           seed={this.props.state.client.uid}
           exportFile={this.props.exportFile} 
           copyAccount={this.props.copyAccount}
-          closeExportModal={this.props.closeExportModal}
+          closeModal={this.props.closeModal}
         />
       );
     } else if (this.props.state.modal === ModalType.NORMAL) {
@@ -77,7 +77,7 @@ class App extends React.Component {
       );
     } else if (this.props.state.modal === ModalType.ISSUE) {
       modal = (
-        <BsIssueModal show={true} closeModal={this.props.closeModal} />
+        <BsIssueModal show={true} closeModal={this.props.closeModal} isLoading={this.props.state.isIssuing} error={this.props.state.issueError}/>
       );
     }
     const main = (
