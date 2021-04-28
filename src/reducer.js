@@ -1,22 +1,25 @@
 
 import initialState from "./initialState";
-
+import ModalType from "./modalType";
 
 export default function Reducer(state=initialState, action) {
   switch(action.type) {
     case "ON_CLICK_ISSUE_BUTTON":
       return Object.assign({}, state, {
+        modal: ModalType.NORMAL,
         isLoading: true,
         message: "Issuesing the certificate...",
       }); 
     case "START_UPDATE_USER_SETTING":
       return Object.assign({}, state, {
+        modal: ModalType.NORMAL,
         isLoading: true,
         message: "Updating your setting...",
       }); 
     case "UPDATE_USER_SETTING":
       if ((!state.name || state.name.trim() === "") && (!state.icon)) {
         return Object.assign({}, state, {
+          modal: ModalType.NORMAL,
           isLoading: false,
           message: null,
           errorMessage: "The input fields are empty.",
@@ -24,18 +27,21 @@ export default function Reducer(state=initialState, action) {
       }
       if (action.error) {
         return Object.assign({}, state, {
+          modal: ModalType.NORMAL,
           isLoading: false,
           message: null,
           errorMessage: "Failed to update your setting.",
         });
       }
       return Object.assign({}, state, {
+        modal: ModalType.NORMAL,
         isLoading: false,
         message: "Successfully updated your setting.",
       }); 
     case "ISSUE":
       if (state.issueTo === null || state.certificateImage === null || state.title.trim() === "") {
         return Object.assign({}, state, {
+          modal: ModalType.NORMAL,
           isLoading: false,
           message: null,
           errorMessage: "Fill the input fields.",
@@ -44,18 +50,21 @@ export default function Reducer(state=initialState, action) {
       }
       if (action.error) {
         return Object.assign({}, state, {
+          modal: ModalType.NORMAL,
           isLoading: false,
           message: null,
           errorMessage: "Failed to issue the certificate.",
         });
       }
       return Object.assign({}, state, {
+        modal: ModalType.NORMAL,
         isLoading: false,
         message: "Successfully issuesed the certificate.",
       });
     case "GET_CERTIFICATES":
       if (action.error) {
         return Object.assign({}, state, {
+          modal: ModalType.NORMAL,
           myPageIsLoading: false,
           errorMessage: "Failed to fetch your certificates.",
         });
@@ -67,6 +76,7 @@ export default function Reducer(state=initialState, action) {
     case "GET_CERTIFICATES_I_ISSUESED":
       if (action.error) {
         return Object.assign({}, state, {
+          modal: ModalType.NORMAL,
           myPageIsLoading: false,
           errorMessage: "Failed to fetch the certificates that you issuesed.",
         });
@@ -147,11 +157,14 @@ export default function Reducer(state=initialState, action) {
       });
     case "CLOSE_MODAL":
       return Object.assign({}, state, {
+        modal: 0,
+        isLoading: false,
         message: null,
         errorMessage: null,
       });
     case "ON_COPY_ID":
       return Object.assign({}, state, {
+        modal: ModalType.NORMAL,
         message: "Successfully copied your ID",
       });
     case "CHANGE_TAB_TO_ISSUESER":
@@ -184,19 +197,21 @@ export default function Reducer(state=initialState, action) {
     case "INITIALIZE_CLIENT":
       return Object.assign({}, state, {
         client: action.payload,
+        modal: ModalType.NORMAL,
         isLoading: false,
       });
     case "LOADING":
       return Object.assign({}, state, {
+        modal: ModalType.NORMAL,
         isLoading: true,
       });
     case "OPEN_EXPORT_MODAL":
       return Object.assign({}, state, {
-        exportModalIsShown: true,
+        modal: ModalType.EXPORT,
       });
     case "CLOSE_EXPORT_MODAL":
       return Object.assign({}, state, {
-        exportModalIsShown: false,
+        modal: 0,
       });
     default:
       return state;
