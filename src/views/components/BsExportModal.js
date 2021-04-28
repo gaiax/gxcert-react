@@ -17,7 +17,7 @@ export default class BsExportModal extends React.Component {
             </div>
             <p className="modal-label">Your Seed Phrase</p>
             <div className="modal-seed-box">
-              { "TODO: show seed." }
+              { this.props.seed }
             </div>
             <div className="modal-seed-buttons">
               <button onClick={this.props.copyAccount}>Copy to Clipboard</button>

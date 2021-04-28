@@ -64,6 +64,7 @@ class App extends React.Component {
     if (this.props.state.exportModalIsShown) {
       exportModal = (
         <BsExportModal
+          seed={this.props.state.client.uid}
           exportFile={this.props.exportFile} 
           copyAccount={this.props.copyAccount}
           closeExportModal={this.props.closeExportModal}
