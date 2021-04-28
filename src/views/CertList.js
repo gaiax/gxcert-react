@@ -34,7 +34,7 @@ class MyCertListComponent extends React.Component {
     }
     return (
       <div className="mycertificates">
-        <h2 className="mycertificates-title"><a href="javascript:void(0)" onClick={this.props.changeTabToMyCertificates} className="mycertificates-tab"> My Certificates</a><a href="javascript:void(0)" onClick={this.props.changeTabToIssueser} className="mycertificates-tab" >Certificates I issuesed</a></h2>
+        <h2 className="mycertificates-title"><a href="javascript:void(0)" onClick={this.props.changeTabToMyCertificates} className="mycertificates-tab">My</a><a href="javascript:void(0)" onClick={this.props.changeTabToIssueser} className="mycertificates-tab" >Issued</a></h2>
         { this.props.isLoading ? <CommunicationLoading /> : "" }
         { !this.props.isLoading && this.props.tab === 0 ? <CertListComponent
           certificates={this.props.certificates}
