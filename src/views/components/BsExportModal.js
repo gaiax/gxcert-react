@@ -9,19 +9,22 @@ export default class BsExportModal extends React.Component {
       <div className="modal">
         <Modal show={true} animation={true} >
           <Modal.Body>
-            <p className="message">Choose way to export account.</p>
+            <span className="close-button" onClick={this.props.closeExportModal}>x</span>
+            <p className="modal-title-text">Seed Phrase</p>
+            <p className="modal-body-text">You need the seed phrase in order to access your account when you change a browser or a laptop.<br/>Please save the seed phrase in safe place.</p>
+            <div className="modal-warning">
+              Please do not share the seed phrase with anyone.<br/> You will leak all data associated with your seed phrase.
+            </div>
+            <p className="modal-label">Your Seed Phrase</p>
+            <div className="modal-seed-box">
+              { this.props.seed }
+            </div>
+            <div className="modal-seed-buttons">
+              <button onClick={this.props.copyAccount}>Copy to Clipboard</button>
+              <a href="javascript:void(0)" onClick={this.props.exportFile}>Export as JSON file</a>
+
+            </div>
           </Modal.Body>
-          <Modal.Footer>
-            <a href="javascript:void(0)" onClick={this.props.exportFile} className="export-file-button">
-                Export as a file
-            </a>
-            <Button variant="primary" onClick={this.props.copyAccount} >
-              Copy to the clipboard
-            </Button>
-            <Button variant="primary" onClick={this.props.closeExportModal} >
-              Back
-            </Button>
-          </Modal.Footer>
         </Modal>
       </div>
     );
