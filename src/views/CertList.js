@@ -34,7 +34,7 @@ class MyCertListComponent extends React.Component {
     }
     return (
       <div className="mycertificates">
-        <h2 className="mycertificates-title"><a href="javascript:void(0)" onClick={this.props.changeTabToMyCertificates} className="mycertificates-tab">My</a><a href="javascript:void(0)" onClick={this.props.changeTabToIssueser} className="mycertificates-tab" >Issued</a></h2>
+        <h2 className="mycertificates-title"><a href="javascript:void(0)" onClick={this.props.changeTabToMyCertificates} className="mycertificates-tab">My</a><a href="javascript:void(0)" onClick={this.props.changeTabToIssuer} className="mycertificates-tab" >Issued</a></h2>
         { this.props.isLoading ? <CommunicationLoading /> : "" }
         { !this.props.isLoading && this.props.tab === 0 ? <CertListComponent
           certificates={this.props.certificates}
@@ -42,9 +42,9 @@ class MyCertListComponent extends React.Component {
           getInfoOfCertificates={this.props.getInfoOfCertificates}
         /> : "" }
         { !this.props.isLoading && this.props.tab === 1 ? <CertListComponent
-          certificates={this.props.certificatesIIssuesed}
-          getInfoOfCertificates={this.props.getInfoOfCertificatesIIssuesed}
-          path={path + "issuesed"}
+          certificates={this.props.certificatesIIssued}
+          getInfoOfCertificates={this.props.getInfoOfCertificatesIIssued}
+          path={path + "issued"}
         /> : "" }
       </div>
     );

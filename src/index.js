@@ -8,23 +8,23 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { 
   loginWithGoogle, 
   logout, 
-  getInfoOfCertificatesIIssuesed, 
-  getInfoOfCertificatesIIssuesedInUserPage, 
+  getInfoOfCertificatesIIssued, 
+  getInfoOfCertificatesIIssuedInUserPage, 
   getInfoOfCertificates, 
   getInfoOfCertificatesInUserPage, 
   getCertificatesInUserPage, 
-  getCertificatesIIssuesedInUserPage, 
-  changeTabInUserPageToIssueser, 
+  getCertificatesIIssuedInUserPage, 
+  changeTabInUserPageToIssuer, 
   changeTabInUserPageToMyCertificates, 
   fetchProfileInUserPage, 
-  changeTabToIssueser, 
+  changeTabToIssuer, 
   changeTabToMyCertificates, 
   onCopyId, 
   exportFile, 
   closeModal, 
   getMyProfile, 
   getCertificates, 
-  getCertificatesIIssuesed, 
+  getCertificatesIIssued, 
   issue, 
   onChangeIssueTo, 
   onChangeCertificateImage, 
@@ -51,8 +51,8 @@ function mapDispatchToProps(dispatch, props) {
     getCertificates: () => {
       dispatch(getCertificates());
     },
-    getCertificatesIIssuesed: () => {
-      dispatch(getCertificatesIIssuesed());
+    getCertificatesIIssued: () => {
+      dispatch(getCertificatesIIssued());
     },
     issue: () => {
       dispatch(issue());
@@ -96,17 +96,17 @@ function mapDispatchToProps(dispatch, props) {
     getCertificatesInUserPage: (address) => {
       dispatch(getCertificatesInUserPage(address));
     },
-    getCertificatesIIssuesedInUserPage: (address) => {
-      dispatch(getCertificatesIIssuesedInUserPage(address));
+    getCertificatesIIssuedInUserPage: (address) => {
+      dispatch(getCertificatesIIssuedInUserPage(address));
     },
-    changeTabToIssueser: () => {
-      dispatch(getCertificatesIIssuesed());
+    changeTabToIssuer: () => {
+      dispatch(getCertificatesIIssued());
     },
     changeTabToMyCertificates: () => {
       dispatch(getCertificates());
     },
-    changeTabInUserPageToIssueser: (address) => {
-      dispatch(getCertificatesIIssuesedInUserPage(address));
+    changeTabInUserPageToIssuer: (address) => {
+      dispatch(getCertificatesIIssuedInUserPage(address));
     },
     changeTabInUserPageToMyCertificates: () => {
       dispatch(changeTabInUserPageToMyCertificates());
@@ -117,11 +117,11 @@ function mapDispatchToProps(dispatch, props) {
     getInfoOfCertificates: () => {
       dispatch(getInfoOfCertificates());
     },
-    getInfoOfCertificatesIIssuesed: () => {
-      dispatch(getInfoOfCertificatesIIssuesed());
+    getInfoOfCertificatesIIssued: () => {
+      dispatch(getInfoOfCertificatesIIssued());
     },
-    getInfoOfCertificatesIIssuesedInUserPage: () => {
-      dispatch(getInfoOfCertificatesIIssuesedInUserPage());
+    getInfoOfCertificatesIIssuedInUserPage: () => {
+      dispatch(getInfoOfCertificatesIIssuedInUserPage());
     },
     getInfoOfCertificatesInUserPage: () => {
       dispatch(getInfoOfCertificatesInUserPage());

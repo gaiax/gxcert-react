@@ -21,15 +21,15 @@ class MyPageComponent extends React.Component {
         />
         <MyCertListComponent 
           certificates={this.props.certificates}
-          certificatesIIssuesed={this.props.certificatesIIssuesed}
+          certificatesIIssued={this.props.certificatesIIssued}
           isLoading={this.props.isLoading} 
           getCertificates={this.props.getCertificates}
-          getCertificatesIIssuesed={this.props.getCertificatesIIssuesed}
-          changeTabToIssueser={this.props.changeTabToIssueser}
+          getCertificatesIIssued={this.props.getCertificatesIIssued}
+          changeTabToIssuer={this.props.changeTabToIssuer}
           changeTabToMyCertificates={this.props.changeTabToMyCertificates}
           tab={this.props.tab}
           getInfoOfCertificates={this.props.getInfoOfCertificates}
-          getInfoOfCertificatesIIssuesed={this.props.getInfoOfCertificatesIIssuesed}
+          getInfoOfCertificatesIIssued={this.props.getInfoOfCertificatesIIssued}
         />
       </div>
     );

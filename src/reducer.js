@@ -75,11 +75,11 @@ export default function Reducer(state=initialState, action) {
         return Object.assign({}, state, {
           modal: ModalType.NORMAL,
           myPageIsLoading: false,
-          errorMessage: "Failed to fetch the certificates that you issuesed.",
+          errorMessage: "Failed to fetch the certificates that you issued.",
         });
       }
       return Object.assign({}, state, {
-        certificatesIIssuesed: action.payload,
+        certificatesIIssued: action.payload,
         myPageIsLoading: false,
       });
     case "GET_CERTIFICATES_IN_USER_PAGE":
@@ -96,12 +96,12 @@ export default function Reducer(state=initialState, action) {
     case "GET_CERTIFICATES_I_ISSUESED_IN_USER_PAGE":
       if (action.error) {
         return Object.assign({}, state, {
-          certificatesIIssuesedInUserPage: [],
+          certificatesIIssuedInUserPage: [],
           userPageIsLoading: false,
         });
       }
       return Object.assign({}, state, {
-        certificatesIIssuesedInUserPage: action.payload,
+        certificatesIIssuedInUserPage: action.payload,
         userPageIsLoading: false,
       });
     case "ON_CHANGE_CERTIFICATE_IMAGE":

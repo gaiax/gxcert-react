@@ -34,13 +34,13 @@ class UserComponent extends React.Component {
         <MyCertListComponent
           isLoading={this.props.isLoading}
           certificates={this.props.certificates}
-          certificatesIIssuesed={this.props.certificatesIIssuesed}
+          certificatesIIssued={this.props.certificatesIIssued}
           getInfoOfCertificates={this.props.getInfoOfCertificates}
-          getInfoOfCertificatesIIssuesed={this.props.getInfoOfCertificatesIIssuesed}
+          getInfoOfCertificatesIIssued={this.props.getInfoOfCertificatesIIssued}
           getCertificates={this.props.getCertificates}
-          getCertificatesIIssuesed={this.props.getCertificatesIIssuesed}
-          changeTabToIssueser={() => {
-            return this.props.changeTabToIssueser(address);
+          getCertificatesIIssued={this.props.getCertificatesIIssued}
+          changeTabToIssuer={() => {
+            return this.props.changeTabToIssuer(address);
           }}
           changeTabToMyCertificates={this.props.changeTabToMyCertificates}
           tab={this.props.tab}

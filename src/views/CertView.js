@@ -46,8 +46,8 @@ class CertViewComponent extends React.Component {
       if (this.props.getCertificates) {
         this.props.getCertificates(this.state.address);
       }
-      if (this.props.getCertificatesIIssuesed) {
-        this.props.getCertificatesIIssuesed(this.state.address);
+      if (this.props.getCertificatesIIssued) {
+        this.props.getCertificatesIIssued(this.state.address);
       }
     }
   }
@@ -84,7 +84,7 @@ class CertViewComponent extends React.Component {
             { this.state.verified ? "✅ This certificate is valid." : "" }
             { !this.state.verified && this.state.verified !== null ? "❌ This certificate is invalid." : "" }<br/>
             title: { certificate.titleInIpfs }<br/>
-            Issuer: <Link to={"/users/" + certificate.by } className="issuer">{ !certificate.issueserName ? certificate.by.substr(0, 16) : certificate.issueserName }</Link> <br/>
+            Issuer: <Link to={"/users/" + certificate.by } className="issuer">{ !certificate.issuerName ? certificate.by.substr(0, 16) : certificate.issuerName }</Link> <br/>
             Holder: { !certificate.to ? "" : "to " + certificate.to.substr(0, 16) } at {
               dateString(new Date(certificate.time * 1000))
             }

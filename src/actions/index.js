@@ -63,13 +63,13 @@ const getCertificatesInUserPage = (address) => async (dispatch, getState) => {
     });
   });
 }
-const getCertificatesIIssuesed = () => async (dispatch, getState) => {
+const getCertificatesIIssued = () => async (dispatch, getState) => {
   dispatch({
     type: "START_GETTING_CERTIFICATES_I_ISSUESED",
     payload: null,
   });
   const client = getClientFromState(getState().state.client);
-  client.getCertificatesIIssuesed(client.address, (certificates) => {
+  client.getCertificatesIIssued(client.address, (certificates) => {
     dispatch({
       type: "GET_CERTIFICATES_I_ISSUESED",
       payload: certificates,
@@ -85,13 +85,13 @@ const getCertificatesIIssuesed = () => async (dispatch, getState) => {
     });
   });
 }
-const getCertificatesIIssuesedInUserPage = (address) => async (dispatch, getState) => {
+const getCertificatesIIssuedInUserPage = (address) => async (dispatch, getState) => {
   dispatch({
     type: "START_GETTING_CERTIFICATES_I_ISSUESED_IN_USER_PAGE",
     payload: null,
   });
   const client = clientWithoutAccount;
-  client.getCertificatesIIssuesed(address, (certificates) => {
+  client.getCertificatesIIssued(address, (certificates) => {
     dispatch({
       type: "GET_CERTIFICATES_I_ISSUESED_IN_USER_PAGE",
       payload: certificates,
@@ -250,16 +250,6 @@ const updateUserSetting = () => async (dispatch, getState) => {
   if (state.name !== null && state.name.trim() !== "") {
     let name = state.name.trim();
     try {
-      name = await postText(name);
-    } catch(err) {
-      dispatch({
-        type: "UPDATE_USER_SETTING",
-        payload: null,
-        error: err,
-      });
-      return;
-    }
-    try {
       await client.registerName(name);
     } catch(err) {
       dispatch({
@@ -300,8 +290,8 @@ const onCopyId = () => async (dispatch) => {
   });
 }
 
-const changeTabToIssueser = () => async (dispatch) => {
-  console.log("change to issueser");
+const changeTabToIssuer = () => async (dispatch) => {
+  console.log("change to issuer");
   dispatch({
     type: "CHANGE_TAB_TO_ISSUESER",
     payload: null,
@@ -339,7 +329,7 @@ const fetchProfileInUserPage = (id) => async (dispatch, getState) => {
   }
 }
 
-const changeTabInUserPageToIssueser = () => async (dispatch) => {
+const changeTabInUserPageToIssuer = () => async (dispatch) => {
   dispatch({
     type: "CHANGE_TAB_IN_USER_PAGE_TO_ISSUESER",
     payload: null,
@@ -392,9 +382,9 @@ const getInfoOfCertificates = () => async (dispatch, getState) => {
   }
 }
 
-const getInfoOfCertificatesIIssuesed = () => async (dispatch, getState) => {
+const getInfoOfCertificatesIIssued = () => async (dispatch, getState) => {
   const state = getState().state;
-  const certificates = state.certificatesIIssuesed;
+  const certificates = state.certificatesIIssued;
   for (const certificate of certificates) {
     if (!certificate.imageUrl) {
       getImageOnIpfs(certificate.ipfs).then(imageUrl => {
@@ -472,9 +462,9 @@ const getInfoOfCertificatesInUserPage = () => async (dispatch, getState) => {
   }
 }
 
-const getInfoOfCertificatesIIssuesedInUserPage = () => async (dispatch, getState) => {
+const getInfoOfCertificatesIIssuedInUserPage = () => async (dispatch, getState) => {
   const state = getState().state;
-  const certificates = state.certificatesIIssuesedInUserPage;
+  const certificates = state.certificatesIIssuedInUserPage;
   for (const certificate of certificates) {
     if (!certificate.imageUrl) {
       getImageOnIpfs(certificate.ipfs).then(imageUrl => {
@@ -566,8 +556,8 @@ export {
   getMyProfile,
   getCertificates,
   getCertificatesInUserPage,
-  getCertificatesIIssuesed,
-  getCertificatesIIssuesedInUserPage,
+  getCertificatesIIssued,
+  getCertificatesIIssuedInUserPage,
   issue,
   onChangeCertificateImage,
   onChangeIssueTo,
@@ -579,15 +569,15 @@ export {
   onChangeTitle,
   closeModal,
   onCopyId,
-  changeTabToIssueser,
+  changeTabToIssuer,
   changeTabToMyCertificates,
   fetchProfileInUserPage,
-  changeTabInUserPageToIssueser,
+  changeTabInUserPageToIssuer,
   changeTabInUserPageToMyCertificates,
   getInfoOfCertificates,
   getInfoOfCertificatesInUserPage,
-  getInfoOfCertificatesIIssuesed,
-  getInfoOfCertificatesIIssuesedInUserPage,
+  getInfoOfCertificatesIIssued,
+  getInfoOfCertificatesIIssuedInUserPage,
   logout,
   loginWithGoogle,
   openExportModal,

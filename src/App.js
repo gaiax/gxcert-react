@@ -94,14 +94,14 @@ class App extends React.Component {
                 profile={client.profile}
                 isLoading={that.props.state.myPageIsLoading} 
                 certificates={that.props.state.certificates} 
-                certificatesIIssuesed={that.props.state.certificatesIIssuesed}
+                certificatesIIssued={that.props.state.certificatesIIssued}
                 getCertificates={that.props.getCertificates} 
-                getCertificatesIIssuesed={that.props.getCertificatesIIssuesed} 
+                getCertificatesIIssued={that.props.getCertificatesIIssued} 
                 openExportModal={that.props.openExportModal}
                 onCopyId={that.props.onCopyId}
                 getInfoOfCertificates={that.props.getInfoOfCertificates}
-                getInfoOfCertificatesIIssuesed={that.props.getInfoOfCertificatesIIssuesed}
-                changeTabToIssueser={that.props.changeTabToIssueser}
+                getInfoOfCertificatesIIssued={that.props.getInfoOfCertificatesIIssued}
+                changeTabToIssuer={that.props.changeTabToIssuer}
                 changeTabToMyCertificates={that.props.changeTabToMyCertificates}
                 tab={that.props.state.tabInMyPage}
                 logout={that.props.logout}
@@ -127,18 +127,18 @@ class App extends React.Component {
                 name={that.props.state.nameInUserPage}
                 isLoading={that.props.state.userPageIsLoading}
                 certificates={that.props.state.certificatesInUserPage}
-                certificatesIIssuesed={that.props.state.certificatesIIssuesedInUserPage}
+                certificatesIIssued={that.props.state.certificatesIIssuedInUserPage}
                 getCertificates={that.props.getCertificatesInUserPage}
-                getCertificatesIIssuesed={that.props.getCertificatesIIssuesedInUserPage}
+                getCertificatesIIssued={that.props.getCertificatesIIssuedInUserPage}
                 getInfoOfCertificates={that.props.getInfoOfCertificatesInUserPage}
-                getInfoOfCertificatesIIssuesed={that.props.getInfoOfCertificatesIIssuesedInUserPage}
-                changeTabToIssueser={that.props.changeTabInUserPageToIssueser}
+                getInfoOfCertificatesIIssued={that.props.getInfoOfCertificatesIIssuedInUserPage}
+                changeTabToIssuer={that.props.changeTabInUserPageToIssuer}
                 changeTabToMyCertificates={that.props.changeTabInUserPageToMyCertificates}
                 tab={that.props.state.tabInUserPage}
                 isNotFound={that.props.state.userIsNotFound}
               /> } />
-              <Route exact path="/users/:address/issuesed/:index" render={ (routeProps) => <CertViewComponent {...routeProps} 
-                certificates={that.props.state.certificatesIIssuesedInUserPage}
+              <Route exact path="/users/:address/issued/:index" render={ (routeProps) => <CertViewComponent {...routeProps} 
+                certificates={that.props.state.certificatesIIssuedInUserPage}
                 client={clientWithoutAccount}
                 getCertificates={that.props.getCertificatesInUserPage}
                 fromUserPage={true}
@@ -146,11 +146,11 @@ class App extends React.Component {
               <Route exact path="/users/:address/certs/:index" render={ (routeProps) => <CertViewComponent {...routeProps} 
                 certificates={that.props.state.certificatesInUserPage}
                 client={clientWithoutAccount}
-                getCertificatesIIssuesed={that.props.getCertificatesIIssuesedInUserPage}
+                getCertificatesIIssued={that.props.getCertificatesIIssuedInUserPage}
                 fromUserPage={true}
               /> } />
-              <Route exact path="/issuesed/:index" render={ (routeProps) => <CertViewComponent {...routeProps}
-                certificates={that.props.state.certificatesIIssuesed}
+              <Route exact path="/issued/:index" render={ (routeProps) => <CertViewComponent {...routeProps}
+                certificates={that.props.state.certificatesIIssued}
                 client={clientWithoutAccount}
               />} />
               <Route exact path="/certs/:index" render={ (routeProps) => <CertViewComponent {...routeProps} 

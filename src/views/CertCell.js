@@ -26,7 +26,7 @@ class CertCellComponent extends React.Component {
           <p className="cert-cell-title">
             { displayedTitle(this.props.certificate.titleInIpfs) }
           </p>
-          <p className="cert-cell-issueser">
+          <p className="cert-cell-issuer">
             { this.props.certificate.byProfile ? "by " + this.props.certificate.byProfile.name.substr(0, 16) : "" } { this.props.certificate.toProfile ? "to " + this.props.certificate.toProfile.name.substr(0, 16) : "" }
           </p>
           <p className="cert-cell-date">
