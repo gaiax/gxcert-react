@@ -10,12 +10,16 @@ class MyInfoComponent extends React.Component {
   }
   render() {
     let name = "";
+    let imageUrl = "";
     if (this.props.profile && this.props.profile.nameInIpfs) {
       name = this.props.profile.nameInIpfs;
     }
+    if (this.props.profile && this.props.profile.imageUrl) {
+      imageUrl = this.props.profile.imageUrl;
+    }
     return (
       <div className="myinfo">
-        <img className="myinfo-image" alt="GxCert icon" src={this.props.profile.imageUrl} />
+        <img className="myinfo-image" alt="GxCert icon" src={imageUrl} />
         <div className="myinfo-right">
           <div className="myinfo-name">
             { name }
