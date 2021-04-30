@@ -29,7 +29,7 @@ class UserComponent extends React.Component {
       <div className="user">
         <img src={imageUrl} className="user-icon" />
         <h2 className="user-name">
-          { this.props.name }
+          { this.props.nameInIpfs }
         </h2>
         <MyCertListComponent
           isLoading={this.props.isLoading}
