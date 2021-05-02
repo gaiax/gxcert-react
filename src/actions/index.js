@@ -23,22 +23,36 @@ const getCertificates = () => async (dispatch, getState) => {
     payload: null,
   });
   const client = getClientFromState(getState().state.client);
-  client.getCertificates(client.address, (certificates) => {
-    console.log(certificates);
-    dispatch({
-      type: "GET_CERTIFICATES",
-      payload: certificates,
+  const certificates = await client.getCertificates(client.address);
+  for (const [index, certificate] of certificates.entries()) {
+    certificate.index = index;
+    client.getTitle(client.address, index).then(certificates => {
+      dispatch({
+        type: "GET_CERTIFICATES",
+        payload: certificates,
+      });
+    }).catch(err => {
+      console.error(err);
+      dispatch({
+        type: "GET_CERTIFICATES",
+        payload: null,
+        error: err,
+      });
     });
-  }).then(certificates => {
-    
-  }).catch(err => {
-    console.error(err);
-    dispatch({
-      type: "GET_CERTIFICATES",
-      payload: null,
-      error: err,
+    client.getImageUrl(client.address, index).then(certificates => {
+      dispatch({
+        type: "GET_CERTIFICATES",
+        payload: certificates,
+      });
+    }).catch(err => {
+      console.error(err);
+      dispatch({
+        type: "GET_CERTIFICATES",
+        payload: null,
+        error: err,
+      });
     });
-  });
+  }
 }
 
 const getCertificatesInUserPage = (address) => async (dispatch, getState) => {
