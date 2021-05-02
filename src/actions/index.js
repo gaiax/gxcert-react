@@ -23,7 +23,18 @@ const getCertificates = () => async (dispatch, getState) => {
     payload: null,
   });
   const client = getClientFromState(getState().state.client);
-  const certificates = await client.getCertificates(client.address);
+  let certificates;
+  try {
+    certificates = await client.getCertificates(client.address);
+  } catch(err) {
+    console.error(err);
+    dispatch({
+      type: "GET_CERTIFICATES",
+      payload: null,
+      error: err,
+    });
+    return;
+  }
   for (const [index, certificate] of certificates.entries()) {
     certificate.index = index;
     client.getTitle(client.address, index).then(certificates => {
@@ -60,22 +71,49 @@ const getCertificatesInUserPage = (address) => async (dispatch, getState) => {
     type: "START_GETTING_CERTIFICATES_IN_USER_PAGE",
     payload: null,
   });
+  console.log("address");
+  console.log(address);
   const client = clientWithoutAccount;
-  client.getCertificates(address, (certificates) => {
-    dispatch({
-      type: "GET_CERTIFICATES_IN_USER_PAGE",
-      payload: certificates,
-    });
-  }).then(certificates => {
-    
-  }).catch(err => {
+  let certificates;
+  try {
+    certificates = await client.getCertificates(address);
+  } catch(err) {
     console.error(err);
     dispatch({
       type: "GET_CERTIFICATES_IN_USER_PAGE",
       payload: null,
       error: err,
     });
-  });
+    return;
+  }
+  for (const [index, certificate] of certificates.entries()) {
+    client.getTitle(address, index).then(certificates => {
+      dispatch({
+        type: "GET_CERTIFICATES_IN_USER_PAGE",
+        payload: certificates,
+      });
+    }).catch(err => {
+      console.error(err);
+      dispatch({
+        type: "GET_CERTIFICATES_IN_USER_PAGE",
+        payload: null,
+        error: err,
+      });
+    });
+    client.getImageUrl(address, index).then(certificates => {
+      dispatch({
+        type: "GET_CERTIFICATES_IN_USER_PAGE",
+        payload: certificates,
+      });
+    }).catch(err => {
+      console.error(err);
+      dispatch({
+        type: "GET_CERTIFICATES_IN_USER_PAGE",
+        payload: null,
+        error: err,
+      });
+    });
+  }
 }
 const getCertificatesIIssued = () => async (dispatch, getState) => {
   dispatch({
@@ -83,21 +121,46 @@ const getCertificatesIIssued = () => async (dispatch, getState) => {
     payload: null,
   });
   const client = getClientFromState(getState().state.client);
-  client.getCertificatesIIssued(client.address, (certificates) => {
-    dispatch({
-      type: "GET_CERTIFICATES_I_ISSUESED",
-      payload: certificates,
-    });
-  }).then(certificates => {
-
-  }).catch(err => {
+  let certificates;
+  try {
+    certificates = await client.getCertificatesIIssued(client.address);
+  } catch(err) {
     console.error(err);
     dispatch({
       type: "GET_CERTIFICATES_I_ISSUESED",
       payload: null,
       error: err,
     });
-  });
+    return;
+  }
+  for (const [index, certificate] of certificates.entries()) {
+    client.getTitle(client.address, index).then(certificates => {
+      dispatch({
+        type: "GET_CERTIFICATES_I_ISSUESED",
+        payload: certificates,
+      });
+    }).catch(err => {
+      console.error(err);
+      dispatch({
+        type: "GET_CERTIFICATES_I_ISSUESED",
+        payload: null,
+        error: err,
+      });
+    });
+    client.getImageUrl(client.address, index).then(certificates => {
+      dispatch({
+        type: "GET_CERTIFICATES_I_ISSUESED",
+        payload: certificates,
+      });
+    }).catch(err => {
+      console.error(err);
+      dispatch({
+        type: "GET_CERTIFICATES_I_ISSUESED",
+        payload: null,
+        error: err,
+      });
+    });
+  }
 }
 const getCertificatesIIssuedInUserPage = (address) => async (dispatch, getState) => {
   dispatch({
@@ -105,21 +168,46 @@ const getCertificatesIIssuedInUserPage = (address) => async (dispatch, getState)
     payload: null,
   });
   const client = clientWithoutAccount;
-  client.getCertificatesIIssued(address, (certificates) => {
-    dispatch({
-      type: "GET_CERTIFICATES_I_ISSUESED_IN_USER_PAGE",
-      payload: certificates,
-    });
-  }).then(certificates => {
-
-  }).catch(err => {
+  let certificates;
+  try {
+    certificates = await client.getCertificatesIIssued(address);
+  } catch(err) {
     console.error(err);
     dispatch({
       type: "GET_CERTIFICATES_I_ISSUESED_IN_USER_PAGE",
       payload: null,
       error: err,
     });
-  });
+    return;
+  }
+  for (const [index, certificate] of certificates.entries()) {
+    client.getTitle(address, index).then(certificates => {
+      dispatch({
+        type: "GET_CERTIFICATES_I_ISSUESED_IN_USER_PAGE",
+        payload: certificates,
+      });
+    }).catch(err => {
+      console.error(err);
+      dispatch({
+        type: "GET_CERTIFICATES_I_ISSUESED_IN_USER_PAGE",
+        payload: null,
+        error: err,
+      });
+    });
+    client.getImageUrl(address, index).then(certificates => {
+      dispatch({
+        type: "GET_CERTIFICATES_I_ISSUESED_IN_USER_PAGE",
+        payload: certificates,
+      });
+    }).catch(err => {
+      console.error(err);
+      dispatch({
+        type: "GET_CERTIFICATES_I_ISSUESED_IN_USER_PAGE",
+        payload: null,
+        error: err,
+      });
+    });
+  }
 }
 const issue = () => async (dispatch, getState) => {
   dispatch({
