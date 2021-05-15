@@ -19,7 +19,7 @@ export default class BsModal extends React.Component {
       modal = (
         <Modal show={this.props.show} animation={true} >
           <Modal.Body>
-            <span className="close-button">x</span>
+            <span className="close-button" onClick={this.props.closeModal} >x</span>
             <p className="message">{ this.props.message }</p>
             <p className="error-message">{ this.props.errorMessage }</p>
           </Modal.Body>
