@@ -1,8 +1,11 @@
 import React from "react";
 import ReactLoading from "react-loading";
+import "./Loading.css";
 
 const CommunicationLoading = () => (
-  <ReactLoading type="spin" style={{marginLeft: "auto", marginRight: "auto", width: 150}} />
+  <div className="loader">
+  </div>
+
 );
 
 export default CommunicationLoading;
