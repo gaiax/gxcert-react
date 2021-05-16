@@ -21,7 +21,7 @@ export default class BsIssueModal extends React.Component {
       modal = (
         <Modal show={this.props.show} animation={true} >
           <Modal.Body>
-            <span className="close-button" onClick={this.props.closeModal}>x</span>
+            <img src="/close.png" className="close-button" onClick={this.props.closeModal} />
             <br/>
             <div className="issued-image-wrapper">
               <img className="issued-image" />
@@ -37,7 +37,7 @@ export default class BsIssueModal extends React.Component {
       modal = (
         <Modal show={this.props.show} animation={true} >
           <Modal.Body>
-            <span className="close-button" onClick={this.props.closeModal}>x</span>
+            <img src="/close.png" className="close-button" onClick={this.props.closeModal} />
             <br/>
             <div className="issued-image-wrapper">
               <img src="/check.png" className="issued-image" />
