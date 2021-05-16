@@ -134,3 +134,7 @@
 .message {
   text-align: center;
 }
+
+.export-icon, .copy-icon {
+  width: 20px;
+}
