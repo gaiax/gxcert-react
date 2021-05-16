@@ -16,10 +16,19 @@ export default class BsModal extends React.Component {
         </Modal>
       );
     } else if (this.props.message !== null || this.props.errorMessage !== null) {
+      let checkMark = "";
+      if (this.props.message !== null && this.props.errorMessage === null) {
+        checkMark = (
+          <div className="center">
+            <img src="/check.png" className="check-mark" />
+          </div>
+        );
+      }
       modal = (
         <Modal show={this.props.show} animation={true} >
           <Modal.Body>
             <span className="close-button" onClick={this.props.closeModal} >x</span>
+            {checkMark}
             <p className="message">{ this.props.message }</p>
             <p className="error-message">{ this.props.errorMessage }</p>
           </Modal.Body>

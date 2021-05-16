@@ -5,9 +5,7 @@ class Login extends React.Component {
   render() {
     return (
       <div className="login-page">
-        <button className="login-google" onClick={this.props.onClick}>
-          Login with Google
-        </button>
+        <img src="/google.png" className="login-google" onClick={this.props.onClick} />
       </div>
     );
   }

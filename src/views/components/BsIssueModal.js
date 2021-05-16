@@ -24,7 +24,7 @@ export default class BsIssueModal extends React.Component {
             <span className="close-button" onClick={this.props.closeModal}>x</span>
             <br/>
             <div className="issued-image-wrapper">
-              <img className="issued-image" />
+              <img src="/check.png" className="issued-image" />
             </div>
             <p className="issue-modal-message">Failed to issue certificate.</p>
             <div className="issued-button-wrapper">
