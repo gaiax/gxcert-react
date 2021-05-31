@@ -1,7 +1,7 @@
 import * as Client from "gxcert-iota";
 import cryptico from "cryptico";
 
-const clientWithoutAccount = new Client("https://api.lb-0.testnet.chrysalis2.com");
+const clientWithoutAccount = new Client("https://chrysalis-nodes.iota.org");
 function getKeyPair(uid) {
   const privKey = cryptico.generateRSAKey(uid, 1024);
   const pubKey = cryptico.publicKeyString(privKey);
@@ -11,7 +11,7 @@ function getKeyPair(uid) {
   }
 }
 function getClientFromState (client) {
-  const result = new Client("https://api.lb-0.testnet.chrysalis2.com");
+  const result = new Client("https://chrysalis-nodes.iota.org");
   result.address = client.address;
   result.rsaKeyPair = getKeyPair(client.uid);
   result.profile = client.profile;
@@ -22,7 +22,7 @@ function getClientFromState (client) {
 }
 
 export default function CertClient(uid) {
-  return new Client("https://api.lb-0.testnet.chrysalis2.com", uid);
+  return new Client("https://chrysalis-nodes.iota.org", uid);
 }
 
 export {
